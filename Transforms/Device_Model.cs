@@ -13,7 +13,12 @@
     {
         private AutoResetEvent Ev = new AutoResetEvent(false);
         public int id;
-
+        static public List<Data_Carrier_Base> fields = new List<Data_Carrier_Base>() { 
+            new Data_Carrier_Int { param = All_Params.bru_220, value = 0 }, 
+            new Data_Carrier_Int { param = All_Params.bru_127, value = 0 }, 
+            new Data_Carrier_Int_List {param = All_Params.sCurrentAnalogData_avg_adc_value}    
+        };
+        public List<Command_Handler> commands = new List<Command_Handler>() { new Command_Handler_128(fields), new Command_Handler_124(fields) };
         public List<int> avg_adc_value = new List<int>();
 
         private volatile bool model_interaction_working = true;
@@ -44,35 +49,54 @@
                 for (int i = packet_s.Count()-1; i >= 0; i--)
                 {
                     Packet packet = ((Packet)packet_s[i]);
-                    switch (((Packet)packet_s[i]).frame)
-                    {
-
-                        
-                        case 0:
-
-                            avg_adc_value[0] = packet.data[0] * 256 + packet.data[1];
-                            avg_adc_value[1] = packet.data[2] * 256 + packet.data[3];
-                            avg_adc_value[2] = packet.data[4] * 256 + packet.data[5];
-                            avg_adc_value[3] = packet.data[6] * 256 + packet.data[7];
+                    switch (packet.cmd) {
+                        case 128:
+                            commands.Where(c => c.id == 128).First().Handle_Incoming_Command(packet);
+                            lock (fields) _mediator.Notify(this, Reseiver.UI, new Data_Carrier_Int_List { });
                             break;
+                        default:
+                           Data_Carrier_Int_List a = (Data_Carrier_Int_List) commands.Where(c => c.id == 124).First().Handle_Incoming_Command(packet).First();
 
-                        case 1:
+                            /*switch (((Packet)packet_s[i]).frame)
+                            {
 
-                            avg_adc_value[4] = packet.data[0] * 256 + packet.data[1];
-                            avg_adc_value[5] = packet.data[2] * 256 + packet.data[3];
-                            avg_adc_value[6] = packet.data[4] * 256 + packet.data[5];
-                            avg_adc_value[7] = packet.data[6] * 256 + packet.data[7];
+
+                                case 0:
+
+                                    avg_adc_value[0] = packet.data[0] * 256 + packet.data[1];
+                                    avg_adc_value[1] = packet.data[2] * 256 + packet.data[3];
+                                    avg_adc_value[2] = packet.data[4] * 256 + packet.data[5];
+                                    avg_adc_value[3] = packet.data[6] * 256 + packet.data[7];
+                                    break;
+
+                                case 1:
+
+                                    avg_adc_value[4] = packet.data[0] * 256 + packet.data[1];
+                                    avg_adc_value[5] = packet.data[2] * 256 + packet.data[3];
+                                    avg_adc_value[6] = packet.data[4] * 256 + packet.data[5];
+                                    avg_adc_value[7] = packet.data[6] * 256 + packet.data[7];
+
+                                    
+                                    break;
+                            }
+                            
+                            {
+                                        List<int> val = new List<int>();
+                                        for (int h = 0; h < 8; h++)
+                                        {
+                                            val.Add(avg_adc_value[h]);
+                                        }
+
+                                        lock (val) _mediator.Notify(this, Reseiver.UI, new Data_Carrier_Int_List { param = All_Params.sCurrentAnalogData_avg_adc_value, values = val });
+                                    }
+                            */
+                            lock (fields) _mediator.Notify(this, Reseiver.UI, a);
+
+
+
                             break;
                     }
-                    {
-                        List<int> val = new List<int>();
-                        for (int h = 0; h < 8; h++)
-                        {
-                            val.Add(avg_adc_value[h]);
-                        }
-
-                        lock (val) _mediator.Notify(this, Reseiver.UI, new Data_Carrier_Int_List { param = All_Params.sCurrentAnalogData_avg_adc_value, values = val });
-                    }
+                    
                     packet_s.RemoveAt(i);
                 }
             }

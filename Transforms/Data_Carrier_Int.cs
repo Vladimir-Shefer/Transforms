@@ -1,16 +1,16 @@
 ﻿namespace Transforms
 {
-    public abstract class Data_Currier_Base
+    public abstract class Data_Carrier_Base
     {
         public All_Params param;
     }
 
-    public class Data_Carrier_Int : Data_Currier_Base
+    public class Data_Carrier_Int : Data_Carrier_Base
     {
         public int value;
     }
 
-    public class Data_Carrier_Int_List : Data_Currier_Base
+    public class Data_Carrier_Int_List : Data_Carrier_Base
     {
         public List<int> values;
     }

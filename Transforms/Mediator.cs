@@ -27,8 +27,9 @@ namespace Transforms
             
         }
 
-        public Mediator(List<Device_Model> d, Connection c, UI u)
+        public Mediator(List<Device_Model> d, Connection c, UI u, Data_Parser parser)
         {
+            Set_Parser(parser);
             Set_New_Connection(c);
             foreach (var j in d) Set_New_DeviceModel(j);
             Set_New_UI(u);
@@ -134,7 +135,15 @@ namespace Transforms
             {
                 ui.Update_Model_Info(((Device_Model)sender).id, d);
             }
+            if (reseiver == Reseiver.connection)
+            {
+
+                connections.First().Pass_Data_to_Connection(new byte[] { 2,1,38,0,64,5,1,2,3,4,5,0,0,0,0 });
+
+
+            }
         }
+
 
         public void Notify(object sender, Reseiver reseiver, byte[] bytes)
         {

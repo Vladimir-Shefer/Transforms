@@ -2,7 +2,7 @@
 {
     internal class Device_Command_Logic
     {
-        private List<Data_Currier_Base> fields = new List<Data_Currier_Base>();
+        private List<Data_Carrier_Base> fields = new List<Data_Carrier_Base>();
     }
 
     internal enum Devices
@@ -24,7 +24,7 @@
 
         public int number_of_frames = 1;
 
-        public Device_Command(List<Data_Currier_Base> data_fields)
+        public Device_Command(List<Data_Carrier_Base> data_fields)
         {
         }
 

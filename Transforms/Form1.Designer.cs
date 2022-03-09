@@ -45,6 +45,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.Send_Data_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -190,6 +191,16 @@
             this.label6.TabIndex = 15;
             this.label6.Text = "4";
             // 
+            // Send_Data_button
+            // 
+            this.Send_Data_button.Location = new System.Drawing.Point(312, 305);
+            this.Send_Data_button.Name = "Send_Data_button";
+            this.Send_Data_button.Size = new System.Drawing.Size(94, 92);
+            this.Send_Data_button.TabIndex = 16;
+            this.Send_Data_button.Text = "button1";
+            this.Send_Data_button.UseVisualStyleBackColor = true;
+            this.Send_Data_button.Click += new System.EventHandler(this.Send_Data_button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -198,6 +209,7 @@
             this.BackgroundImage = global::Transforms.Properties.Resources.сук;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Send_Data_button);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -242,5 +254,6 @@
         private Label label4;
         private Label label5;
         private Label label6;
+        private Button Send_Data_button;
     }
 }

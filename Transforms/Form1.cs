@@ -189,6 +189,12 @@ namespace Transforms
             _ui.Close_All();
         }
 
+        private void Send_Data_button_Click(object sender, EventArgs e)
+        {
+            
+            _ui.Pass_Data_to_Connection_from_Interface(new Data_Carrier_Int_List { param = All_Params.sCurrentAnalogData_avg_adc_value, values = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 } });
+        }
+
 
 
 

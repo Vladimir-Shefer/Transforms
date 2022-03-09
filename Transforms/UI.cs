@@ -75,10 +75,15 @@ namespace Transforms
             _mediator.Close_Serial_Port();
         }
 
-        internal void Pass_Data_to_Connection_from_Interface(byte[] data)
+        internal void Pass_Data_to_Connection_from_Interface(Data_Carrier_Int_List data)
         {
-            
-          
+           // _mediator.Notify(this, Reseiver.connection, data);
+
+        }
+            internal void Pass_Data_to_Connection_from_Interface(byte[] data)
+        {
+
+            _mediator.Notify(this, Reseiver.connection, new Data_Carrier_Int_List());
                 _mediator.Notify(this, Reseiver.connection, data);
            
         }
