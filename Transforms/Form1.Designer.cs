@@ -46,6 +46,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.Send_Data_button = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -193,13 +195,31 @@
             // 
             // Send_Data_button
             // 
-            this.Send_Data_button.Location = new System.Drawing.Point(312, 305);
+            this.Send_Data_button.Location = new System.Drawing.Point(884, 305);
             this.Send_Data_button.Name = "Send_Data_button";
             this.Send_Data_button.Size = new System.Drawing.Size(94, 92);
             this.Send_Data_button.TabIndex = 16;
-            this.Send_Data_button.Text = "button1";
+            this.Send_Data_button.Text = "отправить данные";
             this.Send_Data_button.UseVisualStyleBackColor = true;
             this.Send_Data_button.Click += new System.EventHandler(this.Send_Data_button_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.Location = new System.Drawing.Point(870, 38);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(654, 241);
+            this.panel1.TabIndex = 17;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1101, 305);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(94, 29);
+            this.button1.TabIndex = 18;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
@@ -208,7 +228,9 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::Transforms.Properties.Resources.сук;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1536, 450);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.Send_Data_button);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -255,5 +277,7 @@
         private Label label5;
         private Label label6;
         private Button Send_Data_button;
+        private Panel panel1;
+        private Button button1;
     }
 }

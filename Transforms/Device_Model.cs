@@ -45,18 +45,21 @@
         {
             while (model_interaction_working && Ev.WaitOne())
             {
+                List<Data_Carrier_Base> datas = new List<Data_Carrier_Base>();
                
                 for (int i = packet_s.Count()-1; i >= 0; i--)
                 {
                     Packet packet = ((Packet)packet_s[i]);
+                    datas = commands.Find(c => c.id == 128).Handle_Incoming_Command(packet);
                     switch (packet.cmd) {
                         case 128:
-                            commands.Where(c => c.id == 128).First().Handle_Incoming_Command(packet);
-                            lock (fields) _mediator.Notify(this, Reseiver.UI, new Data_Carrier_Int_List { });
+                            //foreach(var d in  commands.Find(c => c.id == 128).Handle_Incoming_Command(packet))
+                            //  lock (fields) _mediator.Notify(this, Reseiver.UI, d);
+                            if( datas != null && datas.Count !=0 )
+                                lock (fields) _mediator.Notify(this, Reseiver.UI, datas);
                             break;
                         default:
-                           Data_Carrier_Int_List a = (Data_Carrier_Int_List) commands.Where(c => c.id == 124).First().Handle_Incoming_Command(packet).First();
-
+                
                             /*switch (((Packet)packet_s[i]).frame)
                             {
 
@@ -90,7 +93,7 @@
                                         lock (val) _mediator.Notify(this, Reseiver.UI, new Data_Carrier_Int_List { param = All_Params.sCurrentAnalogData_avg_adc_value, values = val });
                                     }
                             */
-                            lock (fields) _mediator.Notify(this, Reseiver.UI, a);
+                            lock (fields) _mediator.Notify(this, Reseiver.UI, commands.Find(c => c.id == 124).Handle_Incoming_Command(packet));
 
 
 

@@ -15,7 +15,6 @@ namespace Transforms
     public partial class Form1 : Form
     {
       
-        private Close_All_Del _del_close_all;
         /// <summary>
         /// ///////////////////////// делегаты ////////////////////////////
         /// </summary>
@@ -194,6 +193,31 @@ namespace Transforms
             
             _ui.Pass_Data_to_Connection_from_Interface(new Data_Carrier_Int_List { param = All_Params.sCurrentAnalogData_avg_adc_value, values = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 } });
         }
+        int i = 0;
+        int j = 0;
+        static Data_Carrier_Container f = new Data_Carrier_Container();
+        int x = f.Width;
+         int y = f.Height;
+        const int border = 10;
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            if (((x + border) * (i + 1) < panel1.Width) && ((y + border) * (j + 1) < panel1.Height))
+            {
+                panel1.Controls.Add(new Data_Carrier_Container { Location = new Point { X = (x + border) * (i++), Y = (y + border) * j } });
+
+            }
+            else if (((x + border) * (i + 1) > panel1.Width) && ((y + border) * (j + 2) < panel1.Height))
+            {
+
+                i = 0;
+
+                panel1.Controls.Add(new Data_Carrier_Container { Location = new Point { X = (x + border) * (i++), Y = (y + border) * (++j) } });
+
+            }
+
+        }
+          
 
 
 

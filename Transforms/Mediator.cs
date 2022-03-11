@@ -129,7 +129,7 @@ namespace Transforms
             connections.First().Fixate_Serial_Port(PortName, speed);
         }
 
-        public void Notify(object sender, Reseiver reseiver, Data_Carrier_Int_List d)
+        public void Notify(object sender, Reseiver reseiver, List<Data_Carrier_Base> d)
         {
             if (reseiver == Reseiver.UI)
             {
@@ -139,7 +139,7 @@ namespace Transforms
             {
 
                 connections.First().Pass_Data_to_Connection(new byte[] { 2,1,38,0,64,5,1,2,3,4,5,0,0,0,0 });
-
+                //
 
             }
         }

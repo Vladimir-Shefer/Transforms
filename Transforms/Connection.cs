@@ -175,7 +175,7 @@ namespace Transforms
                             serialPort.Write(data_to_send_list[i], 0, data_to_send_list[i].Length);
                             data_to_send_list.RemoveAt(i);
                         }
-                        //Ev_writing.Reset();
+                       
                     }
             }
         }

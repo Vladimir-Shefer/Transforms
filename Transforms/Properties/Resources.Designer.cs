@@ -63,6 +63,26 @@ namespace Transforms.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Диаграмма_без_названия {
+            get {
+                object obj = ResourceManager.GetObject("Диаграмма без названия", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap перезагрузка {
+            get {
+                object obj = ResourceManager.GetObject("перезагрузка", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap сук {
             get {
                 object obj = ResourceManager.GetObject("сук", resourceCulture);

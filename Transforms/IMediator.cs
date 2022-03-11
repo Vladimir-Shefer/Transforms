@@ -8,7 +8,7 @@
 
         void Fixate_Serial_Port(string PortName, int speed);
 
-        void Notify(object sender, Reseiver reseiver, Data_Carrier_Int_List data_List);
+        void Notify(object sender, Reseiver reseiver, List<Data_Carrier_Base> data_List);
 
         void Notify(object sender, Reseiver reseiver, byte[] ev);
 
