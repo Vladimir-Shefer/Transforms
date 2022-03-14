@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using Modbus.Device;
+using System.Diagnostics;
 using System.IO.Ports;
 
 namespace Transforms
@@ -18,9 +19,12 @@ namespace Transforms
         private Thread writing_thread;
         private volatile bool writing_thread_working = true;
         Data_Parser parser;
+        ModbusSerialMaster master;
         public Connection()
         {
-            for(int i=0; i<buffer.Length; i++)
+            //  master = ModbusSerialMaster.CreateRtu(serialPort);
+            
+            for (int i=0; i<buffer.Length; i++)
             {
 
                 buffer[i] = 0;
@@ -119,7 +123,17 @@ namespace Transforms
             Ev_writing.Set();
 
         }
-    
+         public void Reading_Data_Modbus()
+        {
+            byte slaveID = 1;
+            ushort startAddress = 0;
+            ushort numOfPoints = 1;
+
+            ushort[] holding_register = master.ReadHoldingRegisters(slaveID, startAddress,
+            numOfPoints);
+
+
+        }
         public void Reading_Data_Experimental()
         {
             int tempI = 0;
@@ -131,6 +145,12 @@ namespace Transforms
                 Ev_reading.WaitOne();
                 while (serialPort.IsOpen && serialPort.BytesToRead >= 0)
                 {
+                    if(serialPort.BytesToRead>= buffer.Length)
+                    {
+
+                        serialPort.ReadExisting();
+                        break;
+                    }
                     if (buffer_position + serialPort.BytesToRead > buffer.Length)
                     {
                         
@@ -147,7 +167,7 @@ namespace Transforms
                     {
 
                         
-                       // _mediator.Notify(this, Reseiver.model, parser.Parse_from_bytes_to_Packet(temp));
+                        _mediator.Notify(this, Reseiver.model, parser.Parse_from_bytes_to_Packet(temp));
                         buffer_position -= data_length;
                     }
 

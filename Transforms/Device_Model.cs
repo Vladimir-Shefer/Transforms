@@ -43,14 +43,23 @@
 
         public void Model_Interaction()
         {
+            List<Data_Carrier_Base> datas = new List<Data_Carrier_Base>();
             while (model_interaction_working && Ev.WaitOne())
             {
-                List<Data_Carrier_Base> datas = new List<Data_Carrier_Base>();
+              
                
                 for (int i = packet_s.Count()-1; i >= 0; i--)
                 {
                     Packet packet = ((Packet)packet_s[i]);
-                    datas = commands.Find(c => c.id == 128).Handle_Incoming_Command(packet);
+
+
+                    { datas = commands.Find(c => c.id == packet.cmd).Handle_Incoming_Command(packet);
+
+                        _mediator.Notify(this, Reseiver.UI, datas);
+
+
+
+                    }
                     switch (packet.cmd) {
                         case 128:
                             //foreach(var d in  commands.Find(c => c.id == 128).Handle_Incoming_Command(packet))
