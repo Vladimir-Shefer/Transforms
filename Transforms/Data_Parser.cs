@@ -4,7 +4,7 @@
     {
         public Packet Parse_from_bytes_to_Packet(byte[] bytes_data)
         {
-            byte[] hh = new byte[8];//////////////////////////////////9
+            byte[] hh = new byte[8];
 
             for (int i = 0; i < 8; i++)
             {
@@ -12,7 +12,7 @@
             }
             Packet packet = new Packet { from = bytes_data[1], to = bytes_data[2], frame = bytes_data[3], cmd = bytes_data[4], len = bytes_data[5], data = hh };
 
-            return new Packet();
+            return packet;
         }
 
         public byte[] Parse_from_packet_to_bytes(Packet_Base packet_data)

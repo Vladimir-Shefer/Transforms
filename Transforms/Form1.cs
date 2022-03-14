@@ -1,53 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.IO.Ports;
-using System.Linq;
-using System.Threading;
-using System.Windows.Forms;
-
-
 
 namespace Transforms
 {
-
-
     public partial class Form1 : Form
     {
-      
-        /// <summary>
-        /// ///////////////////////// делегаты ////////////////////////////
-        /// </summary>
-     
+       
         private UI _ui;
         private List<string> serial_port_names;
 
-        /// <summary>
-        /// ////////////////////////////////////////////////////////////
-        /// </summary>
-        /// 
-
+      
         public Form1()
         {
             InitializeComponent();
-
-
-
-
-
         }
-
-        public delegate void Close_All_Del();
-
-       
-
-    
-      
-
-      
-
-      
-
 
         internal void Set_UI(UI uI)
         {
@@ -55,11 +20,11 @@ namespace Transforms
                 _ui = uI;
             }
         }
+
         private void Close_Serial_Port_button_Click(object sender, EventArgs e)
         {
             _ui.Close_Serial_Port();
         }
-
 
         private void Find_COM_button_Click(object sender, EventArgs e)
         {
@@ -67,32 +32,28 @@ namespace Transforms
             comboBox_COM_port.Items.Clear();
             comboBox_COM_port.Items.AddRange(serial_port_names.ToArray());
         }
-      
+
         private void fixate_COM_Name_and_Speed_Click(object sender, EventArgs e)
         {
-
             string NAME = comboBox_COM_port.Text;
             uint speed;
             serial_port_names = SerialPort.GetPortNames().ToList();
             if (uint.TryParse(comboBox_COM_speed.Text, out speed) && serial_port_names.Contains(NAME))
             {
                 _ui.Fixate_Serial_Port(NAME, (int)speed);
-
             }
         }
 
-
         private void Form1_Load(object sender, EventArgs e)
         {
-
             comboBox_COM_port.Items.AddRange(SerialPort.GetPortNames());
             try
-            { comboBox_COM_port.Text = SerialPort.GetPortNames().First();
+            {
+                comboBox_COM_port.Text = SerialPort.GetPortNames().First();
                 comboBox_COM_speed.Items.Add("115200");
             }
             catch
             {
-
             }
         }
 
@@ -113,11 +74,12 @@ namespace Transforms
             return false;
         }
 
+
+       
         public void Update_Rich_Textbox(int i, Data_Carrier_Int_List carrier_Int_List)
         {
             try
             {
-
                 if (this != null)
                     this.Invoke((MethodInvoker)delegate
                     {
@@ -127,7 +89,6 @@ namespace Transforms
                                 switch (i)
 
                                 {
-
                                     case 10:
                                         int j = 0;
                                         avg_richTextBox_1.Clear();
@@ -136,9 +97,9 @@ namespace Transforms
                                             if (j < 6)
                                                 avg_richTextBox_1.Text += Convert.ToString(s) + "\n";
                                             j++;
-
                                         }
                                         break;
+
                                     case 11:
                                         j = 0;
                                         avg_richTextBox_2.Clear();
@@ -147,9 +108,9 @@ namespace Transforms
                                             if (j < 6)
                                                 avg_richTextBox_2.Text += Convert.ToString(s) + "\n";
                                             j++;
-
                                         }
                                         break;
+
                                     case 12:
                                         j = 0;
                                         avg_richTextBox_3.Clear();
@@ -158,10 +119,9 @@ namespace Transforms
                                             if (j < 6)
                                                 avg_richTextBox_3.Text += Convert.ToString(s) + "\n";
                                             j++;
-
-
                                         }
                                         break;
+
                                     case 13:
                                         j = 0;
                                         avg_richTextBox_4.Clear();
@@ -170,15 +130,30 @@ namespace Transforms
                                             if (j < 6)
                                                 avg_richTextBox_4.Text += Convert.ToString(s) + "\n";
                                             j++;
-
-
                                         }
                                         break;
-
                                 }
                         }
                     });
+            }
+            catch { }
+            try
+            {
+                this.Invoke((MethodInvoker)delegate
+                {
+                    if (panel_with_fields1.actual)
+                    {
 
+
+
+                    }
+                    else
+                    {
+                        Data_Carrier_Container temp_container = new Data_Carrier_Container(carrier_Int_List);
+                        List<Data_Carrier_Container> booba = new List<Data_Carrier_Container>() { temp_container };
+                        panel_with_fields1.fields(booba);
+                    }
+                });
             }
             catch { }
         }
@@ -190,39 +165,29 @@ namespace Transforms
 
         private void Send_Data_button_Click(object sender, EventArgs e)
         {
-            
             _ui.Pass_Data_to_Connection_from_Interface(new Data_Carrier_Int_List { param = All_Params.sCurrentAnalogData_avg_adc_value, values = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 } });
         }
-        int i = 0;
-        int j = 0;
-        static Data_Carrier_Container f = new Data_Carrier_Container();
-        int x = f.Width;
-         int y = f.Height;
-        const int border = 10;
+
+        private int i = 0;
+        private int j = 0;
+        private static Data_Carrier_Container f = new Data_Carrier_Container();
+        private int x = f.Width;
+        private int y = f.Height;
+        private const int border = 10;
+
         private void button1_Click(object sender, EventArgs e)
         {
-
             if (((x + border) * (i + 1) < panel1.Width) && ((y + border) * (j + 1) < panel1.Height))
             {
                 panel1.Controls.Add(new Data_Carrier_Container { Location = new Point { X = (x + border) * (i++), Y = (y + border) * j } });
-
             }
             else if (((x + border) * (i + 1) > panel1.Width) && ((y + border) * (j + 2) < panel1.Height))
             {
-
                 i = 0;
 
                 panel1.Controls.Add(new Data_Carrier_Container { Location = new Point { X = (x + border) * (i++), Y = (y + border) * (++j) } });
-
             }
-
         }
-          
-
-
-
-
-
 
         //private void save_to_clipboard_button_Click(object sender, EventArgs e)
         //{
@@ -234,11 +199,5 @@ namespace Transforms
         //    thread.Start();
         //    thread.Join();
         //}
-
-
-
-
-
-
     }
 }

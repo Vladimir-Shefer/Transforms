@@ -40,7 +40,7 @@ namespace Transforms
         {
             byte[] data = packet.data;
             ((Data_Carrier_Int)
-            field_1).value= data[1];
+            field_1).value= data[1];//null
             ((Data_Carrier_Int)field_2).value = data[2];
             return new List<Data_Carrier_Base>{ field_1, field_2 }; 
 
@@ -49,14 +49,14 @@ namespace Transforms
 
 
 
-    public class Command_Handler_124 : Command_Handler
+    public class Command_Handler_116 : Command_Handler
     {
 
         const All_Params w = All_Params.sCurrentAnalogData_avg_adc_value;
         public override int id { get; set; } = 128;
         Data_Carrier_Base field_1;
       
-        public Command_Handler_124(List<Data_Carrier_Base> fields) : base(fields)
+        public Command_Handler_116(List<Data_Carrier_Base> fields) : base(fields)
         {
             foreach (var d in fields)
             {

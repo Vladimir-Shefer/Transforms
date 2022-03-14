@@ -7,13 +7,13 @@ namespace Transforms
     {
         private List<Connection> connections = new List<Connection>();
 
-        //private Transfer_Data_to_Interface_from_Model _del_update;
+        
         private List<Device_Model> models = new List<Device_Model>();
         private UI ui = new UI();
-        Data_Parser parser;
-        public Mediator(Device_Model d, Connection c, UI u, Data_Parser parser)
+        
+        public Mediator(Device_Model d, Connection c, UI u)
         {
-            Set_Parser(parser);
+          
             Set_New_Connection(c);
             Set_New_DeviceModel(d);
             Set_New_UI(u);
@@ -27,14 +27,15 @@ namespace Transforms
             
         }
 
-        public Mediator(List<Device_Model> d, Connection c, UI u, Data_Parser parser)
+        public Mediator(List<Device_Model> d, Connection c, UI u)
         {
-            Set_Parser(parser);
+            
             Set_New_Connection(c);
             foreach (var j in d) Set_New_DeviceModel(j);
             Set_New_UI(u);
             foreach (var j in d) j.SetMediator(this);
             connections.First().SetMediator(this);
+            
             ui.SetMediator(this);
 
             //IUsbEventWatcher usbEventWatcher = new UsbEventWatcher();
@@ -44,7 +45,7 @@ namespace Transforms
             //BRUS.Register_Model_Update_Handler(new DeviceModel.Model_Update_Del(Pass_Data_to_Interface_from_Model));
         }
 
-        public interface IScopedPostmanService
+       /* public interface IScopedPostmanService
         {
             void DeliverLetter(string postmanType);
 
@@ -76,7 +77,7 @@ namespace Transforms
 
             void PickUpLetter(string postmanType);
         }
-
+       */
         public void Close_All()
         {
             models.First().Close_Model();
@@ -88,7 +89,7 @@ namespace Transforms
             connections.First().Close_Serial_Port();
         }
 
-        public void DoDI()
+   /*     public void DoDI()
         {
             PostmanHandler postman;
 
@@ -122,7 +123,7 @@ namespace Transforms
             }
 
             Console.ReadKey();
-        }
+        }*/
 
         public void Fixate_Serial_Port(string PortName, int speed)
         {
@@ -145,32 +146,19 @@ namespace Transforms
         }
 
 
-        public void Notify(object sender, Reseiver reseiver, byte[] bytes)
+        public void Notify(object sender, Reseiver reseiver, Packet packet)
         {
             if (reseiver == Reseiver.model)
 
             {
 
-                byte[] hh = new byte[8];
-
-                for (int i = 0; i < 8; i++)
-                {
-                    hh[i] = bytes[i + 6];
-                }
-                Packet packet = new Packet { from = bytes[1], to = bytes[2], frame = bytes[3], cmd = bytes[4], len = bytes[5], data = hh };
 
 
-                try { models.Where(c => c.id == packet.from).First().Receive_Data(parser.Parse_from_bytes_to_Packet(bytes)); }
+                try { models.Where(c => c.id == packet.from).First().Receive_Data(packet); }
                 catch { }
                 // models.First().Receive_Data(packet);
             }
-            if (reseiver == Reseiver.connection)
-            {
-
-
-
-                connections.First().Pass_Data_to_Connection(bytes);
-            }
+          
 
 
         }
@@ -196,10 +184,7 @@ namespace Transforms
         {
             connections.Add(connection);
         }
-        public void Set_Parser(Data_Parser dp)
-        {
-            parser = dp;
-        }
+        
         public void Set_New_DeviceModel(Device_Model device)
         {
             models.Add(device);
@@ -208,7 +193,7 @@ namespace Transforms
         {
             this.ui = ui;
         }
-        private static IServiceCollection ConfigureServices()
+      /*  private static IServiceCollection ConfigureServices()
         {
             var services = new ServiceCollection();
             services.AddTransient<ITransientPostmanService, PostmanService>();
@@ -304,5 +289,6 @@ namespace Transforms
                 _logger.LogInformation($"Postman {_name} took the letter. [{postmanType}]");
             }
         }
+      */
     }
 }

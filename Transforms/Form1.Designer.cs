@@ -48,6 +48,7 @@
             this.Send_Data_button = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
+            this.panel_with_fields1 = new Transforms.Panel_with_fields();
             this.SuspendLayout();
             // 
             // label1
@@ -221,6 +222,13 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // panel_with_fields1
+            // 
+            this.panel_with_fields1.Location = new System.Drawing.Point(581, 540);
+            this.panel_with_fields1.Name = "panel_with_fields1";
+            this.panel_with_fields1.Size = new System.Drawing.Size(775, 132);
+            this.panel_with_fields1.TabIndex = 19;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -228,7 +236,8 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::Transforms.Properties.Resources.сук;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(1536, 450);
+            this.ClientSize = new System.Drawing.Size(1536, 752);
+            this.Controls.Add(this.panel_with_fields1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Send_Data_button);
@@ -279,5 +288,6 @@
         private Button Send_Data_button;
         private Panel panel1;
         private Button button1;
+        private Panel_with_fields panel_with_fields1;
     }
 }

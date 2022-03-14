@@ -18,7 +18,7 @@
             new Data_Carrier_Int { param = All_Params.bru_127, value = 0 }, 
             new Data_Carrier_Int_List {param = All_Params.sCurrentAnalogData_avg_adc_value}    
         };
-        public List<Command_Handler> commands = new List<Command_Handler>() { new Command_Handler_128(fields), new Command_Handler_124(fields) };
+        public List<Command_Handler> commands = new List<Command_Handler>() { new Command_Handler_128(fields), new Command_Handler_116(fields) };
         public List<int> avg_adc_value = new List<int>();
 
         private volatile bool model_interaction_working = true;
@@ -93,7 +93,7 @@
                                         lock (val) _mediator.Notify(this, Reseiver.UI, new Data_Carrier_Int_List { param = All_Params.sCurrentAnalogData_avg_adc_value, values = val });
                                     }
                             */
-                            lock (fields) _mediator.Notify(this, Reseiver.UI, commands.Find(c => c.id == 124).Handle_Incoming_Command(packet));
+                            lock (fields) _mediator.Notify(this, Reseiver.UI, commands.Find(c => c.id == 116).Handle_Incoming_Command(packet));
 
 
 
@@ -105,10 +105,7 @@
             }
         }
 
-        public void Receive_Data(byte[] data)
-        {
-            Ev.Set();
-        }
+     
 
         public void Receive_Data(Packet packet)
         {

@@ -52,9 +52,9 @@ namespace Transforms
             _mediator.Open_Serial_Port();
         }
 
-        public void Put_UI_Form(Form1 fff)
+        public void Put_UI_Form(Form1 form_temp)
         {
-            form = fff;
+            form = form_temp;
             form.Set_UI(this);
         }
         public bool Serial_Port_Is_Opened()
@@ -66,9 +66,9 @@ namespace Transforms
       
         public void Update_Model_Info(int id, List<Data_Carrier_Base> data)
         {
-            if(data.GetType()==typeof(Data_Carrier_Int_List))
-           form.Update_Rich_Textbox(id, (Data_Carrier_Int_List)data.First());
-            else if(data.GetType() == typeof(Data_Carrier_Int))
+            if(data.GetType()==typeof(List<Data_Carrier_Int_List>))
+           form.Update_Rich_Textbox(id, (Data_Carrier_Int_List)(data.First()));
+            else if(data.GetType() == typeof(List<Data_Carrier_Int>))
             { }
                
 
@@ -88,8 +88,8 @@ namespace Transforms
             internal void Pass_Data_to_Connection_from_Interface(byte[] data)
         {
 
-          //  _mediator.Notify(this, Reseiver.connection, new Data_Carrier_Int_List());
-                _mediator.Notify(this, Reseiver.connection, data);
+            _mediator.Notify(this, Reseiver.connection, new List<Data_Carrier_Base>());
+              //  _mediator.Notify(this, Reseiver.connection, data);
            
         }
     }

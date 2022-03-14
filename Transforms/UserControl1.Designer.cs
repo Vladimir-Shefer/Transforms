@@ -91,6 +91,7 @@
             this.DoubleBuffered = true;
             this.Name = "Data_Carrier_Container";
             this.Size = new System.Drawing.Size(235, 53);
+            this.Load += new System.EventHandler(this.Data_Carrier_Container_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

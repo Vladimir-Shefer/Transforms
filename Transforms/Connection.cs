@@ -7,8 +7,8 @@ namespace Transforms
     {
         private const byte data_length = 16;
 
-        private byte[] buffer = new byte[100];
-        private byte buffer_position = 0;
+        private byte[] buffer = new byte[data_length*1000];
+        private int buffer_position = 0;
         private List<byte[]> data_to_send_list = new List<byte[]>();
         private AutoResetEvent Ev_reading = new AutoResetEvent(false);
         private AutoResetEvent Ev_writing = new AutoResetEvent(false);
@@ -17,13 +17,18 @@ namespace Transforms
         private SerialPort serialPort;
         private Thread writing_thread;
         private volatile bool writing_thread_working = true;
-
+        Data_Parser parser;
         public Connection()
         {
+            for(int i=0; i<buffer.Length; i++)
+            {
+
+                buffer[i] = 0;
+            }
             serialPort = new SerialPort();
-            serialPort.DataReceived += (a, e) => {   Ev_reading.Set(); };
-           
-            reading_thread = new Thread(Reading_Data);
+            serialPort.DataReceived += (a, e) => { Ev_reading.Set(); };
+
+            reading_thread = new Thread(Reading_Data_Experimental);
             reading_thread.IsBackground = true;
 
             writing_thread = new Thread(Writing_Data);
@@ -32,12 +37,12 @@ namespace Transforms
             reading_thread.Start();
             writing_thread.Start();
         }
-       
+
         public void Close_Connection()
         {
             writing_thread_working = false;
             reading_thread_working = false;
-           
+
         }
 
         public void Close_Serial_Port()
@@ -112,52 +117,134 @@ namespace Transforms
                 data_to_send_list.Add(data_to_connection);
             }
             Ev_writing.Set();
-           
+
+        }
+    
+        public void Reading_Data_Experimental()
+        {
+            int tempI = 0;
+            byte[] data = new byte[data_length];
+            byte[] temp = new byte[data_length];
+            while (reading_thread_working)
+            {
+               
+                Ev_reading.WaitOne();
+                while (serialPort.IsOpen && serialPort.BytesToRead >= 0)
+                {
+                    if (buffer_position + serialPort.BytesToRead > buffer.Length)
+                    {
+                        
+                        for (int g = 0; g < buffer_position; g++)
+                            buffer[g] = 0;
+                        buffer_position = 0;
+                    }
+                    tempI = serialPort.BytesToRead;
+                    serialPort.Read(buffer, buffer_position, tempI);
+                    buffer_position += tempI;
+                    
+
+                    while (Conformity(ref buffer, data_length, ref temp))
+                    {
+
+                        
+                       // _mediator.Notify(this, Reseiver.model, parser.Parse_from_bytes_to_Packet(temp));
+                        buffer_position -= data_length;
+                    }
+
+                    for (int g = 0; g < temp.Length; g++)
+                        temp[g] = 0;
+                }
+            }
         }
 
-        public void Reading_Data()
-        {// бахнуть защиту от смещения
+        public void Set_Parser(Data_Parser dp)
+        {
+            parser = dp;
+        }
+        public bool Conformity(ref byte[] data, int data_length, ref byte[] temp)
+        {
+            int tempLe = data.Length;
+            //byte[] temp = new byte[data_length];
+            List<byte> tempL = new List<byte>();
+            lock(data)
+            for (int i = 0; i < data.Length; i++)
+            {
+
+
+                if (data[i] == 15 && data[i + data_length - 1] == 10)
+                {
+
+                    for (int g = i; g < i + data_length; g++)
+                    {
+
+                        temp[g - i] = data[g];
+
+                    }
+
+                    tempL = data.ToList();
+                    tempL.RemoveRange(i, data_length);
+                        for(int h = 0; h<data.Length; h++)
+                        {
+
+                            data[h] = 0;
+                        }
+                       for(int h = 0; h<tempL.Count; h++)
+                        {
+
+                            data[h] = tempL[h];
+                        }
+
+
+                    return true;
+
+                }
+            }
+            return false;
+        }
+      
+/*public void Reading_Data()
+        {
             try
             {
                 byte[] data = new byte[data_length];
 
                 while (reading_thread_working)
+                {
+                    Ev_reading.WaitOne();
+                    while (serialPort.IsOpen && serialPort.BytesToRead >= data_length)
                     {
-                        Ev_reading.WaitOne();
-                        while (serialPort.IsOpen && serialPort.BytesToRead >= data_length)
+
+                        serialPort.Read(buffer, buffer_position, data_length);
+
+                        if (buffer[buffer_position] == (byte)15 && buffer[buffer_position + data_length - 1] == (byte)10)
+
                         {
-                          
-                            serialPort.Read(buffer, buffer_position, data_length);
-
-                           if (buffer[buffer_position] == (byte)15 && buffer[buffer_position + data_length - 1] == (byte)10)
-
+                            for (int i = buffer_position; i < buffer_position + data_length; i++)
                             {
-                                for (int i = buffer_position; i < buffer_position + data_length; i++)
-                                {
-                                    data[i - buffer_position] = buffer[i];
-                                }
-
-                                _mediator.Notify(this, Reseiver.model, data);
+                                data[i - buffer_position] = buffer[i];
                             }
 
-                            buffer_position += data_length;
-                            if (buffer_position > 3 * data_length)
-                            {
-                                for (int i = 0; i < buffer.Length; i++)
-                                {
-                                    buffer[i] = 0;
-                                }
-                                buffer_position = 0;
-                            }
-                          
+                            _mediator.Notify(this, Reseiver.model, data);
                         }
+
+                        buffer_position += data_length;
+                        if (buffer_position > 3 * data_length)
+                        {
+                            for (int i = 0; i < buffer.Length; i++)
+                            {
+                                buffer[i] = 0;
+                            }
+                            buffer_position = 0;
+                        }
+
                     }
+                }
             }
             catch
             {
             }
         }
-
+*/
         public bool Serial_Port_Is_Opened()
         {
             return serialPort.IsOpen;
@@ -175,7 +262,7 @@ namespace Transforms
                             serialPort.Write(data_to_send_list[i], 0, data_to_send_list[i].Length);
                             data_to_send_list.RemoveAt(i);
                         }
-                       
+
                     }
             }
         }

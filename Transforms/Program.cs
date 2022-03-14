@@ -48,7 +48,8 @@ namespace Transforms
               
             }
             Connection connection = new Connection();
-            new Mediator(devices, connection, u, parser);
+            connection.Set_Parser(parser);
+            new Mediator(devices, connection, u);
             
             Application.Run(form);
 
