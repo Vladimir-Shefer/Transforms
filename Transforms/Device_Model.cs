@@ -52,14 +52,15 @@
                 {
                     Packet packet = ((Packet)packet_s[i]);
 
+                    //try
+                    //{ datas = commands.Find(c => c.id == packet.cmd).Handle_Incoming_Command(packet);
 
-                    { datas = commands.Find(c => c.id == packet.cmd).Handle_Incoming_Command(packet);
-
-                        _mediator.Notify(this, Reseiver.UI, datas);
+                    //    _mediator.Notify(this, Reseiver.UI, datas);
 
 
 
-                    }
+                    //}
+                    //catch { }
                     switch (packet.cmd) {
                         case 128:
                             //foreach(var d in  commands.Find(c => c.id == 128).Handle_Incoming_Command(packet))
@@ -67,8 +68,8 @@
                             if( datas != null && datas.Count !=0 )
                                 lock (fields) _mediator.Notify(this, Reseiver.UI, datas);
                             break;
-                        default:
-                
+                       default:
+
                             /*switch (((Packet)packet_s[i]).frame)
                             {
 
@@ -101,11 +102,15 @@
 
                                         lock (val) _mediator.Notify(this, Reseiver.UI, new Data_Carrier_Int_List { param = All_Params.sCurrentAnalogData_avg_adc_value, values = val });
                                     }
-                            */
+                            
                             lock (fields) _mediator.Notify(this, Reseiver.UI, commands.Find(c => c.id == 116).Handle_Incoming_Command(packet));
+                            */
+                            if (packet.cmd != 115)
+                            {
+                                datas = commands.Find(c => c.id == packet.cmd).Handle_Incoming_Command(packet);
 
-
-
+                                _mediator.Notify(this, Reseiver.UI, datas);
+                            }
                             break;
                     }
                     
@@ -114,7 +119,11 @@
             }
         }
 
-     
+        internal void Send_Data_to_Connection(List<Data_Carrier_Base> d)
+        {
+            
+            _mediator.Notify(this, Reseiver.connection, commands.First(c => c.id == ((Data_Carrier_Int)d.Find(f => f.param == All_Params.command)).value).Handle_Outgoing_Command(d));    
+        }
 
         public void Receive_Data(Packet packet)
         {

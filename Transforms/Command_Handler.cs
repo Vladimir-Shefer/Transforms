@@ -11,10 +11,12 @@ namespace Transforms
         public abstract int id { get; set; }
         abstract public List<Data_Carrier_Base> Handle_Incoming_Command(Packet packet);
         public Command_Handler(List<Data_Carrier_Base> fields) { }
-       
+
+        abstract public Packet Handle_Outgoing_Command(List<Data_Carrier_Base> list);
+
     }
 
-    
+
 
     public class Command_Handler_128 : Command_Handler
     {
@@ -45,6 +47,10 @@ namespace Transforms
             return new List<Data_Carrier_Base>{ field_1, field_2 }; 
 
         }
+        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base> list)
+        {
+            return new Packet { cmd = (byte)64, CAN = 2, data = new byte[] { 0,9,0,9,0,9}, frame = 0, to = 10, from = 1,  };
+        }
     }
 
 
@@ -53,18 +59,16 @@ namespace Transforms
     {
 
         const All_Params w = All_Params.sCurrentAnalogData_avg_adc_value;
-        public override int id { get; set; } = 128;
-        Data_Carrier_Base field_1;
+        public override int id { get; set; } = 116;
+        Data_Carrier_Base field_1 = new Data_Carrier_Int_List { param = w, values = new List<int> { 0,0,0,0,0,0,0,0} };
       
         public Command_Handler_116(List<Data_Carrier_Base> fields) : base(fields)
         {
-            foreach (var d in fields)
-            {
-
+            
               
-                if (d.param == w)
-                    field_1 = d;
-            }
+                if (fields.First().param == w)
+                    field_1 =fields.First();
+            
         }
 
         override public List<Data_Carrier_Base> Handle_Incoming_Command(Packet packet)
@@ -78,5 +82,10 @@ namespace Transforms
             return new List<Data_Carrier_Base> { field_1 };
 
         }
+        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base> list)
+        {
+            return new Packet { cmd = (byte)id, CAN = 2, data = new byte[] { 0, 9, 0, 9, 0, 9 }, frame = 0, to = 38, from = 1, };
+        }
+
     }
 }

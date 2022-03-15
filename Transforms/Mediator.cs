@@ -10,7 +10,7 @@ namespace Transforms
         
         private List<Device_Model> models = new List<Device_Model>();
         private UI ui = new UI();
-        
+        Data_Parser data_parser12 = new Data_Parser();    
         public Mediator(Device_Model d, Connection c, UI u)
         {
           
@@ -136,11 +136,12 @@ namespace Transforms
             {
                 ui.Update_Model_Info(((Device_Model)sender).id, d);
             }
-            if (reseiver == Reseiver.connection)
+            if (reseiver == Reseiver.model)
             {
 
-                connections.First().Pass_Data_to_Connection(new byte[] { 2,1,38,0,64,5,1,2,3,4,5,0,0,0,0 });
-                //
+                models.First().Send_Data_to_Connection( d);
+               // connections.First().Pass_Data_to_Connection(data_parser12.Parse_from_packet_to_bytes(models.First().commands.First(c => c.id == ((Data_Carrier_Int)d.Find(f => f.param == All_Params.command)).value).Handle_Outgoing_Command(d)));
+     
 
             }
         }
@@ -158,9 +159,13 @@ namespace Transforms
                 catch { }
                 // models.First().Receive_Data(packet);
             }
-          
+          else if (reseiver== Reseiver.connection)
 
+            {
 
+                connections.First().Pass_Data_to_Connection(packet);
+
+            }
         }
 
         public void Open_Serial_Port()

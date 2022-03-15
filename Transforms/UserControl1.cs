@@ -36,7 +36,7 @@
         private void Data_Carrier_Container_Load(object sender, EventArgs e)
         {
             Display_Current_Data();
-            label1.Text = field_data.param.ToString();
+            label1.Text = field_data.param.ToString().Substring(0, 7);
         }
     }
 }

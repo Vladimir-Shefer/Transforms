@@ -123,7 +123,18 @@ namespace Transforms
             Ev_writing.Set();
 
         }
-         public void Reading_Data_Modbus()
+
+        public void Pass_Data_to_Connection(Packet packet)
+        {
+            lock (data_to_send_list)
+            {
+                data_to_send_list.Add(parser.Parse_from_packet_to_bytes(packet));
+            }
+            Ev_writing.Set();
+
+        }
+
+        public void Reading_Data_Modbus()
         {
             byte slaveID = 1;
             ushort startAddress = 0;

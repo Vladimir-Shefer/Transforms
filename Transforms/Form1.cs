@@ -137,25 +137,26 @@ namespace Transforms
                     });
             }
             catch { }
-            try
+           
             {
                 this.Invoke((MethodInvoker)delegate
                 {
-                    if (panel_with_fields1.actual)
-                    {
-
-
-
-                    }
-                    else
+                    if (!panel_with_fields1.actual)
+                   
                     {
                         Data_Carrier_Container temp_container = new Data_Carrier_Container(carrier_Int_List);
                         List<Data_Carrier_Container> booba = new List<Data_Carrier_Container>() { temp_container };
                         panel_with_fields1.fields(booba);
                     }
+                    else
+                    {
+
+                        panel_with_fields1.containers.First().field_data = carrier_Int_List;
+                        panel_with_fields1.containers.First().Display_Current_Data();
+                    }
                 });
             }
-            catch { }
+           
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -165,7 +166,7 @@ namespace Transforms
 
         private void Send_Data_button_Click(object sender, EventArgs e)
         {
-            _ui.Pass_Data_to_Connection_from_Interface(new Data_Carrier_Int_List { param = All_Params.sCurrentAnalogData_avg_adc_value, values = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 } });
+            _ui.Pass_Data_to_Connection_from_Interface(new List<Data_Carrier_Base>(){ new Data_Carrier_Int { param = All_Params.command, value = 128}, new Data_Carrier_Int_List { param = All_Params.sCurrentAnalogData_avg_adc_value, values = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 } } });
         }
 
         private int i = 0;
