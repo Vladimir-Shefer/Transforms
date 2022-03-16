@@ -13,12 +13,11 @@
     {
         private AutoResetEvent Ev = new AutoResetEvent(false);
         public int id;
-        static public List<Data_Carrier_Base> fields = new List<Data_Carrier_Base>() { 
-            new Data_Carrier_Int { param = All_Params.bru_220, value = 0 }, 
-            new Data_Carrier_Int { param = All_Params.bru_127, value = 0 }, 
-            new Data_Carrier_Int_List {param = All_Params.sCurrentAnalogData_avg_adc_value}    
+        public  List<Data_Carrier_Base> fields = new List<Data_Carrier_Base>() { 
+          
+            new Data_Carrier_Int_List {param = All_Params.sCurrentAnalogData_avg_adc_value, values = new List<int>{ 0,0,0,0,0,0,0,0} }    
         };
-        public List<Command_Handler> commands = new List<Command_Handler>() { new Command_Handler_128(fields), new Command_Handler_116(fields) };
+        public List<Command_Handler> commands ;
         public List<int> avg_adc_value = new List<int>();
 
         private volatile bool model_interaction_working = true;
@@ -29,10 +28,7 @@
             model_thread = new Thread(Model_Interaction);
             model_thread.IsBackground = true;
             model_thread.Start();
-            for (int i = 0; i < 8; i++)
-            {
-                avg_adc_value.Add(0);
-            }
+            commands = new List<Command_Handler>() { new Command_Handler_128(fields), new Command_Handler_116(fields) };
         }
 
         public void Close_Model()
@@ -40,79 +36,45 @@
             model_interaction_working = false;
             Ev.Set();
         }
+        public void Notify_about_Model()
+        {
 
+            _mediator.Notify(this, Reseiver.UI, fields);
+            _mediator.Notify(this, Reseiver.UI, commands);
+
+        }
         public void Model_Interaction()
         {
-            List<Data_Carrier_Base> datas = new List<Data_Carrier_Base>();
+          
             while (model_interaction_working && Ev.WaitOne())
             {
               
                
                 for (int i = packet_s.Count()-1; i >= 0; i--)
                 {
+                    List<Data_Carrier_Base> datas = new List<Data_Carrier_Base>();
                     Packet packet = ((Packet)packet_s[i]);
+                    
+                   
 
-                    //try
-                    //{ datas = commands.Find(c => c.id == packet.cmd).Handle_Incoming_Command(packet);
-
-                    //    _mediator.Notify(this, Reseiver.UI, datas);
-
-
-
-                    //}
-                    //catch { }
-                    switch (packet.cmd) {
-                        case 128:
-                            //foreach(var d in  commands.Find(c => c.id == 128).Handle_Incoming_Command(packet))
-                            //  lock (fields) _mediator.Notify(this, Reseiver.UI, d);
-                            if( datas != null && datas.Count !=0 )
-                                lock (fields) _mediator.Notify(this, Reseiver.UI, datas);
-                            break;
-                       default:
-
-                            /*switch (((Packet)packet_s[i]).frame)
-                            {
-
-
-                                case 0:
-
-                                    avg_adc_value[0] = packet.data[0] * 256 + packet.data[1];
-                                    avg_adc_value[1] = packet.data[2] * 256 + packet.data[3];
-                                    avg_adc_value[2] = packet.data[4] * 256 + packet.data[5];
-                                    avg_adc_value[3] = packet.data[6] * 256 + packet.data[7];
-                                    break;
-
-                                case 1:
-
-                                    avg_adc_value[4] = packet.data[0] * 256 + packet.data[1];
-                                    avg_adc_value[5] = packet.data[2] * 256 + packet.data[3];
-                                    avg_adc_value[6] = packet.data[4] * 256 + packet.data[5];
-                                    avg_adc_value[7] = packet.data[6] * 256 + packet.data[7];
-
-                                    
-                                    break;
-                            }
-                            
-                            {
-                                        List<int> val = new List<int>();
-                                        for (int h = 0; h < 8; h++)
-                                        {
-                                            val.Add(avg_adc_value[h]);
-                                        }
-
-                                        lock (val) _mediator.Notify(this, Reseiver.UI, new Data_Carrier_Int_List { param = All_Params.sCurrentAnalogData_avg_adc_value, values = val });
-                                    }
-                            
-                            lock (fields) _mediator.Notify(this, Reseiver.UI, commands.Find(c => c.id == 116).Handle_Incoming_Command(packet));
-                            */
+                          
                             if (packet.cmd != 115)
                             {
+                                datas.Clear();
+                     int gff =    this.id;
                                 datas = commands.Find(c => c.id == packet.cmd).Handle_Incoming_Command(packet);
+                               if(((Data_Carrier_Int_List)datas[0]).values.Exists(c=>c>3000) && id!=10)
+                                {
 
-                                _mediator.Notify(this, Reseiver.UI, datas);
+
+
+                                }
+                                datas.Add(new Data_Carrier_Int { param = All_Params.id, value = id, });
+                                
+                                
+                               _mediator.Notify(this, Reseiver.UI, datas);
                             }
-                            break;
-                    }
+                     
                     
                     packet_s.RemoveAt(i);
                 }
@@ -127,9 +89,27 @@
 
         public void Receive_Data(Packet packet)
         {
+            Packet gg;
             lock (packet_s)
-                packet_s.Add(packet);
-           
+            {
+               gg = new Packet { CAN = packet.CAN, cmd = packet.cmd, frame = packet.frame, from = packet.from, len = packet.len, to = packet.to };
+                gg.data = new byte[gg.len];
+                for(int i = 0; i< gg.len; i++)
+                { 
+
+                    gg.data[i] = packet.data[i];    
+}
+            }
+            if(gg.data[0] * 256 + gg.data[1] > 2000)
+            {
+
+
+
+            }
+            if (gg.from != 10 && gg.data[0] * 256 + gg.data[1] > 2000)
+            { }
+            packet_s.Add(gg);
+           //////////////////////////////////////////////
             Ev.Set();
         }
     }

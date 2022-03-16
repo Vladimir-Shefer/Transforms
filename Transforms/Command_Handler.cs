@@ -53,7 +53,7 @@ namespace Transforms
         }
     }
 
-
+   
 
     public class Command_Handler_116 : Command_Handler
     {
@@ -64,21 +64,28 @@ namespace Transforms
       
         public Command_Handler_116(List<Data_Carrier_Base> fields) : base(fields)
         {
-            
-              
+            foreach (var d in fields)
+            {
+
                 if (fields.First().param == w)
-                    field_1 =fields.First();
-            
+                    field_1 = d;
+               
+            }
+
+           
+                   
         }
 
         override public List<Data_Carrier_Base> Handle_Incoming_Command(Packet packet)
         {
-            byte[] data = packet.data;
-            for (int i = 0; i < ((Data_Carrier_Int_List)
-             field_1).values.Count/2; i++)
-                ((Data_Carrier_Int_List)
-            field_1).values[i+4*packet.frame] = 256*data[2*i] + data[2*i+1];
-          
+            lock (field_1)
+            {
+                byte[] data = packet.data;
+                for (int i = 0; i < ((Data_Carrier_Int_List)
+                 field_1).values.Count / 2; i++)
+                    ((Data_Carrier_Int_List)
+                field_1).values[i + 4 * packet.frame] = 256 * data[2 * i] + data[2 * i + 1];
+            }
             return new List<Data_Carrier_Base> { field_1 };
 
         }

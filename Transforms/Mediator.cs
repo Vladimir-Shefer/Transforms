@@ -163,9 +163,9 @@ namespace Transforms
 
             {
 
-                connections.First().Pass_Data_to_Connection(packet);
+                    connections.First().Pass_Data_to_Connection(packet);
 
-            }
+                }
         }
 
         public void Open_Serial_Port()
@@ -175,10 +175,28 @@ namespace Transforms
 
       
 
-       
+       public void Set_Model(int version)
+        {
 
-      
+            Device_Model model = new Device_Model();
+            models.Add(model);
+            model.Notify_about_Model();
+         
 
+        }
+
+
+        public void Notify(object sender, Reseiver reseiver, List<Command_Handler> commands)
+        {
+
+
+            if(reseiver == Reseiver.UI)
+            {
+
+
+                ui.Set_Commands(commands);
+            }
+        }
 
         public bool Serial_Port_Is_Opened()
         {

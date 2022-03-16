@@ -11,6 +11,7 @@
         void Notify(object sender, Reseiver reseiver, List<Data_Carrier_Base> data_List);
 
         void Notify(object sender, Reseiver reseiver, Packet packet);
+        void Notify(object sender, Reseiver reseiver, List<Command_Handler> commands);
 
         void Open_Serial_Port();
 

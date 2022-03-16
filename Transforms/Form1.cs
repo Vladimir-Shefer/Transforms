@@ -76,86 +76,96 @@ namespace Transforms
 
 
        
-        public void Update_Rich_Textbox(int i, Data_Carrier_Int_List carrier_Int_List)
+        public void Update_Rich_Textbox(int i, List<Data_Carrier_Base> carrier)
+
         {
             try
             {
                 if (this != null)
                     this.Invoke((MethodInvoker)delegate
                     {
-                        lock (carrier_Int_List)
+                        Data_Carrier_Int_List carrier_Int_List;
+                        int g;
+
+                        carrier_Int_List = (Data_Carrier_Int_List)carrier.Find(c => c.GetType() == typeof(Data_Carrier_Int_List));
+                        g = ((Data_Carrier_Int)carrier.Find(c => c.param == All_Params.id)).value;
+
+                        if (this != null)
+
+                            lock (carrier_Int_List)
+                            {
+                                if (carrier_Int_List.param == All_Params.sCurrentAnalogData_avg_adc_value)
+                                    switch (i)
+
+                                    {
+                                        case 10:
+                                            int j = 0;
+                                            avg_richTextBox_1.Clear();
+                                            foreach (var s in carrier_Int_List.values)
+                                            {
+                                                if (j < 6)
+                                                    avg_richTextBox_1.Text += Convert.ToString(s) + "\n";
+                                                j++;
+                                            }
+                                            break;
+
+                                        case 11:
+                                            j = 0;
+                                            avg_richTextBox_2.Clear();
+                                            foreach (var s in carrier_Int_List.values)
+                                            {
+                                                if (j < 6)
+                                                    avg_richTextBox_2.Text += Convert.ToString(s) + "\n";
+                                                j++;
+                                            }
+                                            break;
+
+                                        case 12:
+                                            j = 0;
+                                            avg_richTextBox_3.Clear();
+                                            foreach (var s in carrier_Int_List.values)
+                                            {
+                                                if (j < 6)
+                                                    avg_richTextBox_3.Text += Convert.ToString(s) + "\n";
+                                                j++;
+                                            }
+                                            break;
+
+                                        case 13:
+                                            j = 0;
+                                            avg_richTextBox_4.Clear();
+                                            foreach (var s in carrier_Int_List.values)
+                                            {
+                                                if (j < 6)
+                                                    avg_richTextBox_4.Text += Convert.ToString(s) + "\n";
+                                                j++;
+                                            }
+                                            break;
+                                    }
+                            }
+
+
+
+                        if (g == 10)
                         {
-                            if (carrier_Int_List.param == All_Params.sCurrentAnalogData_avg_adc_value)
-                                switch (i)
 
-                                {
-                                    case 10:
-                                        int j = 0;
-                                        avg_richTextBox_1.Clear();
-                                        foreach (var s in carrier_Int_List.values)
-                                        {
-                                            if (j < 6)
-                                                avg_richTextBox_1.Text += Convert.ToString(s) + "\n";
-                                            j++;
-                                        }
-                                        break;
+                            if (!panel_with_fields1.actual)
 
-                                    case 11:
-                                        j = 0;
-                                        avg_richTextBox_2.Clear();
-                                        foreach (var s in carrier_Int_List.values)
-                                        {
-                                            if (j < 6)
-                                                avg_richTextBox_2.Text += Convert.ToString(s) + "\n";
-                                            j++;
-                                        }
-                                        break;
+                            {
+                                Data_Carrier_Container temp_container = new Data_Carrier_Container(carrier_Int_List);
+                                List<Data_Carrier_Container> booba = new List<Data_Carrier_Container>() { temp_container };
+                                panel_with_fields1.fields(booba);
+                            }
+                            else
+                            {
 
-                                    case 12:
-                                        j = 0;
-                                        avg_richTextBox_3.Clear();
-                                        foreach (var s in carrier_Int_List.values)
-                                        {
-                                            if (j < 6)
-                                                avg_richTextBox_3.Text += Convert.ToString(s) + "\n";
-                                            j++;
-                                        }
-                                        break;
-
-                                    case 13:
-                                        j = 0;
-                                        avg_richTextBox_4.Clear();
-                                        foreach (var s in carrier_Int_List.values)
-                                        {
-                                            if (j < 6)
-                                                avg_richTextBox_4.Text += Convert.ToString(s) + "\n";
-                                            j++;
-                                        }
-                                        break;
-                                }
+                                panel_with_fields1.containers.First().field_data = carrier_Int_List;
+                                panel_with_fields1.containers.First().Display_Current_Data();
+                            }
                         }
                     });
             }
             catch { }
-           
-            {
-                this.Invoke((MethodInvoker)delegate
-                {
-                    if (!panel_with_fields1.actual)
-                   
-                    {
-                        Data_Carrier_Container temp_container = new Data_Carrier_Container(carrier_Int_List);
-                        List<Data_Carrier_Container> booba = new List<Data_Carrier_Container>() { temp_container };
-                        panel_with_fields1.fields(booba);
-                    }
-                    else
-                    {
-
-                        panel_with_fields1.containers.First().field_data = carrier_Int_List;
-                        panel_with_fields1.containers.First().Display_Current_Data();
-                    }
-                });
-            }
            
         }
 

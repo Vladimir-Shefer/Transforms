@@ -147,9 +147,7 @@ namespace Transforms
         }
         public void Reading_Data_Experimental()
         {
-            int tempI = 0;
-            byte[] data = new byte[data_length];
-            byte[] temp = new byte[data_length];
+            
             while (reading_thread_working)
             {
                
@@ -169,6 +167,9 @@ namespace Transforms
                             buffer[g] = 0;
                         buffer_position = 0;
                     }
+                    int tempI = 0;
+            byte[] data = new byte[data_length];
+            byte[] temp = new byte[data_length];
                     tempI = serialPort.BytesToRead;
                     serialPort.Read(buffer, buffer_position, tempI);
                     buffer_position += tempI;
@@ -177,8 +178,10 @@ namespace Transforms
                     while (Conformity(ref buffer, data_length, ref temp))
                     {
 
-                        
-                        _mediator.Notify(this, Reseiver.model, parser.Parse_from_bytes_to_Packet(temp));
+                        Packet ggg = parser.Parse_from_bytes_to_Packet(temp);
+                        if(ggg.from!=10 && ggg.data[0]*256+ggg.data[1]>2000)
+                        { }    
+                        _mediator.Notify(this, Reseiver.model,ggg);
                         buffer_position -= data_length;
                     }
 

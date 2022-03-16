@@ -249,10 +249,10 @@
             this.data_Carrier_Container1.BackColor = System.Drawing.Color.Transparent;
             this.data_Carrier_Container1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("data_Carrier_Container1.BackgroundImage")));
             this.data_Carrier_Container1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.data_Carrier_Container1.Location = new System.Drawing.Point(96, 405);
+            this.data_Carrier_Container1.Location = new System.Drawing.Point(118, 391);
             this.data_Carrier_Container1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.data_Carrier_Container1.Name = "data_Carrier_Container1";
-            this.data_Carrier_Container1.Size = new System.Drawing.Size(206, 40);
+            this.data_Carrier_Container1.Size = new System.Drawing.Size(309, 40);
             this.data_Carrier_Container1.TabIndex = 20;
             // 
             // Form1

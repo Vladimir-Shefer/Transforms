@@ -17,8 +17,10 @@
 
     public enum All_Params
     {
+        id,
         command,
         unknown,
+        state,
         sCurrentAnalogData_avg_adc_value,
         bru_127,
         bru_220,
