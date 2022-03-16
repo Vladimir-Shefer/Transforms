@@ -83,8 +83,11 @@
 
         internal void Send_Data_to_Connection(List<Data_Carrier_Base> d)
         {
+            Packet packet = commands.First(c => c.id == ((Data_Carrier_Int)d.Find(f => f.param == All_Params.command)).value).Handle_Outgoing_Command(d);
+            packet.len = (byte)packet.data.Length;
+            packet.to = (byte)id;
             
-            _mediator.Notify(this, Reseiver.connection, commands.First(c => c.id == ((Data_Carrier_Int)d.Find(f => f.param == All_Params.command)).value).Handle_Outgoing_Command(d));    
+            _mediator.Notify(this, Reseiver.connection,packet );    
         }
 
         public void Receive_Data(Packet packet)

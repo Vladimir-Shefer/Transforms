@@ -14,6 +14,10 @@
     {
         public List<int> values = new List<int>();
     }
+    public class Data_Carrier_Bool : Data_Carrier_Base
+    {
+        public bool value;  
+    }
 
     public enum All_Params
     {
@@ -24,6 +28,7 @@
         sCurrentAnalogData_avg_adc_value,
         bru_127,
         bru_220,
+        time_logic,
         _FLASH_ID_VERSIYA_H,      // uint16_t id_versiya_h            // Версия ПО
         _FLASH_ID_VERSIYA_L,      // uint16_t id_versiya_l            // Версия ПО
         _FLASH_NUMBER_BLOK,        // uint16_t number_blok            // Номер блока

@@ -162,7 +162,9 @@ namespace Transforms
           else if (reseiver== Reseiver.connection)
 
             {
-
+                packet.from = 1;
+                packet.CAN = 2;
+              
                     connections.First().Pass_Data_to_Connection(packet);
 
                 }
