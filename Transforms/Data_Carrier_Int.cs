@@ -79,6 +79,9 @@
         _FLASH_CT_MUL,
         _FLASH_WRONG_CON_MAX_CURRENT,
         _FLASH_WRONG_CON_SW_CURRENT,
+        _FLASH_ASSYMETRY_ENABLE,
+        _FLASH_ASSYMETRY_SETPOINT,
+        _FLASH_ASSYMETRY_TIME,
         ADCdata_currentA,
         ADCdata_currentB,
         ADCdata_currentC,
@@ -94,7 +97,22 @@
         ADCdata_IB_angle,
         ADCdata_IC_angle,
         ADCdata_ID_angle,
-
+        _WARN_PT100_0,  
+        _WARN_PT100_1,
+        _WARN_PT100_2,
+        _WARN_V4_20_0,
+        _WARN_V4_20_1,
+        _WARN_PT100_ERROR_0,
+        _WARN_PT100_ERROR_1,
+        _WARN_PT100_ERROR_2,
+        _LOCK_PT100_0,
+        _LOCK_PT100_1,
+        _LOCK_PT100_2,
+        V4_20_0,
+        V4_20_1,
+        _PT100_0,
+        _PT100_1,
+        _PT100_2,
     }
 
     public enum Reseiver

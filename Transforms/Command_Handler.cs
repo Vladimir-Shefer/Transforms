@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Transforms
 {
-   //Exception invalid_received_data = new Exception("Недопустимый вызов команды на прием");
+    
+   //const Exception invalid_received_data = new Exception("Недопустимый вызов команды на прием");
     public abstract class Command_Handler
     {
         public abstract int id { get; set; }
@@ -16,7 +17,7 @@ namespace Transforms
         }
         public Command_Handler(List<Data_Carrier_Base> fields) { }
 
-        virtual public Packet Handle_Outgoing_Command(List<Data_Carrier_Base> list)
+        virtual public Packet Handle_Outgoing_Command(List<Data_Carrier_Base>? list)
         {
             throw new Exception("Недопустимый вызов команды на отправку");
         }
@@ -53,7 +54,7 @@ namespace Transforms
             return new List<Data_Carrier_Base> { field_1, field_2 };
 
         }
-        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base> list)
+        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base>? list)
         {
             return new Packet { cmd = (byte)64, CAN = 2, data = new byte[] { 0, 9, 0, 9, 0, 9 }, frame = 0, to = 10, from = 1, };
         }
@@ -79,7 +80,7 @@ namespace Transforms
         }
 
 
-        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base> list)
+        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base>? list)
         {
 
 
@@ -129,20 +130,24 @@ namespace Transforms
     }
     public class Command_Handler_60 : Command_Handler
     {
-        const All_Params first_param = All_Params._FLASH_PROT_PT100_0_ENABLE;
-        const All_Params second_param = All_Params._FLASH_PROT_PT100_1_ENABLE;
-        const All_Params third_param = All_Params._FLASH_PROT_PT100_2_ENABLE;
-        const All_Params firth_param = All_Params._FLASH_WARN_PT100_0_ENABLE;
-        const All_Params fifth_param = All_Params._FLASH_WARN_PT100_1_ENABLE;
-        const All_Params sixth_param = All_Params._FLASH_WARN_PT100_2_ENABLE;
-        const All_Params seventh_param = All_Params._FLASH_PROT_V4_20_0_ENABLE;
-        const All_Params eighth_param = All_Params._FLASH_PROT_V4_20_1_ENABLE;
-        const All_Params ninth_param = All_Params._FLASH_PROT_V4_20_0_SETPOINT;
-        const All_Params tenth_param = All_Params._FLASH_PROT_V4_20_1_SETPOINT;
-        const All_Params eleventh_param = All_Params._FLASH_PROT_PT100_0_SETPOINT;
-        const All_Params twelve_param = All_Params._FLASH_PROT_PT100_1_SETPOINT;
-        const All_Params thirteenth_param = All_Params._FLASH_PROT_PT100_2_SETPOINT;
+        const All_Params first_param = All_Params._LOCK_PT100_0;
+        const All_Params second_param = All_Params._LOCK_PT100_1;
+        const All_Params third_param = All_Params._LOCK_PT100_2;
+        const All_Params firth_param = All_Params._WARN_PT100_0;
+        const All_Params fifth_param = All_Params._WARN_PT100_1;
+        const All_Params sixth_param = All_Params._WARN_PT100_2;
+        const All_Params seventh_param = All_Params._WARN_V4_20_0;
+        const All_Params eighth_param = All_Params._WARN_V4_20_1;
+        const All_Params ninth_param = All_Params.V4_20_0;
+        const All_Params tenth_param = All_Params.V4_20_1;
+        const All_Params eleventh_param = All_Params._PT100_0;
+        const All_Params twelve_param = All_Params._PT100_1;
+        const All_Params thirteenth_param = All_Params._PT100_2;
         const All_Params fourteenth_param = All_Params.time_logic;
+        const All_Params sixteenth_param = All_Params._WARN_PT100_ERROR_0;
+        const All_Params seventeenth_param = All_Params._WARN_PT100_ERROR_1;
+        const All_Params eighteenth_param = All_Params._WARN_PT100_ERROR_2;
+
         public override int id { get; set; } = 60;
         Data_Carrier_Base field_1 = new Data_Carrier_Bool();
         Data_Carrier_Base field_2 = new Data_Carrier_Bool();
@@ -158,6 +163,9 @@ namespace Transforms
         Data_Carrier_Base field_12 = new Data_Carrier_Int();
         Data_Carrier_Base field_13 = new Data_Carrier_Int();
         Data_Carrier_Base field_14 = new Data_Carrier_Int();
+        Data_Carrier_Base field_16 = new Data_Carrier_Bool();
+        Data_Carrier_Base field_17 = new Data_Carrier_Bool();
+        Data_Carrier_Base field_18 = new Data_Carrier_Bool();
         public Command_Handler_60(List<Data_Carrier_Base> fields) : base(fields)
         {
             foreach (var d in fields)
@@ -191,6 +199,12 @@ namespace Transforms
                     field_13 = d;
                 if (d.param == fourteenth_param)
                     field_14 = d;
+                if (d.param == sixteenth_param)
+                    field_16 = d;
+                if (d.param == seventeenth_param)
+                    field_17 = d;
+                if (d.param == eighteenth_param)
+                    field_18 = d;
             }
         }
         public override List<Data_Carrier_Base> Handle_Incoming_Command(Packet packet)
@@ -207,6 +221,9 @@ namespace Transforms
                     ((Data_Carrier_Bool)field_6).value = (data[1] >> 0) % 2 == 1;
                     ((Data_Carrier_Bool)field_7).value = (data[1] >> 1) % 2 == 1;
                     ((Data_Carrier_Bool)field_8).value = (data[1] >> 2) % 2 == 1;
+                    ((Data_Carrier_Bool)field_16).value = (data[1] >> 3) % 2 == 1;
+                    ((Data_Carrier_Bool)field_17).value = (data[1] >> 4) % 2 == 1;
+                    ((Data_Carrier_Bool)field_18).value = (data[1] >> 5) % 2 == 1;
                     ((Data_Carrier_Int)field_9).value = data[4] + data[5] * 256;
                     ((Data_Carrier_Int)field_10).value = data[6] + data[7] * 256;
                     
@@ -220,12 +237,12 @@ namespace Transforms
                     ((Data_Carrier_Int)field_14).value = data[6] + data[7] * 256;
                     break;
             }
-            return new List<Data_Carrier_Base> { field_1, field_2, field_3, field_4, field_5, field_6, field_7, field_8, field_9, field_10, field_11, field_12, field_13, field_14 };
+            return new List<Data_Carrier_Base> { field_1, field_2, field_3, field_4, field_5, field_6, field_7, field_8, field_9, field_10, field_11, field_12, field_13, field_14, field_16, field_17, field_18};
         }
 
 
 
-        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base> list)
+        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base>? list)
         {
 
 
@@ -253,7 +270,7 @@ namespace Transforms
         }
 
 
-        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base> list)
+        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base>? list)
         {
 
 
@@ -295,14 +312,220 @@ namespace Transforms
             return new List<Data_Carrier_Base> { field_1 };
 
         }
-        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base> list)
+        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base>? list)
         {
             return new Packet { cmd = (byte)id, CAN = 2, data = new byte[] { 0, 9, 0, 9, 0, 9 }, frame = 0, to = 38, from = 1, };
         }
 
     }
 
+    public class Command_Handler_102 : Command_Handler
+    {
+       
+        public override int id { get; set; } = 102;
+        List<Data_Carrier_Base> fields = new List<Data_Carrier_Base>();
+        List<All_Params> all_Params = new List<All_Params>() {All_Params._FLASH_ID_VERSIYA_H,      // uint16_t id_versiya_h            // Версия ПО
+        All_Params._FLASH_ID_VERSIYA_L,      // uint16_t id_versiya_l            // Версия ПО
+        All_Params._FLASH_NUMBER_BLOK,        // uint16_t number_blok            // Номер блока
+        All_Params._FLASH_DEV_TYPE,         //uint16_t device_config.device_type;      //тип блока //device_type_t device_type;   //тип блока
+        All_Params._FLASH_PROT_PT100_0_ENABLE,
+        All_Params._FLASH_PROT_PT100_1_ENABLE,
+        All_Params._FLASH_PROT_PT100_2_ENABLE,
+        All_Params._FLASH_WARN_PT100_0_ENABLE,
+        All_Params._FLASH_WARN_PT100_1_ENABLE,
+        All_Params._FLASH_WARN_PT100_2_ENABLE,
+        All_Params._FLASH_PROT_V4_20_0_ENABLE,
+        All_Params._FLASH_PROT_V4_20_1_ENABLE,
+        All_Params._FLASH_WARN_V4_20_0_ENABLE,
+        All_Params._FLASH_WARN_V4_20_1_ENABLE,
+        All_Params._FLASH_PROT_WRONG_CON_ENABLE,
+        All_Params._FLASH_MIN_CURRENT,
+        All_Params._FLASH_PROT_PT100_0_SETPOINT,
+        All_Params._FLASH_PROT_PT100_1_SETPOINT,
+        All_Params._FLASH_PROT_PT100_2_SETPOINT,
+        All_Params._FLASH_WARN_PT100_0_SETPOINT,
+        All_Params._FLASH_WARN_PT100_1_SETPOINT,
+       All_Params._FLASH_WARN_PT100_2_SETPOINT,
+       All_Params._FLASH_PROT_V4_20_0_SETPOINT,
+       All_Params._FLASH_PROT_V4_20_1_SETPOINT,
+       All_Params._FLASH_WARN_V4_20_0_SETPOINT,
+       All_Params._FLASH_WARN_V4_20_1_SETPOINT,
+       All_Params._FLASH_RS485_ADDRESS,
+       All_Params._FLASH_RS485_SPEED,
+       All_Params._FLASH_RATIOS_MUL0,
+       All_Params._FLASH_RATIOS_MUL1,
+       All_Params._FLASH_RATIOS_MUL2,
+       All_Params._FLASH_RATIOS_MUL3,
+       All_Params._FLASH_RATIOS_MUL4,
+       All_Params._FLASH_RATIOS_MUL5,
+       All_Params._FLASH_RATIOS_MUL6,
+       All_Params._FLASH_RATIOS_MUL7,
+       All_Params._FLASH_RATIOS_MUL8,
+       All_Params._FLASH_RATIOS_GND0,
+       All_Params._FLASH_RATIOS_GND1,
+       All_Params._FLASH_RATIOS_GND2,
+       All_Params._FLASH_RATIOS_GND3,
+       All_Params._FLASH_RATIOS_GND4,
+       All_Params._FLASH_RATIOS_GND5,
+       All_Params._FLASH_RATIOS_GND6,
+       All_Params._FLASH_RATIOS_GND7,
+       All_Params._FLASH_RATIOS_GND8,
+       All_Params._FLASH_CURRENT_MUL,
+       All_Params._FLASH_CT_MUL,
+       All_Params._FLASH_WRONG_CON_MAX_CURRENT,
+       All_Params._FLASH_WRONG_CON_SW_CURRENT };
 
+        public Command_Handler_102(List<Data_Carrier_Base> fields) : base(fields)
+        {
+            foreach(var p in all_Params)
+            {
+
+                //  fields.Add(new Data_Carrier_Bool { param = p, value = false });
+                if (fields.Exists(c => c.param == p))
+                    this.fields.Add(fields.FindLast(c => c.param == p));
+                else throw new Exception("Ошибка при привязке параметров - не хвататет параметров устройства");
+            }
+        }
+
+
+        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base>? list)
+        {
+            int h = 0;
+            foreach (var p in all_Params)
+            {
+                if (list.Exists(c => c.param == p))
+
+                {
+                    h = all_Params.IndexOf(p);
+                         return new Packet { cmd = (byte)id, data = new byte[]{ (byte)(h%256), (byte)(h /256) }, frame = 0 };
+                }
+            }
+            throw new Exception("Невозможно отправить такой запрос ");
+
+        }
+
+        override public List<Data_Carrier_Base> Handle_Incoming_Command(Packet packet)
+        {
+            int int_param = packet.data[0] + packet.data[1] * 256;
+            if(fields.Count<=int_param)
+            {
+
+              ( (Data_Carrier_Int)fields[int_param]).value = packet.data[2] + packet.data[3] * 256;
+                return new List<Data_Carrier_Base>() { fields[int_param] };
+            }
+            else throw new Exception("Неверно распознан пакет ");
+
+        }
+        }
+    public class Command_Handler_103 : Command_Handler
+    {
+       
+
+        public override int id { get; set; } = 103;
+        List<Data_Carrier_Base> fields = new List<Data_Carrier_Base>();
+        List<All_Params> all_Params = new List<All_Params>() {All_Params._FLASH_ID_VERSIYA_H,      // uint16_t id_versiya_h            // Версия ПО
+        All_Params._FLASH_ID_VERSIYA_L,      // uint16_t id_versiya_l            // Версия ПО
+        All_Params._FLASH_NUMBER_BLOK,        // uint16_t number_blok            // Номер блока
+        All_Params._FLASH_DEV_TYPE,         //uint16_t device_config.device_type;      //тип блока //device_type_t device_type;   //тип блока
+        All_Params._FLASH_PROT_PT100_0_ENABLE,
+        All_Params._FLASH_PROT_PT100_1_ENABLE,
+        All_Params._FLASH_PROT_PT100_2_ENABLE,
+        All_Params._FLASH_WARN_PT100_0_ENABLE,
+        All_Params._FLASH_WARN_PT100_1_ENABLE,
+        All_Params._FLASH_WARN_PT100_2_ENABLE,
+        All_Params._FLASH_PROT_V4_20_0_ENABLE,
+        All_Params._FLASH_PROT_V4_20_1_ENABLE,
+        All_Params._FLASH_WARN_V4_20_0_ENABLE,
+        All_Params._FLASH_WARN_V4_20_1_ENABLE,
+        All_Params._FLASH_PROT_WRONG_CON_ENABLE,
+        All_Params._FLASH_MIN_CURRENT,
+        All_Params._FLASH_PROT_PT100_0_SETPOINT,
+        All_Params._FLASH_PROT_PT100_1_SETPOINT,
+        All_Params._FLASH_PROT_PT100_2_SETPOINT,
+        All_Params._FLASH_WARN_PT100_0_SETPOINT,
+        All_Params._FLASH_WARN_PT100_1_SETPOINT,
+       All_Params._FLASH_WARN_PT100_2_SETPOINT,
+       All_Params._FLASH_PROT_V4_20_0_SETPOINT,
+       All_Params._FLASH_PROT_V4_20_1_SETPOINT,
+       All_Params._FLASH_WARN_V4_20_0_SETPOINT,
+       All_Params._FLASH_WARN_V4_20_1_SETPOINT,
+       All_Params._FLASH_RS485_ADDRESS,
+       All_Params._FLASH_RS485_SPEED,
+       All_Params._FLASH_RATIOS_MUL0,
+       All_Params._FLASH_RATIOS_MUL1,
+       All_Params._FLASH_RATIOS_MUL2,
+       All_Params._FLASH_RATIOS_MUL3,
+       All_Params._FLASH_RATIOS_MUL4,
+       All_Params._FLASH_RATIOS_MUL5,
+       All_Params._FLASH_RATIOS_MUL6,
+       All_Params._FLASH_RATIOS_MUL7,
+       All_Params._FLASH_RATIOS_MUL8,
+       All_Params._FLASH_RATIOS_GND0,
+       All_Params._FLASH_RATIOS_GND1,
+       All_Params._FLASH_RATIOS_GND2,
+       All_Params._FLASH_RATIOS_GND3,
+       All_Params._FLASH_RATIOS_GND4,
+       All_Params._FLASH_RATIOS_GND5,
+       All_Params._FLASH_RATIOS_GND6,
+       All_Params._FLASH_RATIOS_GND7,
+       All_Params._FLASH_RATIOS_GND8,
+       All_Params._FLASH_CURRENT_MUL,
+       All_Params._FLASH_CT_MUL,
+       All_Params._FLASH_WRONG_CON_MAX_CURRENT,
+       All_Params._FLASH_WRONG_CON_SW_CURRENT,
+        All_Params._FLASH_ASSYMETRY_ENABLE,
+         All_Params._FLASH_ASSYMETRY_SETPOINT,
+         All_Params._FLASH_ASSYMETRY_TIME};
+        public Command_Handler_103(List<Data_Carrier_Base> fields) : base(fields)
+        {
+            foreach (var p in all_Params)
+            {
+
+                
+                if (fields.Exists(c => c.param == p))
+                    this.fields.Add(fields.FindLast(c => c.param == p));
+                else throw new Exception("Ошибка при привязке параметров - не хвататет параметров устройства");
+            }
+        }
+
+
+        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base>? list)
+        {
+            int h = 0;
+            int i = 0;
+            foreach (var p in all_Params)
+            {
+               
+
+                if (list.Exists(c => c.param == p))
+
+                {
+                    h = all_Params.IndexOf(p);
+                   int b = ((Data_Carrier_Int)list[i]).value;
+                    if( b/ 256<256 && b >=0)
+                        return new Packet { cmd = (byte)id, data = new byte[] { (byte)(h % 256), (byte)(h / 256), (byte)(b % 256), (byte)(b / 256) }, frame = 0 };
+                    else { throw new Exception("Невозможно отправить такой запрос "); }
+                    
+                }
+                i++;
+            }
+            throw new Exception("Невозможно отправить такой запрос ");
+
+        }
+
+        override public List<Data_Carrier_Base> Handle_Incoming_Command(Packet packet)
+        {
+            int int_param = packet.data[0] + packet.data[1] * 256;
+            if (fields.Count <= int_param)
+            {
+
+                ((Data_Carrier_Int)fields[int_param]).value = packet.data[2] + packet.data[3] * 256;
+                return new List<Data_Carrier_Base>() { fields[int_param] };
+            }
+            else throw new Exception("Неверно распознан пакет ");
+
+        }
+    }
     public class Command_Handler_106 : Command_Handler
     {
         const All_Params first_param = All_Params.ADCdata_currentA;
@@ -435,7 +658,7 @@ namespace Transforms
 
 
 
-        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base> list)
+        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base>? list)
         {
 
             All_Params param_temp = list.FindLast(c => (c.param == first_param) || (c.param == second_param) || (c.param == third_param) ||
@@ -488,6 +711,232 @@ namespace Transforms
             else throw new Exception("Недопустимый параметр команды на отправку");
 
 
+        }
+    }
+    public class Command_Handler_59 : Command_Handler
+    {
+        const All_Params first_param = All_Params._WARN_PT100_0;
+        const All_Params second_param = All_Params._WARN_PT100_1;
+        const All_Params third_param = All_Params._WARN_PT100_2;
+        const All_Params fourth_param = All_Params._WARN_V4_20_0;
+        const All_Params fifth_param = All_Params._WARN_V4_20_1;
+        const All_Params sixth_param = All_Params._WARN_PT100_ERROR_0;
+        const All_Params seventh_param = All_Params._WARN_PT100_ERROR_1;
+        const All_Params eigth_param = All_Params._WARN_PT100_ERROR_2;
+        public override int id { get; set; } = 59;
+        Data_Carrier_Base field_1 = new Data_Carrier_Bool();
+        Data_Carrier_Base field_2 = new Data_Carrier_Bool();
+        Data_Carrier_Base field_3 = new Data_Carrier_Bool();
+        Data_Carrier_Base field_4 = new Data_Carrier_Bool();
+        Data_Carrier_Base field_5 = new Data_Carrier_Bool();
+        Data_Carrier_Base field_6 = new Data_Carrier_Bool();
+        Data_Carrier_Base field_7 = new Data_Carrier_Bool();
+        Data_Carrier_Base field_8 = new Data_Carrier_Bool();
+
+
+
+        public Command_Handler_59(List<Data_Carrier_Base> fields) : base(fields)
+        {
+            foreach (var d in fields)
+            {
+
+               
+
+                    if (d.param == first_param)
+                        field_1 = d;
+                   else if (d.param == second_param)
+                        field_2 = d;
+                   else if (d.param == third_param)
+                        field_3 = d;
+                   else if (d.param == fourth_param)
+                        field_4 = d;
+                   else if (d.param == fifth_param)
+                        field_5 = d;
+                   else if (d.param == sixth_param)
+                        field_6 = d;
+                   else if (d.param == seventh_param)
+                        field_7 = d;
+               else if (d.param == eigth_param)
+                    field_8 = d;
+
+
+            }
+        }
+
+        public override List<Data_Carrier_Base> Handle_Incoming_Command(Packet packet)
+        {
+            byte[] data = packet.data;
+            
+                    ((Data_Carrier_Bool)field_1).value = (data[0] >> 0) % 2 == 1;
+                    ((Data_Carrier_Bool)field_2).value = (data[0] >> 1) % 2 == 1;
+                    ((Data_Carrier_Bool)field_3).value = (data[0] >> 2) % 2 == 1;
+                    ((Data_Carrier_Bool)field_4).value = (data[0] >> 3) % 2 == 1;
+                    ((Data_Carrier_Bool)field_5).value = (data[0] >> 4) % 2 == 1;
+                    ((Data_Carrier_Bool)field_6).value = (data[0] >> 5) % 2 == 1;
+                    ((Data_Carrier_Bool)field_7).value = (data[0] >> 6) % 2 == 1;
+                    ((Data_Carrier_Bool)field_8).value = (data[0] >> 7) % 2 == 1;
+                   
+
+
+            return new List<Data_Carrier_Base> { field_1, field_2, field_3, field_4, field_5, field_6, field_7, field_8 };
+        }
+        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base>? list)
+        {
+
+
+            return new Packet { cmd = (byte) id, data = { }, frame = 0 };
+        }
+
+    }
+    public class Command_Handler_58 : Command_Handler
+    {
+        const All_Params first_param = All_Params._LOCK_PT100_0;
+        const All_Params second_param = All_Params._LOCK_PT100_1;
+        const All_Params third_param = All_Params._LOCK_PT100_2;
+
+        public override int id { get; set; } = 58;
+        Data_Carrier_Base field_1 = new Data_Carrier_Bool();
+        Data_Carrier_Base field_2 = new Data_Carrier_Bool();
+        Data_Carrier_Base field_3 = new Data_Carrier_Bool();
+
+
+        public Command_Handler_58(List<Data_Carrier_Base> fields) : base(fields)
+        {
+            foreach (var d in fields)
+            {
+
+
+
+                if (d.param == first_param)
+                    field_1 = d;
+                if (d.param == second_param)
+                    field_2 = d;
+                if (d.param == third_param)
+                    field_3 = d;
+
+
+
+            }
+        }
+
+        public override List<Data_Carrier_Base> Handle_Incoming_Command(Packet packet)
+        {
+            byte[] data = packet.data;
+
+            ((Data_Carrier_Bool)field_1).value = (data[0] >> 5) % 2 == 1;
+            ((Data_Carrier_Bool)field_2).value = (data[0] >> 6) % 2 == 1;
+            ((Data_Carrier_Bool)field_3).value = (data[0] >> 7) % 2 == 1;
+
+
+
+            return new List<Data_Carrier_Base> { field_1, field_2, field_3 };
+        }
+        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base>? list)
+        {
+
+
+            return new Packet { cmd = (byte)id, data = { }, frame = 0 };
+        }
+
+    }
+    public class Command_Handler_76 : Command_Handler
+    {
+       
+        List<Data_Carrier_Base> fields = new List<Data_Carrier_Base>();
+        List<All_Params> all_Params = new List<All_Params>() 
+        {  
+        All_Params._FLASH_PROT_PT100_0_ENABLE,
+        All_Params._FLASH_PROT_PT100_1_ENABLE,
+        All_Params._FLASH_PROT_PT100_2_ENABLE,
+        All_Params._FLASH_WARN_PT100_0_ENABLE,
+        All_Params._FLASH_WARN_PT100_1_ENABLE,
+        All_Params._FLASH_WARN_PT100_2_ENABLE,
+        All_Params._FLASH_PROT_V4_20_0_ENABLE,
+        All_Params._FLASH_PROT_V4_20_1_ENABLE,
+        All_Params._FLASH_WARN_V4_20_0_ENABLE,
+        All_Params._FLASH_WARN_V4_20_1_ENABLE,
+        All_Params._FLASH_PROT_WRONG_CON_ENABLE,
+        All_Params._FLASH_ASSYMETRY_ENABLE,
+        
+        All_Params._FLASH_PROT_PT100_0_SETPOINT,
+        All_Params._FLASH_PROT_PT100_1_SETPOINT,
+        All_Params._FLASH_PROT_PT100_2_SETPOINT,
+
+        All_Params._FLASH_WARN_PT100_0_SETPOINT,
+        All_Params._FLASH_WARN_PT100_1_SETPOINT,
+       All_Params._FLASH_WARN_PT100_2_SETPOINT,
+
+        All_Params._FLASH_WARN_V4_20_0_SETPOINT,
+       All_Params._FLASH_WARN_V4_20_1_SETPOINT,
+
+    
+        All_Params._FLASH_MIN_CURRENT,
+         };
+
+
+
+        public override int id { get; set; } = 76;
+      
+
+        public Command_Handler_76(List<Data_Carrier_Base> fields) : base(fields)
+        {
+            foreach (var p in all_Params)
+            {
+
+
+                if (fields.Exists(c => c.param == p))
+                    this.fields.Add(fields.FindLast(c => c.param == p));
+                else throw new Exception("Ошибка при привязке параметров - не хвататет параметров устройства");
+            }
+        }
+        
+        public override List<Data_Carrier_Base> Handle_Incoming_Command(Packet packet)
+        {
+            byte[] data = packet.data;
+            switch (packet.frame)
+            {
+                case 0:
+                    for (int i = 0; i < 12; i++)
+                    {
+
+                        ((Data_Carrier_Bool)fields[i]).value = (data[i / 8] >> i % 8) % 2 == 1;
+
+                    }
+                     ((Data_Carrier_Int)fields[12]).value = data[2] + data[3] * 256;
+                    ((Data_Carrier_Int)fields[13]).value = data[4] + data[5] * 256;
+                    ((Data_Carrier_Int)fields[14]).value = data[6] + data[7] * 256;
+                    return fields.Take(15).ToList();
+
+                    break;
+                case 1:
+                    for (int i = 15; i < 19; i++)
+                    {
+                        ((Data_Carrier_Int)fields[i]).value = data[2 * (i - 15)] + data[2 * (i - 15) + 1] * 256;
+                    }
+                    return fields.Take(new Range(15, 18)).ToList();
+                    break;
+                case 2:
+                    for (int i = 19; i < 22; i++)
+                    {
+                        ((Data_Carrier_Int)fields[i]).value = data[2 * (i - 15)] + data[2 * (i - 15) + 1] * 256;
+                        
+                    }
+                    return fields.Take(new Range(19, 21)).ToList();
+                    break;
+                    
+            }
+             throw new Exception("Неверно распознан пакет ");
+
+
+        }
+
+
+
+        override public Packet Handle_Outgoing_Command(List<Data_Carrier_Base>? list)
+        {
+
+
+            return new Packet { cmd = (byte)id, data = { }, frame = 0 };
         }
     }
 
