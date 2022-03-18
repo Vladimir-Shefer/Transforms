@@ -14,8 +14,9 @@
         private static System.Timers.Timer timer_for_observation;
         private AutoResetEvent Ev = new AutoResetEvent(false);
         public int id;
-        public  List<Data_Carrier_Base> fields = new List<Data_Carrier_Base>() { 
-          
+        public List<Data_Carrier_Base> fields = new List<Data_Carrier_Base>() {
+              new Data_Carrier_Bool {param = All_Params. state, value = false},
+               new Data_Carrier_Int{param = All_Params.time_logic, value = 0},
             new Data_Carrier_Int_List {param = All_Params.sCurrentAnalogData_avg_adc_value, values = new List<int>{ 0,0,0,0,0,0,0,0} },
              new Data_Carrier_Int {param = All_Params._FLASH_ID_VERSIYA_H, value = 0},
              new Data_Carrier_Int {param = All_Params._FLASH_ID_VERSIYA_L, value = 0},
@@ -32,7 +33,7 @@
                           new Data_Carrier_Bool {param = All_Params. _FLASH_WARN_V4_20_0_ENABLE, value = false},
                              new Data_Carrier_Bool {param = All_Params. _FLASH_WARN_V4_20_1_ENABLE, value = false},
                                 new Data_Carrier_Bool {param = All_Params. _FLASH_PROT_WRONG_CON_ENABLE, value = false},
-                                 new Data_Carrier_Bool {param = All_Params. _FLASH_MIN_CURRENT, value = false},
+                                 new Data_Carrier_Int {param = All_Params. _FLASH_MIN_CURRENT, value = 0},
                                 new Data_Carrier_Int {param = All_Params. _FLASH_PROT_PT100_0_SETPOINT, value = 0},
                                 new Data_Carrier_Int {param = All_Params. _FLASH_PROT_PT100_1_SETPOINT, value = 0},
                                 new Data_Carrier_Int {param = All_Params. _FLASH_PROT_PT100_2_SETPOINT, value = 0},
@@ -44,6 +45,7 @@
                                     new Data_Carrier_Int {param = All_Params.  _FLASH_WARN_V4_20_0_SETPOINT, value = 0},
                                      new Data_Carrier_Int {param = All_Params.  _FLASH_WARN_V4_20_1_SETPOINT, value = 0},
                                         new Data_Carrier_Int {param = All_Params.  _FLASH_RS485_ADDRESS, value = 0},
+                                        new Data_Carrier_Int {param = All_Params.  _FLASH_RS485_SPEED, value = 0},
                                          new Data_Carrier_Int {param = All_Params.  _FLASH_RATIOS_MUL0, value = 0},
                                           new Data_Carrier_Int {param = All_Params.  _FLASH_RATIOS_MUL1, value = 0},
                                            new Data_Carrier_Int {param = All_Params.  _FLASH_RATIOS_MUL2, value = 0},
@@ -92,6 +94,8 @@
                                                                                                        new Data_Carrier_Bool {param = All_Params._WARN_PT100_ERROR_0, value = false},
                                                                                                        new Data_Carrier_Bool {param = All_Params._WARN_PT100_ERROR_1, value = false},
                                                                                                        new Data_Carrier_Bool {param = All_Params._WARN_PT100_ERROR_2, value = false},
+                                                                                                       new Data_Carrier_Bool {param = All_Params._WARN_V4_20_ERROR_0, value = false},
+                                                                                                       new Data_Carrier_Bool {param = All_Params._WARN_V4_20_ERROR_1, value = false},
                                                                                                        new Data_Carrier_Bool {param = All_Params._LOCK_PT100_0, value = false},
                                                                                                        new Data_Carrier_Bool {param = All_Params._LOCK_PT100_1, value = false},
                                                                                                           new Data_Carrier_Bool {param = All_Params._LOCK_PT100_2, value = false},
@@ -102,7 +106,7 @@
                                                                                                                   new Data_Carrier_Int {param = All_Params.  _PT100_2, value = 0},
 
         };
-        public List<Command_Handler> commands ;
+        public List<Command_Handler> commands;
         public List<int> avg_adc_value = new List<int>();
 
         private volatile bool model_interaction_working = true;
@@ -110,34 +114,84 @@
         private List<Packet_Base> packet_s = new List<Packet_Base>();
         public Device_Model()
         {
-            timer_for_observation  = new System.Timers.Timer(500);
+            timer_for_observation = new System.Timers.Timer(500);
             timer_for_observation.Elapsed += Timer_for_observation_Elapsed;
             timer_for_observation.Start();
             model_thread = new Thread(Model_Interaction);
             model_thread.IsBackground = true;
             model_thread.Start();
            
-            commands = new List<Command_Handler>() { new Command_Handler_128(fields), new Command_Handler_116(fields), new Command_Handler_102(fields), new Command_Handler_80(fields), new Command_Handler_76(fields),
+
+            commands = new List<Command_Handler>() {  new Command_Handler_102(fields), new Command_Handler_80(fields), new Command_Handler_76(fields),
                 new Command_Handler_60(fields), new Command_Handler_59(fields), new Command_Handler_58(fields), new Command_Handler_51(fields), new Command_Handler_50(fields), new Command_Handler_106(fields), new Command_Handler_103(fields)
             };
-        }
 
+            
+        }
+        List<All_Params> all_ = new List<All_Params>()
+            {
+             All_Params.ADCdata_currentA,
+        All_Params.ADCdata_currentB,
+        All_Params.ADCdata_currentC,
+        All_Params.ADCdata_currentD,
+        All_Params.ADCdata_currentAVG,
+        All_Params.ADCdata_PT1,
+        All_Params.ADCdata_PT2,
+        All_Params.ADCdata_PT3,
+        All_Params.ADCdata_I4_20_1,
+        All_Params.ADCdata_I4_20_2,
+        All_Params.ADCdata_assymetry,
+        All_Params.ADCdata_IA_angle,
+        All_Params.ADCdata_IB_angle,
+        All_Params.ADCdata_IC_angle,
+        All_Params.ADCdata_ID_angle,
+            };
+        bool actual = false;
         private void Timer_for_observation_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
             Packet packet = commands.First(c => c.id == 59).Handle_Outgoing_Command(null);
-            packet.len = (byte)packet.data.Length;
+            packet.len = (packet.data == null ? (byte)0 : (byte)(packet.data.Length));
             packet.to = (byte)id;
             Packet packet1 = commands.First(c => c.id == 58).Handle_Outgoing_Command(null);
-            packet1.len = (byte)packet1.data.Length;
+            packet1.len = (packet.data == null ? (byte)0 : (byte)(packet.data.Length));
             packet1.to = (byte)id;
             _mediator.Notify(this, Reseiver.connection, packet1);
             Packet packet2 = commands.First(c => c.id == 60).Handle_Outgoing_Command(null);
-            packet2.len = (byte)packet2.data.Length;
+            packet2.len = (packet.data == null ? (byte)0 : (byte)(packet.data.Length));
             packet2.to = (byte)id;
+            _mediator.Notify(this, Reseiver.connection, packet2);
+
+            for (int i = 0; i < all_.Count; i++)
+            {
+                Packet packet3 = commands.First(c => c.id == 106).Handle_Outgoing_Command(new List<Data_Carrier_Base>() { new Data_Carrier_Bool() { param = all_[i] } });
+                packet3.len = (packet.data == null ? (byte)0 : (byte)(packet.data.Length));
+                packet3.to = (byte)id;
+                _mediator.Notify(this, Reseiver.connection, packet3);
+            }
+
+
+           
+
+                Send_Command_Static_Data();
+           
 
         }
 
-      
+        public void Send_Command_Static_Data()
+        {
+            foreach(var par in fields)
+            {
+
+
+                if(par.param.ToString().Contains("_FLASH_"))
+                { Send_Data_to_Connection(new List<Data_Carrier_Base>() { new Data_Carrier_Int() { param = All_Params.command, value = 102 }, par });
+                }
+                
+            }
+
+
+
+        }
         public void Close_Model()
         {
             model_interaction_working = false;
@@ -153,37 +207,35 @@
         }
         public void Model_Interaction()
         {
-          
+
             while (model_interaction_working && Ev.WaitOne())
             {
-              
+
                
-                for (int i = packet_s.Count()-1; i >= 0; i--)
+                for (int i = packet_s.Count() - 1; i >= 0; i--)
                 {
                     List<Data_Carrier_Base> datas = new List<Data_Carrier_Base>();
                     Packet packet = ((Packet)packet_s[i]);
-                    
-                   
-
-                          
-                            if (packet.cmd != 115)
-                            {
-                                datas.Clear();
-                     int gff =    this.id;
-                                datas = commands.Find(c => c.id == packet.cmd).Handle_Incoming_Command(packet);
-                               if(((Data_Carrier_Int_List)datas[0]).values.Exists(c=>c>3000) && id!=10)
-                                {
 
 
 
-                                }
-                                datas.Add(new Data_Carrier_Int { param = All_Params.id, value = id, });
-                                
-                                
-                               _mediator.Notify(this, Reseiver.UI, datas);
-                            }
-                     
-                    
+
+
+
+                    if (packet.cmd != 203)
+                    {
+                        {
+                            datas = commands.Find(c => c.id == packet.cmd).Handle_Incoming_Command(packet);
+
+                            datas.Add(new Data_Carrier_Int { param = All_Params.id, value = id, });
+                            
+
+                            _mediator.Notify(this, Reseiver.UI, datas);
+                            
+                        }
+                    }
+
+
                     packet_s.RemoveAt(i);
                 }
             }
@@ -194,8 +246,16 @@
             Packet packet = commands.First(c => c.id == ((Data_Carrier_Int)d.Find(f => f.param == All_Params.command)).value).Handle_Outgoing_Command(d);
             packet.len = (byte)packet.data.Length;
             packet.to = (byte)id;
-            
-            _mediator.Notify(this, Reseiver.connection,packet );    
+
+            _mediator.Notify(this, Reseiver.connection, packet);
+            if(packet.cmd==103)
+            {
+
+                packet = commands.First(c => c.id == 102).Handle_Outgoing_Command(d);
+                packet.len = (byte)packet.data.Length;
+                packet.to = (byte)id;
+                _mediator.Notify(this, Reseiver.connection, packet);
+            }
         }
 
         public void Receive_Data(Packet packet)
@@ -203,24 +263,17 @@
             Packet gg;
             lock (packet_s)
             {
-               gg = new Packet { CAN = packet.CAN, cmd = packet.cmd, frame = packet.frame, from = packet.from, len = packet.len, to = packet.to };
+                gg = new Packet { CAN = packet.CAN, cmd = packet.cmd, frame = packet.frame, from = packet.from, len = packet.len, to = packet.to };
                 gg.data = new byte[gg.len];
-                for(int i = 0; i< gg.len; i++)
-                { 
+                for (int i = 0; i < gg.len; i++)
+                {
 
-                    gg.data[i] = packet.data[i];    
-}
+                    gg.data[i] = packet.data[i];
+                }
             }
-            if(gg.data[0] * 256 + gg.data[1] > 2000)
-            {
 
-
-
-            }
-            if (gg.from != 10 && gg.data[0] * 256 + gg.data[1] > 2000)
-            { }
             packet_s.Add(gg);
-           //////////////////////////////////////////////
+            //////////////////////////////////////////////
             Ev.Set();
         }
     }

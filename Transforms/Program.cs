@@ -40,16 +40,11 @@ namespace Transforms
             Form1 form = new Form1();
             u.Put_UI_Form(form);
             
-            List<Device_Model> devices = new List<Device_Model>();
-            for (int i = 0; i < 4; i++)
-            {
-
-                devices.Add( new Device_Model { id = 10+i});
-              
-            }
+          
+                       
             Connection connection = new Connection();
             connection.Set_Parser(parser);
-            new Mediator(devices, connection, u);
+            new Mediator( connection, u);
             
             Application.Run(form);
 

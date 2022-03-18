@@ -74,11 +74,242 @@ namespace Transforms
             return false;
         }
 
+        private bool Write_data_to_textBox( Data_Carrier_Base data, TextBox textBox )
+        {
+            if (data.GetType() == typeof(Data_Carrier_Int))
+                textBox.Text = Convert.ToString(((Data_Carrier_Int)data).value);
+           else if (data.GetType() == typeof(Data_Carrier_Bool))
+                textBox.Text = (((Data_Carrier_Bool)data).value?"true":"false");
+            else return false;
+            return true;
+        }
+       public void Update_Rich_textbox1(int i, List<Data_Carrier_Base> carrier)
+        {
 
-       
+            if (this != null)
+                this.Invoke((MethodInvoker)delegate
+            { foreach (var data in carrier)
+                {
+
+
+                    if (data.param == All_Params._PT100_0)
+                    {
+
+                        Write_data_to_textBox(data,PT100_0_textBox );
+                    }
+                    else
+                    if (data.param == All_Params._PT100_1)
+                    {
+
+                        Write_data_to_textBox(data, PT100_1_textBox);
+                    }
+                    else
+                    if (data.param == All_Params._PT100_2)
+                    {
+
+                        Write_data_to_textBox(data, PT100_2_textBox);
+                    }
+                    else
+                    if (data.param == All_Params.V4_20_0)
+                    {
+
+                        Write_data_to_textBox(data, V4_20_0_textBox);
+                    }
+                    else
+                    if (data.param == All_Params.V4_20_1)
+                    {
+
+                        Write_data_to_textBox(data, V4_20_1_textBox);
+                    }
+                    else if (data.param == All_Params.ADCdata_currentA)
+                    {
+
+                        Write_data_to_textBox(data, IA_textBox);
+                    }
+                    else if (data.param == All_Params.ADCdata_currentB)
+                    {
+
+                        Write_data_to_textBox(data, IB_textBox);
+                    }
+                    else if (data.param == All_Params.ADCdata_currentC)
+                    {
+
+                        Write_data_to_textBox(data, IC_textBox);
+                    }
+                    else if (data.param == All_Params.ADCdata_currentD)
+                    {
+
+                        Write_data_to_textBox(data, ID_textBox);
+                    }
+                    else if (data.param == All_Params.time_logic)
+                    {
+
+                        Write_data_to_textBox(data, Moto_clock_textBox);
+                    }
+                    else if (data.param == All_Params.ADCdata_IA_angle)
+                    {
+
+                        Write_data_to_textBox(data, angle_IA_textBox);
+                    }
+                    else if (data.param == All_Params.ADCdata_IB_angle)
+                    {
+
+                        Write_data_to_textBox(data, angle_IB_textBox);
+                    }
+                    else if (data.param == All_Params.ADCdata_IC_angle)
+                    {
+
+                        Write_data_to_textBox(data, angle_IC_textBox);
+                    }
+                    else if (data.param == All_Params.ADCdata_ID_angle)
+                    {
+
+                        Write_data_to_textBox(data, angle_ID_textBox);
+                    }
+                    else if (data.param == All_Params.ADCdata_assymetry)
+                    {
+
+                        Write_data_to_textBox(data, assymetry_textBox);
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_MUL0)
+                    {
+
+                        Write_data_to_textBox(data, MUL_0);
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_MUL1)
+                    {
+
+                        Write_data_to_textBox(data, MUL_1);
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_MUL2)
+                    {
+
+                        Write_data_to_textBox(data, MUL_2);
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_MUL3)
+                    {
+
+                        Write_data_to_textBox(data, MUL_3);
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_MUL4)
+                    {
+
+                        Write_data_to_textBox(data, MUL_4);
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_MUL5)
+                    {
+
+                        Write_data_to_textBox(data, MUL_5);
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_MUL6)
+                    {
+
+                        Write_data_to_textBox(data, MUL_6);
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_MUL7)
+                    {
+
+                        Write_data_to_textBox(data, MUL_7);
+
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_MUL8)
+                    {
+
+                        Write_data_to_textBox(data, MUL_8);
+                    }
+
+
+
+                    else if (data.param == All_Params._FLASH_RATIOS_GND0)
+                    {
+
+                        Write_data_to_textBox(data, GMD_0_textBox);
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_GND1)
+                    {
+
+                        Write_data_to_textBox(data, GMD_1_textBox);
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_GND2)
+                    {
+
+                        Write_data_to_textBox(data, GMD_2_textBox);
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_GND3)
+                    {
+
+                        Write_data_to_textBox(data, GMD_3_textBox);
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_GND4)
+                    {
+
+                        Write_data_to_textBox(data, GMD_4_textBox);
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_GND5)
+                    {
+
+                        Write_data_to_textBox(data, GMD_5_textBox);
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_GND6)
+                    {
+
+                        Write_data_to_textBox(data, GMD_6_textBox);
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_GND7)
+                    {
+
+                        Write_data_to_textBox(data, GMD_7_textBox);
+
+                    }
+                    else if (data.param == All_Params._FLASH_RATIOS_GND8)
+                    {
+
+                        Write_data_to_textBox(data, GMD_8_textBox);
+                    }
+                    else if (data.param == All_Params._FLASH_CURRENT_MUL)
+                    {
+
+                        Write_data_to_textBox(data,I_MUL);
+                    }
+                    else if (data.param == All_Params._FLASH_CT_MUL)
+                    {
+
+                        Write_data_to_textBox(data, CT_mul);
+                    }
+                    else if (data.param == All_Params._FLASH_MIN_CURRENT)
+                    {
+
+                        Write_data_to_textBox(data, I_min);
+                    }
+                    else if (data.param == All_Params._FLASH_NUMBER_BLOK)
+                    {
+
+                        Write_data_to_textBox(data, N);
+                    }
+                    else if (data.param == All_Params._FLASH_RS485_ADDRESS)
+                    {
+
+                        Write_data_to_textBox(data, RS_485_addr);
+                    }
+                    else if (data.param == All_Params._FLASH_RS485_SPEED)
+                    {
+
+                        Write_data_to_textBox(data, RS485_speed);
+                    }
+
+
+
+
+
+
+
+                }
+            });
+
+        }
         public void Update_Rich_Textbox(int i, List<Data_Carrier_Base> carrier)
 
-        {
+        {/*
             try
             {
                 if (this != null)
@@ -146,27 +377,27 @@ namespace Transforms
 
 
 
-                        if (g == 10)
-                        {
+                        //if (g == 10)
+                        //{
 
-                            if (!panel_with_fields1.actual)
+                        //    if (!panel_with_fields1.actual)
 
-                            {
-                                Data_Carrier_Container temp_container = new Data_Carrier_Container(carrier_Int_List);
-                                List<Data_Carrier_Container> booba = new List<Data_Carrier_Container>() { temp_container };
-                                panel_with_fields1.fields(booba);
-                            }
-                            else
-                            {
+                        //    {
+                        //        Data_Carrier_Container temp_container = new Data_Carrier_Container(carrier_Int_List);
+                        //        List<Data_Carrier_Container> booba = new List<Data_Carrier_Container>() { temp_container };
+                        //        panel_with_fields1.fields(booba);
+                        //    }
+                        //    else
+                        //    {
 
-                                panel_with_fields1.containers.First().field_data = carrier_Int_List;
-                                panel_with_fields1.containers.First().Display_Current_Data();
-                            }
-                        }
+                        //        panel_with_fields1.containers.First().field_data = carrier_Int_List;
+                        //        panel_with_fields1.containers.First().Display_Current_Data();
+                        //    }
+                        //}
                     });
             }
             catch { }
-           
+           */
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -188,7 +419,7 @@ namespace Transforms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (((x + border) * (i + 1) < panel1.Width) && ((y + border) * (j + 1) < panel1.Height))
+           /* if (((x + border) * (i + 1) < panel1.Width) && ((y + border) * (j + 1) < panel1.Height))
             {
                 panel1.Controls.Add(new Data_Carrier_Container { Location = new Point { X = (x + border) * (i++), Y = (y + border) * j } });
             }
@@ -197,7 +428,37 @@ namespace Transforms
                 i = 0;
 
                 panel1.Controls.Add(new Data_Carrier_Container { Location = new Point { X = (x + border) * (i++), Y = (y + border) * (++j) } });
-            }
+            }*/
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox11_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label29_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label27_Click(object sender, EventArgs e)
+        {
+
         }
 
         //private void save_to_clipboard_button_Click(object sender, EventArgs e)

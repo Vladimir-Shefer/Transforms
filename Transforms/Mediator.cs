@@ -10,7 +10,7 @@ namespace Transforms
         
         private List<Device_Model> models = new List<Device_Model>();
         private UI ui = new UI();
-        Data_Parser data_parser12 = new Data_Parser();    
+        
         public Mediator(Device_Model d, Connection c, UI u)
         {
           
@@ -27,17 +27,20 @@ namespace Transforms
             
         }
 
-        public Mediator(List<Device_Model> d, Connection c, UI u)
+        public Mediator( Connection c, UI u)
         {
-            
+            models.Add(new Device_Model());
+            models.First().SetMediator(this);
+            models.First().id = 50;
+
             Set_New_Connection(c);
-            foreach (var j in d) Set_New_DeviceModel(j);
+            
             Set_New_UI(u);
-            foreach (var j in d) j.SetMediator(this);
+         
             connections.First().SetMediator(this);
             
             ui.SetMediator(this);
-
+           // models.First().Send_Command_Static_Data();
             //IUsbEventWatcher usbEventWatcher = new UsbEventWatcher();
 
             //usbEventWatcher.UsbDeviceRemoved += (_, device) => ui.doS();
@@ -155,9 +158,9 @@ namespace Transforms
 
 
 
-                try { models.Find(c => c.id == packet.from).Receive_Data(packet); }
+                try { models.First().Receive_Data(packet); }
                 catch { }
-                // models.First().Receive_Data(packet);
+                
             }
           else if (reseiver== Reseiver.connection)
 
@@ -173,6 +176,7 @@ namespace Transforms
         public void Open_Serial_Port()
         {
             connections.First().Open_Serial_Port();
+            
         }
 
       

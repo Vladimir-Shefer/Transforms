@@ -105,6 +105,8 @@
         _WARN_PT100_ERROR_0,
         _WARN_PT100_ERROR_1,
         _WARN_PT100_ERROR_2,
+        _WARN_V4_20_ERROR_0,
+        _WARN_V4_20_ERROR_1,
         _LOCK_PT100_0,
         _LOCK_PT100_1,
         _LOCK_PT100_2,

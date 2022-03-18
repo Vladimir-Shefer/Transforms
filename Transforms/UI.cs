@@ -66,7 +66,7 @@ namespace Transforms
       
         public void Update_Model_Info(int id, List<Data_Carrier_Base> data)
         {
-            form.Update_Rich_Textbox(id, data);
+            form.Update_Rich_textbox1(id, data);
             // if(data.GetType()==typeof(List<Data_Carrier_Base>))
             //form.Update_Rich_Textbox(id, (Data_Carrier_Base)(data.First()));
             // else if(data.GetType() == typeof(List<Data_Carrier_Int>))

@@ -179,7 +179,7 @@ namespace Transforms
                     {
 
                         Packet ggg = parser.Parse_from_bytes_to_Packet(temp);
-                        if(ggg.from!=10 && ggg.data[0]*256+ggg.data[1]>2000)
+                        if(ggg.cmd == 106 && ggg.data[0]==14)
                         { }    
                         _mediator.Notify(this, Reseiver.model,ggg);
                         buffer_position -= data_length;
