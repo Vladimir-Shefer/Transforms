@@ -104,6 +104,9 @@
                                                                                                             new Data_Carrier_Int {param = All_Params.  _PT100_0, value = 0},
                                                                                                                new Data_Carrier_Int {param = All_Params.  _PT100_1, value = 0},
                                                                                                                   new Data_Carrier_Int {param = All_Params.  _PT100_2, value = 0},
+                                                                                                                    new Data_Carrier_Int {param =   All_Params._FLASH_RATIOS_SHIFT_PT1, value = 0},
+                                                                      new Data_Carrier_Int {param = All_Params._FLASH_RATIOS_SHIFT_PT2, value = 0},
+                                                                        new Data_Carrier_Int {param = All_Params._FLASH_RATIOS_SHIFT_PT3, value = 0},
 
         };
         public List<Command_Handler> commands;
@@ -146,25 +149,26 @@
         All_Params.ADCdata_IC_angle,
         All_Params.ADCdata_ID_angle,
             };
-        bool actual = false;
+      
         private void Timer_for_observation_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
         {
-            Packet packet = commands.First(c => c.id == 59).Handle_Outgoing_Command(null);
-            packet.len = (packet.data == null ? (byte)0 : (byte)(packet.data.Length));
-            packet.to = (byte)id;
+            //Packet packet = commands.First(c => c.id == 59).Handle_Outgoing_Command(null);
+            //packet.len = (packet.data == null ? (byte)0 : (byte)(packet.data.Length));
+            //packet.to = (byte)id;
+            //_mediator.Notify(this, Reseiver.connection, packet);
             Packet packet1 = commands.First(c => c.id == 58).Handle_Outgoing_Command(null);
-            packet1.len = (packet.data == null ? (byte)0 : (byte)(packet.data.Length));
+            packet1.len = (packet1.data == null ? (byte)0 : (byte)(packet1.data.Length));
             packet1.to = (byte)id;
             _mediator.Notify(this, Reseiver.connection, packet1);
             Packet packet2 = commands.First(c => c.id == 60).Handle_Outgoing_Command(null);
-            packet2.len = (packet.data == null ? (byte)0 : (byte)(packet.data.Length));
+            packet2.len = (packet2.data == null ? (byte)0 : (byte)(packet2.data.Length));
             packet2.to = (byte)id;
             _mediator.Notify(this, Reseiver.connection, packet2);
 
             for (int i = 0; i < all_.Count; i++)
             {
                 Packet packet3 = commands.First(c => c.id == 106).Handle_Outgoing_Command(new List<Data_Carrier_Base>() { new Data_Carrier_Bool() { param = all_[i] } });
-                packet3.len = (packet.data == null ? (byte)0 : (byte)(packet.data.Length));
+                packet3.len = (packet3.data == null ? (byte)0 : (byte)(packet3.data.Length));
                 packet3.to = (byte)id;
                 _mediator.Notify(this, Reseiver.connection, packet3);
             }
@@ -205,38 +209,51 @@
             _mediator.Notify(this, Reseiver.UI, commands);
 
         }
+       
         public void Model_Interaction()
         {
 
             while (model_interaction_working && Ev.WaitOne())
             {
 
-               
-                for (int i = packet_s.Count() - 1; i >= 0; i--)
+
+                lock (packet_s)
+
                 {
-                    List<Data_Carrier_Base> datas = new List<Data_Carrier_Base>();
-                    Packet packet = ((Packet)packet_s[i]);
-
-
-
-
-
-
-                    if (packet.cmd != 203)
+                    for (int i = packet_s.Count() - 1; i >= 0; i--)
                     {
+                        List<Data_Carrier_Base> datas = new List<Data_Carrier_Base>();
+                        Packet packet = ((Packet)packet_s[i]);
+
+
+                        if(packet.frame == 0 &&  packet.cmd==60 && (packet.data[1] >> 2) % 2 == 1)
+                        { }
+
+
+                        if (packet.frame == 0 && packet.cmd == 60 && (packet.data[1] >> 2) % 2 == 0)
+                        { }
+
+
+                        if (packet.cmd != 203 && packet.cmd != 0)
                         {
-                            datas = commands.Find(c => c.id == packet.cmd).Handle_Incoming_Command(packet);
+                            {
+                                datas = commands.Find(c => c.id == packet.cmd).Handle_Incoming_Command(packet);
 
-                            datas.Add(new Data_Carrier_Int { param = All_Params.id, value = id, });
-                            
+                                datas.Add(new Data_Carrier_Int { param = All_Params.id, value = id, });
 
-                            _mediator.Notify(this, Reseiver.UI, datas);
-                            
+                                if(datas.First().param == All_Params._FLASH_WARN_PT100_1_ENABLE)
+                                {
+
+                                  
+                                }
+                                _mediator.Notify(this, Reseiver.UI, datas);
+
+                            }
                         }
+
+
+                        packet_s.RemoveAt(i);
                     }
-
-
-                    packet_s.RemoveAt(i);
                 }
             }
         }

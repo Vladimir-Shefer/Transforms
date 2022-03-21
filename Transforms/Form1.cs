@@ -83,40 +83,40 @@ namespace Transforms
             else return false;
             return true;
         }
-       public void Update_Rich_textbox1(int i, List<Data_Carrier_Base> carrier)
+        public void Update_Rich_textbox1(int i, List<Data_Carrier_Base> carrier)
         {
-
-            if (this != null)
-                this.Invoke((MethodInvoker)delegate
-            { foreach (var data in carrier)
+            try {
+                if (this != null)
+                    this.Invoke((MethodInvoker)delegate
+                { foreach (var data in carrier)
                 {
 
 
                     if (data.param == All_Params._PT100_0)
                     {
 
-                        Write_data_to_textBox(data,PT100_0_textBox );
+                        Write_data_to_textBox(data, PT100_0_textBox);
                     }
                     else
-                    if (data.param == All_Params._PT100_1)
+                if (data.param == All_Params._PT100_1)
                     {
 
                         Write_data_to_textBox(data, PT100_1_textBox);
                     }
                     else
-                    if (data.param == All_Params._PT100_2)
+                if (data.param == All_Params._PT100_2)
                     {
 
                         Write_data_to_textBox(data, PT100_2_textBox);
                     }
                     else
-                    if (data.param == All_Params.V4_20_0)
+                if (data.param == All_Params.V4_20_0)
                     {
 
                         Write_data_to_textBox(data, V4_20_0_textBox);
                     }
                     else
-                    if (data.param == All_Params.V4_20_1)
+                if (data.param == All_Params.V4_20_1)
                     {
 
                         Write_data_to_textBox(data, V4_20_1_textBox);
@@ -269,7 +269,7 @@ namespace Transforms
                     else if (data.param == All_Params._FLASH_CURRENT_MUL)
                     {
 
-                        Write_data_to_textBox(data,I_MUL);
+                        Write_data_to_textBox(data, I_MUL);
                     }
                     else if (data.param == All_Params._FLASH_CT_MUL)
                     {
@@ -296,16 +296,181 @@ namespace Transforms
 
                         Write_data_to_textBox(data, RS485_speed);
                     }
+                        else if (data.param == All_Params._FLASH_PROT_PT100_0_SETPOINT)
+                        {
+
+                            if(!PT100_20_0_setpoint_enter) Write_data_to_textBox(data,PT100_20_0_setpoint_textBox);
+                        }
 
 
 
+                        else if (data.param == All_Params._FLASH_PROT_PT100_1_SETPOINT)
+                        {
+
+                            if (!PT100_20_1_setpoint_enter) Write_data_to_textBox(data, PT100_20_1_setpoint_textBox);
+                        }
+                        else if (data.param == All_Params._FLASH_PROT_PT100_2_SETPOINT)
+                        {
+
+                            if (!PT100_20_2_setpoint_enter) Write_data_to_textBox(data, PT100_20_2_setpoint_textBox);
+                        }
+
+                        else if (data.param == All_Params._FLASH_WARN_PT100_0_SETPOINT)
+                        {
+
+                            if (!PT100_20_0_w_setpoint_enter) Write_data_to_textBox(data, PT100_20_0_warn_setpoint_textBox);
+                        }
+
+                        else if (data.param == All_Params._FLASH_WARN_PT100_1_SETPOINT)
+                        {
+
+                            if (!PT100_20_1_w_setpoint_enter) Write_data_to_textBox(data, PT100_20_1_warn_setpoint_textBox);
+                        }
+
+                        else if (data.param == All_Params._FLASH_WARN_PT100_2_SETPOINT)
+                        {
+
+                            if (!PT100_20_2_w_setpoint_enter) Write_data_to_textBox(data, PT100_20_2_warn_setpoint_textBox);
+                        }
+                    //////////////////////////////
+
+                        else if (data.param == All_Params._LOCK_PT100_0)
+                    {
+                        if (!locks_listBox.Items.Contains(data.param) && ((Data_Carrier_Bool)data).value) locks_listBox.Items.Add(data.param);
+                        if (locks_listBox.Items.Contains(data.param) && !((Data_Carrier_Bool)data).value) locks_listBox.Items.Remove(data.param);
+                    }
+                    else if (data.param == All_Params._LOCK_PT100_1)
+                    {
+                        if (!locks_listBox.Items.Contains(data.param) && ((Data_Carrier_Bool)data).value) locks_listBox.Items.Add(data.param);
+                        if (locks_listBox.Items.Contains(data.param) && !((Data_Carrier_Bool)data).value) locks_listBox.Items.Remove(data.param);
+                    }
+                    else if (data.param == All_Params._LOCK_PT100_2)
+                    {
+                        if (!locks_listBox.Items.Contains(data.param) && ((Data_Carrier_Bool)data).value) locks_listBox.Items.Add(data.param);
+                        if (locks_listBox.Items.Contains(data.param) && !((Data_Carrier_Bool)data).value) locks_listBox.Items.Remove(data.param);
+                    }
+                    else if (data.param == All_Params._WARN_PT100_0)
+                    {
+                        if (!warnings_listBox.Items.Contains(data.param) && ((Data_Carrier_Bool)data).value) warnings_listBox.Items.Add(data.param);
+                        if (warnings_listBox.Items.Contains(data.param) && !((Data_Carrier_Bool)data).value) warnings_listBox.Items.Remove(data.param);
+                    }
+                    else if (data.param == All_Params._WARN_PT100_1)
+                    {
+                        if (!warnings_listBox.Items.Contains(data.param) && ((Data_Carrier_Bool)data).value) warnings_listBox.Items.Add(data.param);
+                        if (warnings_listBox.Items.Contains(data.param) && !((Data_Carrier_Bool)data).value) warnings_listBox.Items.Remove(data.param);
+                    }
+                    else if (data.param == All_Params._WARN_PT100_2)
+                    {
+                        if (!warnings_listBox.Items.Contains(data.param) && ((Data_Carrier_Bool)data).value) warnings_listBox.Items.Add(data.param);
+                        if (warnings_listBox.Items.Contains(data.param) && !((Data_Carrier_Bool)data).value) warnings_listBox.Items.Remove(data.param);
+                    }
+                    else if (data.param == All_Params._WARN_V4_20_0)
+                    {
+                        if (!warnings_listBox.Items.Contains(data.param) && ((Data_Carrier_Bool)data).value) warnings_listBox.Items.Add(data.param);
+                        if (warnings_listBox.Items.Contains(data.param) && !((Data_Carrier_Bool)data).value) warnings_listBox.Items.Remove(data.param);
+                    }
+                    else if (data.param == All_Params._WARN_V4_20_1)
+                    {
+                        if (!warnings_listBox.Items.Contains(data.param) && ((Data_Carrier_Bool)data).value) 
+                                warnings_listBox.Items.Add(data.param);
+                        if (warnings_listBox.Items.Contains(data.param) && !((Data_Carrier_Bool)data).value) 
+                                warnings_listBox.Items.Remove(data.param);
+                    }
+                    else if (data.param == All_Params._WARN_PT100_ERROR_0)
+                    {
+                        if (!warnings_listBox.Items.Contains(data.param) && ((Data_Carrier_Bool)data).value) warnings_listBox.Items.Add(data.param);
+                        if (warnings_listBox.Items.Contains(data.param) && !((Data_Carrier_Bool)data).value) warnings_listBox.Items.Remove(data.param);
+                    }
+                    else if (data.param == All_Params._WARN_PT100_ERROR_1)
+                    {
+                        if (!warnings_listBox.Items.Contains(data.param) && ((Data_Carrier_Bool)data).value) warnings_listBox.Items.Add(data.param);
+                        if (warnings_listBox.Items.Contains(data.param) && !((Data_Carrier_Bool)data).value) warnings_listBox.Items.Remove(data.param);
+                    }
+                    else if (data.param == All_Params._WARN_PT100_ERROR_2)
+                    {
+                        if (!warnings_listBox.Items.Contains(data.param) && ((Data_Carrier_Bool)data).value) warnings_listBox.Items.Add(data.param);
+                        if (warnings_listBox.Items.Contains(data.param) && !((Data_Carrier_Bool)data).value) warnings_listBox.Items.Remove(data.param);
+                    }
+                    else if (data.param == All_Params._WARN_V4_20_ERROR_0)
+                    {
+                        if (!warnings_listBox.Items.Contains(data.param) && ((Data_Carrier_Bool)data).value) warnings_listBox.Items.Add(data.param);
+                        if (warnings_listBox.Items.Contains(data.param) && !((Data_Carrier_Bool)data).value) warnings_listBox.Items.Remove(data.param);
+                    }
+                    else if (data.param == All_Params._WARN_V4_20_ERROR_1)
+                    {
+                        if (!warnings_listBox.Items.Contains(data.param) && ((Data_Carrier_Bool)data).value) 
+                                warnings_listBox.Items.Add(data.param);
+                        if (warnings_listBox.Items.Contains(data.param) && !((Data_Carrier_Bool)data).value) 
+                                warnings_listBox.Items.Remove(data.param);
+                    }
+                    else if (data.param == All_Params._FLASH_PROT_PT100_0_ENABLE)
+                    {
+                        PT_100_0_prot_enable_checkBox.Checked = ((Data_Carrier_Bool)data).value;
+                          
+                    }
+                        else if (data.param == All_Params._FLASH_PROT_PT100_1_ENABLE)
+                        {
+                            PT_100_1_prot_enable_checkBox.Checked = ((Data_Carrier_Bool)data).value;
+
+                        }
+                        else if (data.param == All_Params._FLASH_PROT_PT100_2_ENABLE)
+                        {
+                            PT_100_2_prot_enable_checkBox.Checked = ((Data_Carrier_Bool)data).value;
+
+                        }
+                        else if (data.param == All_Params._FLASH_PROT_V4_20_0_ENABLE)
+                        {
+                           V4_20_0_prot_enable_checkBox.Checked = ((Data_Carrier_Bool)data).value;
+
+                        }
+                        else if (data.param == All_Params._FLASH_PROT_V4_20_1_ENABLE)
+                        {
+                            V4_20_1_prot_enable_checkBox.Checked = ((Data_Carrier_Bool)data).value;
+
+                        }
+
+                        else if (data.param == All_Params._FLASH_WARN_PT100_0_ENABLE)
+                        {
+                            PT_100_0_warn_enable_checkBox.Checked = ((Data_Carrier_Bool)data).value;
+
+                        }
+                        else if (data.param == All_Params._FLASH_WARN_PT100_1_ENABLE)
+                        {
+                            PT_100_1_warn_enable_checkBox.Checked = ((Data_Carrier_Bool)data).value;
+
+                        }
+                        else if (data.param == All_Params._FLASH_WARN_PT100_2_ENABLE)
+                        {
+                            PT_100_2_warn_enable_checkBox.Checked = ((Data_Carrier_Bool)data).value;
+
+                        }
+                        else if (data.param == All_Params._FLASH_WARN_V4_20_0_ENABLE)
+                        {
+                            V4_20_0_warn_enable_checkBox.Checked = ((Data_Carrier_Bool)data).value;
 
 
+                        }
+                        else if (data.param == All_Params._FLASH_WARN_V4_20_1_ENABLE)
+                        {
+                            V4_20_1_warn_enable_checkBox.Checked = ((Data_Carrier_Bool)data).value;
+
+                        }
+                        else if (data.param == All_Params._FLASH_ASSYMETRY_ENABLE)
+                        {
+                            asymmetry_warn_enable_checkBox.Checked = ((Data_Carrier_Bool)data).value;
+
+                        }
+                        else if (data.param == All_Params._FLASH_PROT_WRONG_CON_ENABLE)
+                        {
+                           wrong_con_warn_enable_checkBox.Checked = ((Data_Carrier_Bool)data).value;
+
+                        }
 
 
-                }
+                    }
             });
-
+        }
+        catch{}
         }
         public void Update_Rich_Textbox(int i, List<Data_Carrier_Base> carrier)
 
@@ -407,16 +572,11 @@ namespace Transforms
 
         private void Send_Data_button_Click(object sender, EventArgs e)
         {
-            _ui.Pass_Data_to_Connection_from_Interface(new List<Data_Carrier_Base>(){ new Data_Carrier_Int { param = All_Params.command, value = 128}, new Data_Carrier_Int_List { param = All_Params.sCurrentAnalogData_avg_adc_value, values = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 } } });
+           
+            _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base>(){ new Data_Carrier_Int { param = All_Params.command, value = 128}, new Data_Carrier_Int_List { param = All_Params.sCurrentAnalogData_avg_adc_value, values = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8 } } });
         }
 
-        private int i = 0;
-        private int j = 0;
-        private static Data_Carrier_Container f = new Data_Carrier_Container();
-        private int x = f.Width;
-        private int y = f.Height;
-        private const int border = 10;
-
+     
         private void button1_Click(object sender, EventArgs e)
         {
            /* if (((x + border) * (i + 1) < panel1.Width) && ((y + border) * (j + 1) < panel1.Height))
@@ -460,6 +620,495 @@ namespace Transforms
         {
 
         }
+        bool PT100_20_0_setpoint_enter = false;
+        bool PT100_20_1_setpoint_enter = false;
+        bool PT100_20_2_setpoint_enter = false;
+        bool PT100_20_0_w_setpoint_enter = false;
+        bool PT100_20_1_w_setpoint_enter = false;
+        bool PT100_20_2_w_setpoint_enter = false;
+        bool V4_20_0_setpoint_enter = false;
+        bool V4_20_1_setpoint_enter = false;
+        bool V4_20_0_w_setpoint_enter = false;
+        bool V4_20_1_w_setpoint_enter = false;
+        bool as_setpoint_enter = false;
+        bool w_setpoint_enter = false;
+        private void PT_100_0_enable_checkBox_CheckedChanged(object sender, EventArgs e)
+        {
+          
+           // _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Bool { param = All_Params._FLASH_PROT_PT100_0_ENABLE, value = PT_100_0_enable_checkBox.Checked } , new Data_Carrier_Int { param = All_Params.command, value = 103} });
+        }
+
+        private void PT_100_0_enable_checkBox_Click(object sender, EventArgs e)
+        {
+            
+            _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Bool { param = All_Params._FLASH_PROT_PT100_0_ENABLE, value = PT_100_0_prot_enable_checkBox.Checked }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+        }
+
+        private void PT_100_1_prot_enable_checkBox_Click(object sender, EventArgs e)
+        {
+            _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Bool { param = All_Params._FLASH_PROT_PT100_1_ENABLE, value = PT_100_1_prot_enable_checkBox.Checked }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+        }
+
+        private void PT_100_2_prot_enable_checkBox_Click(object sender, EventArgs e)
+        {
+            _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Bool { param = All_Params._FLASH_PROT_PT100_2_ENABLE, value = PT_100_2_prot_enable_checkBox.Checked }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+        }
+
+        private void V4_20_0_prot_enable_checkBox_Click(object sender, EventArgs e)
+        {
+            _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Bool { param = All_Params._FLASH_PROT_V4_20_0_ENABLE, value = V4_20_0_prot_enable_checkBox.Checked }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+        }
+
+        private void V4_20_1_prot_enable_checkBox_Click(object sender, EventArgs e)
+        {
+            _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Bool { param = All_Params._FLASH_PROT_V4_20_1_ENABLE, value = V4_20_1_prot_enable_checkBox.Checked }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+        }
+
+        private void PT_100_0_warn_enable_checkBox_Click(object sender, EventArgs e)
+        {
+            _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Bool { param = All_Params._FLASH_WARN_PT100_0_ENABLE, value = PT_100_0_warn_enable_checkBox.Checked }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+        }
+
+        private void PT_100_1_warn_enable_checkBox_Click(object sender, EventArgs e)
+        {
+            _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Bool { param = All_Params._FLASH_WARN_PT100_1_ENABLE, value = PT_100_1_warn_enable_checkBox.Checked }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+        }
+
+        private void PT_100_2_warn_enable_checkBox_Click(object sender, EventArgs e)
+        {
+            _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Bool { param = All_Params._FLASH_WARN_PT100_2_ENABLE, value = PT_100_2_warn_enable_checkBox.Checked }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+        }
+
+        private void V4_20_0_warn_enable_checkBox_Click(object sender, EventArgs e)
+        {
+            _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Bool { param = All_Params._FLASH_WARN_V4_20_0_ENABLE, value = V4_20_0_warn_enable_checkBox.Checked }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+        }
+
+        private void V4_20_1_warn_enable_checkBox_Click(object sender, EventArgs e)
+        {
+            _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Bool { param = All_Params._FLASH_WARN_V4_20_1_ENABLE, value = V4_20_1_warn_enable_checkBox.Checked }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+
+        }
+
+        private void asymmetry_warn_enable_checkBox_Click(object sender, EventArgs e)
+        {
+            _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Bool { param = All_Params._FLASH_ASSYMETRY_ENABLE, value = asymmetry_warn_enable_checkBox.Checked}, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+
+        }
+
+        private void wrong_con_warn_enable_checkBox_Click(object sender, EventArgs e)
+        {
+            _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Bool { param = All_Params._FLASH_PROT_WRONG_CON_ENABLE, value = wrong_con_warn_enable_checkBox.Checked }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+
+        }
+
+      
+        
+
+
+        private void PT100_20_0_setpoint_textBox_Enter(object sender, EventArgs e)
+        {
+            PT100_20_0_setpoint_enter = true;
+        
+            PT100_20_0_setpoint_button.Visible = true;
+        }
+
+        private void PT100_20_0_setpoint_textBox_Leave(object sender, EventArgs e)
+        {
+            if (!PT100_20_0_setpoint_button.Focused)
+            {
+               
+                PT100_20_0_setpoint_textBox.Text = "";
+
+                PT100_20_0_setpoint_button.Visible = false;
+                PT100_20_0_setpoint_enter = false;
+            }
+        }
+
+        private void PT100_20_1_setpoint_button_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Int { param = All_Params._FLASH_PROT_PT100_1_SETPOINT, value = Convert.ToInt16(PT100_20_1_setpoint_textBox.Text) }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+              
+                PT100_20_1_setpoint_textBox.Text = "";
+
+                PT100_20_1_setpoint_button.Visible = false;
+                PT100_20_1_setpoint_enter = false;
+            }
+            catch { }
+        }
+
+        private void PT100_20_2_setpoint_button_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Int { param = All_Params._FLASH_PROT_PT100_2_SETPOINT, value = Convert.ToInt16(PT100_20_2_setpoint_textBox.Text) }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+         
+            PT100_20_2_setpoint_textBox.Text = "";
+
+            PT100_20_2_setpoint_button.Visible = false;
+                PT100_20_2_setpoint_enter = false;
+            }
+            catch { }
+        }
+        private void PT100_20_0_setpoint_button_Click(object sender, EventArgs e)
+        {
+                try
+                {
+                    _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Int { param = All_Params._FLASH_PROT_PT100_0_SETPOINT, value = Convert.ToInt16(PT100_20_0_setpoint_textBox.Text) }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+         
+            PT100_20_0_setpoint_textBox.Text = "";
+
+            PT100_20_0_setpoint_button.Visible = false;
+                PT100_20_0_setpoint_enter = false;
+            }
+            catch { }
+        }
+
+        private void V4_20_0_setpoint_button_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Int { param = All_Params._FLASH_PROT_V4_20_0_SETPOINT, value = Convert.ToInt16(V4_20_0_setpoint_textBox.Text) }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+                
+                V4_20_0_setpoint_textBox.Text = "";
+
+                V4_20_0_setpoint_button.Visible = false;
+                V4_20_0_setpoint_enter = false;
+            }
+            catch { }
+        }
+
+        private void V4_20_1_setpoint_button_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Int { param = All_Params._FLASH_PROT_V4_20_1_SETPOINT, value = Convert.ToInt16(V4_20_1_setpoint_textBox.Text) }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+               
+                V4_20_1_setpoint_textBox.Text = "";
+
+                V4_20_1_setpoint_button.Visible = false;
+                V4_20_1_setpoint_enter = false;
+            }
+            catch { }
+        }
+
+        private void PT100_20_0_warn_setpoint_button_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Int { param = All_Params._FLASH_WARN_PT100_0_SETPOINT, value = Convert.ToInt16(PT100_20_0_warn_setpoint_textBox.Text) }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+                
+                PT100_20_0_warn_setpoint_textBox.Text = "";
+
+                PT100_20_0_warn_setpoint_button.Visible = false;
+                PT100_20_0_w_setpoint_enter = false;
+            }
+            catch { }
+        }
+
+        private void PT100_20_1_warn_setpoint_button_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Int { param = All_Params._FLASH_WARN_PT100_1_SETPOINT, value = Convert.ToInt16(PT100_20_1_warn_setpoint_textBox.Text) }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+                
+                PT100_20_1_warn_setpoint_textBox.Text = "";
+
+                PT100_20_1_warn_setpoint_button.Visible = false;
+                PT100_20_1_w_setpoint_enter = false;
+            }
+            catch { }
+        }
+
+        private void PT100_20_2_warn_setpoint_button_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Int { param = All_Params._FLASH_WARN_PT100_2_SETPOINT, value = Convert.ToInt16(PT100_20_2_warn_setpoint_textBox.Text) }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+              
+                PT100_20_2_warn_setpoint_textBox.Text = "";
+
+                PT100_20_2_warn_setpoint_button.Visible = false;
+                PT100_20_2_w_setpoint_enter = false;
+            }
+            catch { }
+        }
+
+        private void V4_20_0_warn_setpoint_button_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Int { param = All_Params._FLASH_WARN_V4_20_0_SETPOINT, value = Convert.ToInt16(V4_20_0_warn_setpoint_textBox.Text) }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+               
+                V4_20_0_warn_setpoint_textBox.Text = "";
+
+                V4_20_0_warn_setpoint_button.Visible = false;
+                V4_20_0_w_setpoint_enter = false;
+            }
+            catch { }
+        }
+
+        private void V4_20_1_warn_setpoint_button_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Int { param = All_Params._FLASH_WARN_V4_20_1_SETPOINT, value = Convert.ToInt16(V4_20_1_warn_setpoint_textBox.Text) }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+              
+                V4_20_1_warn_setpoint_textBox.Text = "";
+
+                V4_20_1_warn_setpoint_button.Visible = false;
+                V4_20_1_w_setpoint_enter = false;
+
+            }
+            catch { }
+        }
+
+        private void as_warn_setpoint_button_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Int { param = All_Params._FLASH_ASSYMETRY_SETPOINT, value = Convert.ToInt16(assymetry_textBox.Text) }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+               
+                assymetry_textBox.Text = "";
+
+                as_warn_setpoint_button.Visible = false;
+                as_setpoint_enter = false;
+            }
+            catch { }
+        }
+
+        private void w_c_warn_setpoint_button_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Int { param = All_Params._FLASH_WRONG_CON_MAX_CURRENT, value = Convert.ToInt16(w_c_warn_setpoint_textBox.Text) }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+                
+                w_c_warn_setpoint_textBox.Text = "";
+
+                w_c_warn_setpoint_button.Visible = false;
+                w_setpoint_enter = false;
+            }
+            catch { }
+        }
+
+        private void PT100_20_1_setpoint_textBox_Enter(object sender, EventArgs e)
+        {
+          
+            PT100_20_1_setpoint_button.Visible = true;
+        }
+
+        private void PT100_20_2_setpoint_textBox_Enter(object sender, EventArgs e)
+        {
+           
+
+            PT100_20_1_setpoint_button.Visible = true;
+        }
+
+        private void V4_20_0_setpoint_textBox_Enter(object sender, EventArgs e)
+        {
+            
+
+            V4_20_0_setpoint_button.Visible = true;
+        }
+
+        private void V4_20_1_setpoint_textBox_Enter(object sender, EventArgs e)
+        {
+
+          
+            V4_20_1_setpoint_button.Visible = true;
+        }
+
+        private void PT100_20_0_warn_setpoint_textBox_Enter(object sender, EventArgs e)
+        {
+           
+
+            PT100_20_0_warn_setpoint_button.Visible = true;
+        }
+
+        private void PT100_20_1_warn_setpoint_textBox_Enter(object sender, EventArgs e)
+        {
+           
+
+            PT100_20_1_warn_setpoint_button.Visible = true;
+        }
+
+        private void PT100_20_2_warn_setpoint_textBox_Enter(object sender, EventArgs e)
+        {
+          
+
+            PT100_20_2_warn_setpoint_button.Visible = true;
+        }
+
+        private void V4_20_0_warn_setpoint_textBox_Enter(object sender, EventArgs e)
+        {
+            
+
+            V4_20_0_warn_setpoint_button.Visible = true;
+        }
+
+        private void V4_20_1_warn_setpoint_textBox_Enter(object sender, EventArgs e)
+        {
+
+            V4_20_1_warn_setpoint_button.Visible = true;
+        }
+
+        private void asymmetry_warn_setpoint_textBox_Enter(object sender, EventArgs e)
+        {
+           
+
+            as_warn_setpoint_button.Visible = true;
+        }
+
+        private void w_c_warn_setpoint_textBox_Enter(object sender, EventArgs e)
+        {
+            
+
+            w_c_warn_setpoint_button.Visible = true;
+        }
+
+        private void PT100_20_1_setpoint_textBox_Leave(object sender, EventArgs e)
+        {
+            if (!PT100_20_1_setpoint_button.Focused)
+            {
+               
+                PT100_20_1_setpoint_textBox.Text = "";
+
+                PT100_20_1_setpoint_button.Visible = false;
+                PT100_20_1_setpoint_enter = false;
+            }
+            }
+
+        private void PT100_20_2_setpoint_textBox_Leave(object sender, EventArgs e)
+        {
+            if (!PT100_20_2_setpoint_button.Focused)
+            {
+               
+                PT100_20_2_setpoint_textBox.Text = "";
+
+                PT100_20_2_setpoint_button.Visible = false;
+                PT100_20_2_setpoint_enter = false;
+            }
+        }
+
+        private void V4_20_0_setpoint_textBox_Leave(object sender, EventArgs e)
+        {
+            if (!V4_20_0_setpoint_button.Focused)
+            {
+                  V4_20_0_setpoint_textBox.Text = "";
+
+                V4_20_0_setpoint_button.Visible = false;
+                V4_20_0_setpoint_enter = false;
+              
+            }
+            }
+
+        private void V4_20_1_setpoint_textBox_Leave(object sender, EventArgs e)
+        {
+            if (!V4_20_1_setpoint_button.Focused)
+            {
+                
+                V4_20_1_setpoint_textBox.Text = "";
+
+                V4_20_1_setpoint_button.Visible = false;
+                V4_20_1_setpoint_enter = false;
+
+            }
+        }
+
+        private void PT100_20_0_warn_setpoint_textBox_Leave(object sender, EventArgs e)
+        {
+            if (!PT100_20_0_warn_setpoint_button.Focused)
+            {
+               
+                PT100_20_0_warn_setpoint_textBox.Text = "";
+
+                PT100_20_0_warn_setpoint_button.Visible = false;
+                PT100_20_0_w_setpoint_enter = false;
+            }
+        }
+
+        private void PT100_20_1_warn_setpoint_textBox_Leave(object sender, EventArgs e)
+        {
+            if (!PT100_20_1_warn_setpoint_button.Focused)
+            {
+               
+                PT100_20_1_warn_setpoint_textBox.Text = "";
+
+                PT100_20_1_warn_setpoint_button.Visible = false;
+                PT100_20_1_w_setpoint_enter = false;
+            }
+        }
+
+        private void PT100_20_2_warn_setpoint_textBox_Leave(object sender, EventArgs e)
+        {
+            if (!PT100_20_2_warn_setpoint_button.Focused)
+            {
+               
+                PT100_20_2_warn_setpoint_textBox.Text = "";
+
+                PT100_20_2_warn_setpoint_button.Visible = false;
+                PT100_20_2_w_setpoint_enter = false;
+            }
+        }
+
+        private void V4_20_0_warn_setpoint_textBox_Leave(object sender, EventArgs e)
+        {
+            if (!V4_20_0_warn_setpoint_button.Focused)
+            {
+               
+                V4_20_0_warn_setpoint_textBox.Text = "";
+
+                V4_20_0_warn_setpoint_button.Visible = false;
+                V4_20_0_w_setpoint_enter = false;
+            }
+        }
+
+        private void V4_20_1_warn_setpoint_textBox_Leave(object sender, EventArgs e)
+        {
+            if (!V4_20_1_warn_setpoint_button.Focused)
+            {
+
+                V4_20_1_warn_setpoint_textBox.Text = "";
+
+                V4_20_1_warn_setpoint_button.Visible = false;
+                V4_20_1_w_setpoint_enter = false;
+            }
+        }
+
+        private void asymmetry_warn_setpoint_textBox_Leave(object sender, EventArgs e)
+        {
+            if (!as_warn_setpoint_button.Focused)
+            {
+
+                asymmetry_warn_setpoint_textBox.Text = "";
+
+                as_warn_setpoint_button.Visible = false;
+                as_setpoint_enter = false;
+            }
+        }
+
+        private void w_c_warn_setpoint_textBox_Leave(object sender, EventArgs e)
+        {
+
+            if (!w_c_warn_setpoint_button.Focused)
+            {
+
+                w_c_warn_setpoint_textBox.Text = "";
+
+                w_c_warn_setpoint_button.Visible = false;
+                w_setpoint_enter = false;
+            }
+        }
+
+        private void PT100_20_0_setpoint_textBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
 
         //private void save_to_clipboard_button_Click(object sender, EventArgs e)
         //{

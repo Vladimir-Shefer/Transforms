@@ -21,58 +21,61 @@
     public class Command_Handler_102 : Command_Handler
     {
         private List<All_Params> all_Params = new List<All_Params>() {All_Params._FLASH_ID_VERSIYA_H,      // uint16_t id_versiya_h            // Версия ПО
-        All_Params._FLASH_ID_VERSIYA_L,      // uint16_t id_versiya_l            // Версия ПО
-        All_Params._FLASH_NUMBER_BLOK,        // uint16_t number_blok            // Номер блока
-        All_Params._FLASH_DEV_TYPE,         //uint16_t device_config.device_type;      //тип блока //device_type_t device_type;   //тип блока
-        All_Params._FLASH_PROT_PT100_0_ENABLE,
-        All_Params._FLASH_PROT_PT100_1_ENABLE,
-        All_Params._FLASH_PROT_PT100_2_ENABLE,
-        All_Params._FLASH_WARN_PT100_0_ENABLE,
-        All_Params._FLASH_WARN_PT100_1_ENABLE,
-        All_Params._FLASH_WARN_PT100_2_ENABLE,
-        All_Params._FLASH_PROT_V4_20_0_ENABLE,
-        All_Params._FLASH_PROT_V4_20_1_ENABLE,
-        All_Params._FLASH_WARN_V4_20_0_ENABLE,
-        All_Params._FLASH_WARN_V4_20_1_ENABLE,
-        All_Params._FLASH_PROT_WRONG_CON_ENABLE,
-        All_Params._FLASH_MIN_CURRENT,
-        All_Params._FLASH_PROT_PT100_0_SETPOINT,
-        All_Params._FLASH_PROT_PT100_1_SETPOINT,
-        All_Params._FLASH_PROT_PT100_2_SETPOINT,
-        All_Params._FLASH_WARN_PT100_0_SETPOINT,
-        All_Params._FLASH_WARN_PT100_1_SETPOINT,
-       All_Params._FLASH_WARN_PT100_2_SETPOINT,
-       All_Params._FLASH_PROT_V4_20_0_SETPOINT,
-       All_Params._FLASH_PROT_V4_20_1_SETPOINT,
-       All_Params._FLASH_WARN_V4_20_0_SETPOINT,
-       All_Params._FLASH_WARN_V4_20_1_SETPOINT,
-       All_Params._FLASH_RS485_ADDRESS,
-       All_Params._FLASH_RS485_SPEED,
-       All_Params._FLASH_RATIOS_MUL0,
-       All_Params._FLASH_RATIOS_MUL1,
-       All_Params._FLASH_RATIOS_MUL2,
-       All_Params._FLASH_RATIOS_MUL3,
-       All_Params._FLASH_RATIOS_MUL4,
-       All_Params._FLASH_RATIOS_MUL5,
-       All_Params._FLASH_RATIOS_MUL6,
-       All_Params._FLASH_RATIOS_MUL7,
-       All_Params._FLASH_RATIOS_MUL8,
-       All_Params._FLASH_RATIOS_GND0,
-       All_Params._FLASH_RATIOS_GND1,
-       All_Params._FLASH_RATIOS_GND2,
-       All_Params._FLASH_RATIOS_GND3,
-       All_Params._FLASH_RATIOS_GND4,
-       All_Params._FLASH_RATIOS_GND5,
-       All_Params._FLASH_RATIOS_GND6,
-       All_Params._FLASH_RATIOS_GND7,
-       All_Params._FLASH_RATIOS_GND8,
-       All_Params._FLASH_CURRENT_MUL,
-       All_Params._FLASH_CT_MUL,
-       All_Params._FLASH_WRONG_CON_MAX_CURRENT,
-       All_Params._FLASH_WRONG_CON_SW_CURRENT,
-        All_Params. _FLASH_ASSYMETRY_ENABLE,
-        All_Params. _FLASH_ASSYMETRY_SETPOINT,
-         All_Params._FLASH_ASSYMETRY_TIME,};
+  All_Params._FLASH_ID_VERSIYA_L,      // uint16_t id_versiya_l            // Версия ПО
+  All_Params._FLASH_NUMBER_BLOK,        // uint16_t number_blok            // Номер блока
+  All_Params._FLASH_DEV_TYPE,         //uint16_t device_config.device_type;      //тип блока //device_type_t device_type;   //тип блока
+  All_Params._FLASH_PROT_PT100_0_ENABLE,
+  All_Params._FLASH_PROT_PT100_1_ENABLE,
+  All_Params._FLASH_PROT_PT100_2_ENABLE,
+  All_Params._FLASH_WARN_PT100_0_ENABLE,
+  All_Params._FLASH_WARN_PT100_1_ENABLE,
+  All_Params._FLASH_WARN_PT100_2_ENABLE,
+  All_Params._FLASH_PROT_V4_20_0_ENABLE,
+  All_Params._FLASH_PROT_V4_20_1_ENABLE,
+  All_Params._FLASH_WARN_V4_20_0_ENABLE,
+  All_Params._FLASH_WARN_V4_20_1_ENABLE,
+  All_Params._FLASH_PROT_WRONG_CON_ENABLE,
+  All_Params._FLASH_MIN_CURRENT,
+  All_Params._FLASH_PROT_PT100_0_SETPOINT,
+  All_Params._FLASH_PROT_PT100_1_SETPOINT,
+  All_Params._FLASH_PROT_PT100_2_SETPOINT,
+  All_Params._FLASH_WARN_PT100_0_SETPOINT,
+  All_Params._FLASH_WARN_PT100_1_SETPOINT,
+  All_Params._FLASH_WARN_PT100_2_SETPOINT,
+  All_Params._FLASH_PROT_V4_20_0_SETPOINT,
+  All_Params._FLASH_PROT_V4_20_1_SETPOINT,
+  All_Params._FLASH_WARN_V4_20_0_SETPOINT,
+  All_Params._FLASH_WARN_V4_20_1_SETPOINT,
+  All_Params._FLASH_RS485_ADDRESS,
+  All_Params._FLASH_RS485_SPEED,
+  All_Params._FLASH_RATIOS_MUL0,
+  All_Params._FLASH_RATIOS_MUL1,
+  All_Params._FLASH_RATIOS_MUL2,
+  All_Params._FLASH_RATIOS_MUL3,
+  All_Params._FLASH_RATIOS_MUL4,
+  All_Params._FLASH_RATIOS_MUL5,
+  All_Params._FLASH_RATIOS_MUL6,
+  All_Params._FLASH_RATIOS_MUL7,
+  All_Params._FLASH_RATIOS_MUL8,
+  All_Params._FLASH_RATIOS_GND0,
+  All_Params._FLASH_RATIOS_GND1,
+  All_Params._FLASH_RATIOS_GND2,
+  All_Params._FLASH_RATIOS_GND3,
+  All_Params._FLASH_RATIOS_GND4,
+  All_Params._FLASH_RATIOS_GND5,
+  All_Params._FLASH_RATIOS_GND6,
+  All_Params._FLASH_RATIOS_GND7,
+  All_Params._FLASH_RATIOS_GND8,
+  All_Params._FLASH_CURRENT_MUL,
+  All_Params._FLASH_CT_MUL,
+  All_Params._FLASH_RATIOS_SHIFT_PT1,
+  All_Params._FLASH_RATIOS_SHIFT_PT2,
+  All_Params._FLASH_RATIOS_SHIFT_PT3,
+  All_Params._FLASH_WRONG_CON_MAX_CURRENT,
+  All_Params._FLASH_WRONG_CON_SW_CURRENT,
+  All_Params._FLASH_ASSYMETRY_ENABLE,
+  All_Params._FLASH_ASSYMETRY_SETPOINT,
+  All_Params._FLASH_ASSYMETRY_TIME,};
 
         private List<Data_Carrier_Base> fields = new List<Data_Carrier_Base>();
         public Command_Handler_102(List<Data_Carrier_Base> fields) : base(fields)
@@ -121,59 +124,61 @@
     public class Command_Handler_103 : Command_Handler
     {
         private List<All_Params> all_Params = new List<All_Params>() {All_Params._FLASH_ID_VERSIYA_H,      // uint16_t id_versiya_h            // Версия ПО
-        All_Params._FLASH_ID_VERSIYA_L,      // uint16_t id_versiya_l            // Версия ПО
-        All_Params._FLASH_NUMBER_BLOK,        // uint16_t number_blok            // Номер блока
-        All_Params._FLASH_DEV_TYPE,         //uint16_t device_config.device_type;      //тип блока //device_type_t device_type;   //тип блока
-        All_Params._FLASH_PROT_PT100_0_ENABLE,
-        All_Params._FLASH_PROT_PT100_1_ENABLE,
-        All_Params._FLASH_PROT_PT100_2_ENABLE,
-        All_Params._FLASH_WARN_PT100_0_ENABLE,
-        All_Params._FLASH_WARN_PT100_1_ENABLE,
-        All_Params._FLASH_WARN_PT100_2_ENABLE,
-        All_Params._FLASH_PROT_V4_20_0_ENABLE,
-        All_Params._FLASH_PROT_V4_20_1_ENABLE,
-        All_Params._FLASH_WARN_V4_20_0_ENABLE,
-        All_Params._FLASH_WARN_V4_20_1_ENABLE,
-        All_Params._FLASH_PROT_WRONG_CON_ENABLE,
-        All_Params._FLASH_MIN_CURRENT,
-        All_Params._FLASH_PROT_PT100_0_SETPOINT,
-        All_Params._FLASH_PROT_PT100_1_SETPOINT,
-        All_Params._FLASH_PROT_PT100_2_SETPOINT,
-        All_Params._FLASH_WARN_PT100_0_SETPOINT,
-        All_Params._FLASH_WARN_PT100_1_SETPOINT,
-       All_Params._FLASH_WARN_PT100_2_SETPOINT,
-       All_Params._FLASH_PROT_V4_20_0_SETPOINT,
-       All_Params._FLASH_PROT_V4_20_1_SETPOINT,
-       All_Params._FLASH_WARN_V4_20_0_SETPOINT,
-       All_Params._FLASH_WARN_V4_20_1_SETPOINT,
-       All_Params._FLASH_RS485_ADDRESS,
-       All_Params._FLASH_RS485_SPEED,
-       All_Params._FLASH_RATIOS_MUL0,
-       All_Params._FLASH_RATIOS_MUL1,
-       All_Params._FLASH_RATIOS_MUL2,
-       All_Params._FLASH_RATIOS_MUL3,
-       All_Params._FLASH_RATIOS_MUL4,
-       All_Params._FLASH_RATIOS_MUL5,
-       All_Params._FLASH_RATIOS_MUL6,
-       All_Params._FLASH_RATIOS_MUL7,
-       All_Params._FLASH_RATIOS_MUL8,
-       All_Params._FLASH_RATIOS_GND0,
-       All_Params._FLASH_RATIOS_GND1,
-       All_Params._FLASH_RATIOS_GND2,
-       All_Params._FLASH_RATIOS_GND3,
-       All_Params._FLASH_RATIOS_GND4,
-       All_Params._FLASH_RATIOS_GND5,
-       All_Params._FLASH_RATIOS_GND6,
-       All_Params._FLASH_RATIOS_GND7,
-       All_Params._FLASH_RATIOS_GND8,
-       All_Params._FLASH_CURRENT_MUL,
-       All_Params._FLASH_CT_MUL,
-       All_Params._FLASH_WRONG_CON_MAX_CURRENT,
-       All_Params._FLASH_WRONG_CON_SW_CURRENT,
-        All_Params._FLASH_ASSYMETRY_ENABLE,
-         All_Params._FLASH_ASSYMETRY_SETPOINT,
-         All_Params._FLASH_ASSYMETRY_TIME};
-
+  All_Params._FLASH_ID_VERSIYA_L,      // uint16_t id_versiya_l            // Версия ПО
+  All_Params._FLASH_NUMBER_BLOK,        // uint16_t number_blok            // Номер блока
+  All_Params._FLASH_DEV_TYPE,         //uint16_t device_config.device_type;      //тип блока //device_type_t device_type;   //тип блока
+  All_Params._FLASH_PROT_PT100_0_ENABLE,
+  All_Params._FLASH_PROT_PT100_1_ENABLE,
+  All_Params._FLASH_PROT_PT100_2_ENABLE,
+  All_Params._FLASH_WARN_PT100_0_ENABLE,
+  All_Params._FLASH_WARN_PT100_1_ENABLE,
+  All_Params._FLASH_WARN_PT100_2_ENABLE,
+  All_Params._FLASH_PROT_V4_20_0_ENABLE,
+  All_Params._FLASH_PROT_V4_20_1_ENABLE,
+  All_Params._FLASH_WARN_V4_20_0_ENABLE,
+  All_Params._FLASH_WARN_V4_20_1_ENABLE,
+  All_Params._FLASH_PROT_WRONG_CON_ENABLE,
+  All_Params._FLASH_MIN_CURRENT,
+  All_Params._FLASH_PROT_PT100_0_SETPOINT,
+  All_Params._FLASH_PROT_PT100_1_SETPOINT,
+  All_Params._FLASH_PROT_PT100_2_SETPOINT,
+  All_Params._FLASH_WARN_PT100_0_SETPOINT,
+  All_Params._FLASH_WARN_PT100_1_SETPOINT,
+  All_Params._FLASH_WARN_PT100_2_SETPOINT,
+  All_Params._FLASH_PROT_V4_20_0_SETPOINT,
+  All_Params._FLASH_PROT_V4_20_1_SETPOINT,
+  All_Params._FLASH_WARN_V4_20_0_SETPOINT,
+  All_Params._FLASH_WARN_V4_20_1_SETPOINT,
+  All_Params._FLASH_RS485_ADDRESS,
+  All_Params._FLASH_RS485_SPEED,
+  All_Params._FLASH_RATIOS_MUL0,
+  All_Params._FLASH_RATIOS_MUL1,
+  All_Params._FLASH_RATIOS_MUL2,
+  All_Params._FLASH_RATIOS_MUL3,
+  All_Params._FLASH_RATIOS_MUL4,
+  All_Params._FLASH_RATIOS_MUL5,
+  All_Params._FLASH_RATIOS_MUL6,
+  All_Params._FLASH_RATIOS_MUL7,
+  All_Params._FLASH_RATIOS_MUL8,
+  All_Params._FLASH_RATIOS_GND0,
+  All_Params._FLASH_RATIOS_GND1,
+  All_Params._FLASH_RATIOS_GND2,
+  All_Params._FLASH_RATIOS_GND3,
+  All_Params._FLASH_RATIOS_GND4,
+  All_Params._FLASH_RATIOS_GND5,
+  All_Params._FLASH_RATIOS_GND6,
+  All_Params._FLASH_RATIOS_GND7,
+  All_Params._FLASH_RATIOS_GND8,
+  All_Params._FLASH_CURRENT_MUL,
+  All_Params._FLASH_CT_MUL,
+  All_Params._FLASH_RATIOS_SHIFT_PT1,
+  All_Params._FLASH_RATIOS_SHIFT_PT2,
+  All_Params._FLASH_RATIOS_SHIFT_PT3,
+  All_Params._FLASH_WRONG_CON_MAX_CURRENT,
+  All_Params._FLASH_WRONG_CON_SW_CURRENT,
+  All_Params._FLASH_ASSYMETRY_ENABLE,
+  All_Params._FLASH_ASSYMETRY_SETPOINT,
+  All_Params._FLASH_ASSYMETRY_TIME,};
         private List<Data_Carrier_Base> fields = new List<Data_Carrier_Base>();
         public Command_Handler_103(List<Data_Carrier_Base> fields) : base(fields)
         {
@@ -210,16 +215,16 @@
 
                 {
                     h = all_Params.IndexOf(p);
-                    if(list[h].GetType() == typeof(Data_Carrier_Int))
+                    if(fields[h].GetType() == typeof(Data_Carrier_Int))
                         {
-                        int b = ((Data_Carrier_Int)list[i]).value;
+                        int b = ((Data_Carrier_Int)(list.FindLast(c=>c.param==p))).value;
                         if (b / 256 < 256 && b >= 0)
                             return new Packet { cmd = (byte)id, data = new byte[] { (byte)(h % 256), (byte)(h / 256), (byte)(b % 256), (byte)(b / 256) }, frame = 0 };
                         else break;
                     }
-                    else if(list[h].GetType() == typeof(Data_Carrier_Bool))
+                    else if(fields[h].GetType() == typeof(Data_Carrier_Bool))
                     {
-                        bool bo = ((Data_Carrier_Bool)list[i]).value;
+                        bool bo = ((Data_Carrier_Bool)(list.FindLast(c => c.param == p))).value;
                        
                             return new Packet { cmd = (byte)id, data = new byte[] { (byte)(h % 256), (byte)(h / 256), (byte)(bo?1:0), 0 }, frame = 0 };
                       
@@ -227,7 +232,7 @@
 
                     }
                 }
-                i++;
+               
             }
             throw new Exception("Невозможно отправить такой запрос ");
         }
@@ -732,6 +737,10 @@
                     field_17 = d;
                 if (d.param == eighteenth_param)
                     field_18 = d;
+                if (d.param == _19_param)
+                    field_19 = d;
+                if (d.param == _20_param)
+                    field_20 = d;
             }
         }
 
@@ -768,7 +777,7 @@
                     ((Data_Carrier_Int)field_14).value = data[6] + data[7] * 256;
                     break;
             }
-            return new List<Data_Carrier_Base> { field_1, field_2, field_3, field_4, field_5, field_6, field_7, field_8, field_9, field_10, field_11, field_12, field_13, field_14, field_16, field_17, field_18 };
+            return new List<Data_Carrier_Base> { field_1, field_2, field_3, field_4, field_5, field_6, field_7, field_8, field_9, field_10, field_11, field_12, field_13, field_14, field_16, field_17, field_18, field_19, field_20 };
         }
 
         public override Packet Handle_Outgoing_Command(List<Data_Carrier_Base>? list)

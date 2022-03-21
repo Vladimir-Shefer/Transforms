@@ -115,6 +115,60 @@
             this.GMD_2_textBox = new System.Windows.Forms.TextBox();
             this.GMD_0_textBox = new System.Windows.Forms.TextBox();
             this.label40 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.locks_listBox = new System.Windows.Forms.ListBox();
+            this.warnings_listBox = new System.Windows.Forms.ListBox();
+            this.PT_100_0_prot_enable_checkBox = new System.Windows.Forms.CheckBox();
+            this.PT_100_1_prot_enable_checkBox = new System.Windows.Forms.CheckBox();
+            this.PT_100_2_prot_enable_checkBox = new System.Windows.Forms.CheckBox();
+            this.V4_20_0_prot_enable_checkBox = new System.Windows.Forms.CheckBox();
+            this.V4_20_1_prot_enable_checkBox = new System.Windows.Forms.CheckBox();
+            this.PT_100_0_warn_enable_checkBox = new System.Windows.Forms.CheckBox();
+            this.PT_100_1_warn_enable_checkBox = new System.Windows.Forms.CheckBox();
+            this.PT_100_2_warn_enable_checkBox = new System.Windows.Forms.CheckBox();
+            this.V4_20_0_warn_enable_checkBox = new System.Windows.Forms.CheckBox();
+            this.V4_20_1_warn_enable_checkBox = new System.Windows.Forms.CheckBox();
+            this.asymmetry_warn_enable_checkBox = new System.Windows.Forms.CheckBox();
+            this.wrong_con_warn_enable_checkBox = new System.Windows.Forms.CheckBox();
+            this.PT100_20_0_setpoint_textBox = new System.Windows.Forms.TextBox();
+            this.PT100_20_0_setpoint_button = new System.Windows.Forms.Button();
+            this.PT100_20_1_setpoint_textBox = new System.Windows.Forms.TextBox();
+            this.PT100_20_1_setpoint_button = new System.Windows.Forms.Button();
+            this.PT100_20_2_setpoint_textBox = new System.Windows.Forms.TextBox();
+            this.PT100_20_2_setpoint_button = new System.Windows.Forms.Button();
+            this.V4_20_0_setpoint_textBox = new System.Windows.Forms.TextBox();
+            this.V4_20_1_setpoint_textBox = new System.Windows.Forms.TextBox();
+            this.V4_20_0_setpoint_button = new System.Windows.Forms.Button();
+            this.V4_20_1_setpoint_button = new System.Windows.Forms.Button();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label45 = new System.Windows.Forms.Label();
+            this.label46 = new System.Windows.Forms.Label();
+            this.ff = new System.Windows.Forms.Label();
+            this.fffff = new System.Windows.Forms.Label();
+            this.label49 = new System.Windows.Forms.Label();
+            this.PT100_20_0_warn_setpoint_button = new System.Windows.Forms.Button();
+            this.PT100_20_0_warn_setpoint_textBox = new System.Windows.Forms.TextBox();
+            this.tgfr = new System.Windows.Forms.Label();
+            this.PT100_20_1_warn_setpoint_button = new System.Windows.Forms.Button();
+            this.PT100_20_1_warn_setpoint_textBox = new System.Windows.Forms.TextBox();
+            this.ads = new System.Windows.Forms.Label();
+            this.PT100_20_2_warn_setpoint_button = new System.Windows.Forms.Button();
+            this.PT100_20_2_warn_setpoint_textBox = new System.Windows.Forms.TextBox();
+            this.werfcd = new System.Windows.Forms.Label();
+            this.V4_20_0_warn_setpoint_button = new System.Windows.Forms.Button();
+            this.V4_20_0_warn_setpoint_textBox = new System.Windows.Forms.TextBox();
+            this.dfs = new System.Windows.Forms.Label();
+            this.V4_20_1_warn_setpoint_button = new System.Windows.Forms.Button();
+            this.V4_20_1_warn_setpoint_textBox = new System.Windows.Forms.TextBox();
+            this.sadas = new System.Windows.Forms.Label();
+            this.as_warn_setpoint_button = new System.Windows.Forms.Button();
+            this.asymmetry_warn_setpoint_textBox = new System.Windows.Forms.TextBox();
+            this.w_c_warn_setpssddsdsdoint_textBox = new System.Windows.Forms.Label();
+            this.w_c_warn_setpoint_button = new System.Windows.Forms.Button();
+            this.w_c_warn_setpoint_textBox = new System.Windows.Forms.TextBox();
+            this.WARNINGS = new System.Windows.Forms.Label();
+            this.label47 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -828,6 +882,520 @@
             this.label40.TabIndex = 89;
             this.label40.Text = "GMD_1";
             // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(53, 373);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(74, 15);
+            this.label42.TabIndex = 100;
+            this.label42.Text = "Блокировки";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(44, 531);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(102, 15);
+            this.label43.TabIndex = 101;
+            this.label43.Text = "Предупреждения";
+            // 
+            // locks_listBox
+            // 
+            this.locks_listBox.FormattingEnabled = true;
+            this.locks_listBox.ItemHeight = 15;
+            this.locks_listBox.Location = new System.Drawing.Point(44, 397);
+            this.locks_listBox.Name = "locks_listBox";
+            this.locks_listBox.Size = new System.Drawing.Size(120, 94);
+            this.locks_listBox.Sorted = true;
+            this.locks_listBox.TabIndex = 102;
+            // 
+            // warnings_listBox
+            // 
+            this.warnings_listBox.FormattingEnabled = true;
+            this.warnings_listBox.ItemHeight = 15;
+            this.warnings_listBox.Location = new System.Drawing.Point(44, 556);
+            this.warnings_listBox.Name = "warnings_listBox";
+            this.warnings_listBox.Size = new System.Drawing.Size(120, 94);
+            this.warnings_listBox.Sorted = true;
+            this.warnings_listBox.TabIndex = 103;
+            // 
+            // PT_100_0_prot_enable_checkBox
+            // 
+            this.PT_100_0_prot_enable_checkBox.AutoSize = true;
+            this.PT_100_0_prot_enable_checkBox.Location = new System.Drawing.Point(12, 77);
+            this.PT_100_0_prot_enable_checkBox.Name = "PT_100_0_prot_enable_checkBox";
+            this.PT_100_0_prot_enable_checkBox.Size = new System.Drawing.Size(15, 14);
+            this.PT_100_0_prot_enable_checkBox.TabIndex = 104;
+            this.PT_100_0_prot_enable_checkBox.UseVisualStyleBackColor = true;
+            this.PT_100_0_prot_enable_checkBox.CheckedChanged += new System.EventHandler(this.PT_100_0_enable_checkBox_CheckedChanged);
+            this.PT_100_0_prot_enable_checkBox.Click += new System.EventHandler(this.PT_100_0_enable_checkBox_Click);
+            // 
+            // PT_100_1_prot_enable_checkBox
+            // 
+            this.PT_100_1_prot_enable_checkBox.AutoSize = true;
+            this.PT_100_1_prot_enable_checkBox.Location = new System.Drawing.Point(201, 76);
+            this.PT_100_1_prot_enable_checkBox.Name = "PT_100_1_prot_enable_checkBox";
+            this.PT_100_1_prot_enable_checkBox.Size = new System.Drawing.Size(15, 14);
+            this.PT_100_1_prot_enable_checkBox.TabIndex = 105;
+            this.PT_100_1_prot_enable_checkBox.UseVisualStyleBackColor = true;
+            this.PT_100_1_prot_enable_checkBox.Click += new System.EventHandler(this.PT_100_1_prot_enable_checkBox_Click);
+            // 
+            // PT_100_2_prot_enable_checkBox
+            // 
+            this.PT_100_2_prot_enable_checkBox.AutoSize = true;
+            this.PT_100_2_prot_enable_checkBox.Location = new System.Drawing.Point(412, 77);
+            this.PT_100_2_prot_enable_checkBox.Name = "PT_100_2_prot_enable_checkBox";
+            this.PT_100_2_prot_enable_checkBox.Size = new System.Drawing.Size(15, 14);
+            this.PT_100_2_prot_enable_checkBox.TabIndex = 106;
+            this.PT_100_2_prot_enable_checkBox.UseVisualStyleBackColor = true;
+            this.PT_100_2_prot_enable_checkBox.Click += new System.EventHandler(this.PT_100_2_prot_enable_checkBox_Click);
+            // 
+            // V4_20_0_prot_enable_checkBox
+            // 
+            this.V4_20_0_prot_enable_checkBox.AutoSize = true;
+            this.V4_20_0_prot_enable_checkBox.Location = new System.Drawing.Point(614, 77);
+            this.V4_20_0_prot_enable_checkBox.Name = "V4_20_0_prot_enable_checkBox";
+            this.V4_20_0_prot_enable_checkBox.Size = new System.Drawing.Size(15, 14);
+            this.V4_20_0_prot_enable_checkBox.TabIndex = 107;
+            this.V4_20_0_prot_enable_checkBox.UseVisualStyleBackColor = true;
+            this.V4_20_0_prot_enable_checkBox.Click += new System.EventHandler(this.V4_20_0_prot_enable_checkBox_Click);
+            // 
+            // V4_20_1_prot_enable_checkBox
+            // 
+            this.V4_20_1_prot_enable_checkBox.AutoSize = true;
+            this.V4_20_1_prot_enable_checkBox.Location = new System.Drawing.Point(815, 76);
+            this.V4_20_1_prot_enable_checkBox.Name = "V4_20_1_prot_enable_checkBox";
+            this.V4_20_1_prot_enable_checkBox.Size = new System.Drawing.Size(15, 14);
+            this.V4_20_1_prot_enable_checkBox.TabIndex = 108;
+            this.V4_20_1_prot_enable_checkBox.UseVisualStyleBackColor = true;
+            this.V4_20_1_prot_enable_checkBox.Click += new System.EventHandler(this.V4_20_1_prot_enable_checkBox_Click);
+            // 
+            // PT_100_0_warn_enable_checkBox
+            // 
+            this.PT_100_0_warn_enable_checkBox.AutoSize = true;
+            this.PT_100_0_warn_enable_checkBox.Location = new System.Drawing.Point(8, 195);
+            this.PT_100_0_warn_enable_checkBox.Name = "PT_100_0_warn_enable_checkBox";
+            this.PT_100_0_warn_enable_checkBox.Size = new System.Drawing.Size(15, 14);
+            this.PT_100_0_warn_enable_checkBox.TabIndex = 109;
+            this.PT_100_0_warn_enable_checkBox.UseVisualStyleBackColor = true;
+            this.PT_100_0_warn_enable_checkBox.Click += new System.EventHandler(this.PT_100_0_warn_enable_checkBox_Click);
+            // 
+            // PT_100_1_warn_enable_checkBox
+            // 
+            this.PT_100_1_warn_enable_checkBox.AutoSize = true;
+            this.PT_100_1_warn_enable_checkBox.Location = new System.Drawing.Point(197, 195);
+            this.PT_100_1_warn_enable_checkBox.Name = "PT_100_1_warn_enable_checkBox";
+            this.PT_100_1_warn_enable_checkBox.Size = new System.Drawing.Size(15, 14);
+            this.PT_100_1_warn_enable_checkBox.TabIndex = 110;
+            this.PT_100_1_warn_enable_checkBox.UseVisualStyleBackColor = true;
+            this.PT_100_1_warn_enable_checkBox.Click += new System.EventHandler(this.PT_100_1_warn_enable_checkBox_Click);
+            // 
+            // PT_100_2_warn_enable_checkBox
+            // 
+            this.PT_100_2_warn_enable_checkBox.AutoSize = true;
+            this.PT_100_2_warn_enable_checkBox.Location = new System.Drawing.Point(408, 195);
+            this.PT_100_2_warn_enable_checkBox.Name = "PT_100_2_warn_enable_checkBox";
+            this.PT_100_2_warn_enable_checkBox.Size = new System.Drawing.Size(15, 14);
+            this.PT_100_2_warn_enable_checkBox.TabIndex = 111;
+            this.PT_100_2_warn_enable_checkBox.UseVisualStyleBackColor = true;
+            this.PT_100_2_warn_enable_checkBox.Click += new System.EventHandler(this.PT_100_2_warn_enable_checkBox_Click);
+            // 
+            // V4_20_0_warn_enable_checkBox
+            // 
+            this.V4_20_0_warn_enable_checkBox.AutoSize = true;
+            this.V4_20_0_warn_enable_checkBox.Location = new System.Drawing.Point(610, 196);
+            this.V4_20_0_warn_enable_checkBox.Name = "V4_20_0_warn_enable_checkBox";
+            this.V4_20_0_warn_enable_checkBox.Size = new System.Drawing.Size(15, 14);
+            this.V4_20_0_warn_enable_checkBox.TabIndex = 112;
+            this.V4_20_0_warn_enable_checkBox.UseVisualStyleBackColor = true;
+            this.V4_20_0_warn_enable_checkBox.Click += new System.EventHandler(this.V4_20_0_warn_enable_checkBox_Click);
+            // 
+            // V4_20_1_warn_enable_checkBox
+            // 
+            this.V4_20_1_warn_enable_checkBox.AutoSize = true;
+            this.V4_20_1_warn_enable_checkBox.Location = new System.Drawing.Point(811, 195);
+            this.V4_20_1_warn_enable_checkBox.Name = "V4_20_1_warn_enable_checkBox";
+            this.V4_20_1_warn_enable_checkBox.Size = new System.Drawing.Size(15, 14);
+            this.V4_20_1_warn_enable_checkBox.TabIndex = 113;
+            this.V4_20_1_warn_enable_checkBox.UseVisualStyleBackColor = true;
+            this.V4_20_1_warn_enable_checkBox.Click += new System.EventHandler(this.V4_20_1_warn_enable_checkBox_Click);
+            // 
+            // asymmetry_warn_enable_checkBox
+            // 
+            this.asymmetry_warn_enable_checkBox.AutoSize = true;
+            this.asymmetry_warn_enable_checkBox.Location = new System.Drawing.Point(610, 258);
+            this.asymmetry_warn_enable_checkBox.Name = "asymmetry_warn_enable_checkBox";
+            this.asymmetry_warn_enable_checkBox.Size = new System.Drawing.Size(15, 14);
+            this.asymmetry_warn_enable_checkBox.TabIndex = 114;
+            this.asymmetry_warn_enable_checkBox.UseVisualStyleBackColor = true;
+            this.asymmetry_warn_enable_checkBox.Click += new System.EventHandler(this.asymmetry_warn_enable_checkBox_Click);
+            // 
+            // wrong_con_warn_enable_checkBox
+            // 
+            this.wrong_con_warn_enable_checkBox.AutoSize = true;
+            this.wrong_con_warn_enable_checkBox.Location = new System.Drawing.Point(811, 258);
+            this.wrong_con_warn_enable_checkBox.Name = "wrong_con_warn_enable_checkBox";
+            this.wrong_con_warn_enable_checkBox.Size = new System.Drawing.Size(15, 14);
+            this.wrong_con_warn_enable_checkBox.TabIndex = 115;
+            this.wrong_con_warn_enable_checkBox.UseVisualStyleBackColor = true;
+            this.wrong_con_warn_enable_checkBox.Click += new System.EventHandler(this.wrong_con_warn_enable_checkBox_Click);
+            // 
+            // PT100_20_0_setpoint_textBox
+            // 
+            this.PT100_20_0_setpoint_textBox.Location = new System.Drawing.Point(31, 72);
+            this.PT100_20_0_setpoint_textBox.Name = "PT100_20_0_setpoint_textBox";
+            this.PT100_20_0_setpoint_textBox.Size = new System.Drawing.Size(100, 23);
+            this.PT100_20_0_setpoint_textBox.TabIndex = 116;
+            this.PT100_20_0_setpoint_textBox.TextChanged += new System.EventHandler(this.PT100_20_0_setpoint_textBox_TextChanged);
+            this.PT100_20_0_setpoint_textBox.Enter += new System.EventHandler(this.PT100_20_0_setpoint_textBox_Enter);
+            this.PT100_20_0_setpoint_textBox.Leave += new System.EventHandler(this.PT100_20_0_setpoint_textBox_Leave);
+            // 
+            // PT100_20_0_setpoint_button
+            // 
+            this.PT100_20_0_setpoint_button.Location = new System.Drawing.Point(131, 72);
+            this.PT100_20_0_setpoint_button.Name = "PT100_20_0_setpoint_button";
+            this.PT100_20_0_setpoint_button.Size = new System.Drawing.Size(51, 23);
+            this.PT100_20_0_setpoint_button.TabIndex = 117;
+            this.PT100_20_0_setpoint_button.Text = "задать";
+            this.PT100_20_0_setpoint_button.UseVisualStyleBackColor = true;
+            this.PT100_20_0_setpoint_button.Click += new System.EventHandler(this.PT100_20_0_setpoint_button_Click);
+            // 
+            // PT100_20_1_setpoint_textBox
+            // 
+            this.PT100_20_1_setpoint_textBox.Location = new System.Drawing.Point(222, 72);
+            this.PT100_20_1_setpoint_textBox.Name = "PT100_20_1_setpoint_textBox";
+            this.PT100_20_1_setpoint_textBox.Size = new System.Drawing.Size(100, 23);
+            this.PT100_20_1_setpoint_textBox.TabIndex = 118;
+            this.PT100_20_1_setpoint_textBox.Enter += new System.EventHandler(this.PT100_20_1_setpoint_textBox_Enter);
+            this.PT100_20_1_setpoint_textBox.Leave += new System.EventHandler(this.PT100_20_1_setpoint_textBox_Leave);
+            // 
+            // PT100_20_1_setpoint_button
+            // 
+            this.PT100_20_1_setpoint_button.Location = new System.Drawing.Point(322, 72);
+            this.PT100_20_1_setpoint_button.Name = "PT100_20_1_setpoint_button";
+            this.PT100_20_1_setpoint_button.Size = new System.Drawing.Size(51, 23);
+            this.PT100_20_1_setpoint_button.TabIndex = 119;
+            this.PT100_20_1_setpoint_button.Text = "задать";
+            this.PT100_20_1_setpoint_button.UseVisualStyleBackColor = true;
+            this.PT100_20_1_setpoint_button.Click += new System.EventHandler(this.PT100_20_1_setpoint_button_Click);
+            // 
+            // PT100_20_2_setpoint_textBox
+            // 
+            this.PT100_20_2_setpoint_textBox.Location = new System.Drawing.Point(433, 73);
+            this.PT100_20_2_setpoint_textBox.Name = "PT100_20_2_setpoint_textBox";
+            this.PT100_20_2_setpoint_textBox.Size = new System.Drawing.Size(100, 23);
+            this.PT100_20_2_setpoint_textBox.TabIndex = 120;
+            this.PT100_20_2_setpoint_textBox.Enter += new System.EventHandler(this.PT100_20_2_setpoint_textBox_Enter);
+            this.PT100_20_2_setpoint_textBox.Leave += new System.EventHandler(this.PT100_20_2_setpoint_textBox_Leave);
+            // 
+            // PT100_20_2_setpoint_button
+            // 
+            this.PT100_20_2_setpoint_button.Location = new System.Drawing.Point(534, 72);
+            this.PT100_20_2_setpoint_button.Name = "PT100_20_2_setpoint_button";
+            this.PT100_20_2_setpoint_button.Size = new System.Drawing.Size(51, 23);
+            this.PT100_20_2_setpoint_button.TabIndex = 121;
+            this.PT100_20_2_setpoint_button.Text = "задать";
+            this.PT100_20_2_setpoint_button.UseVisualStyleBackColor = true;
+            this.PT100_20_2_setpoint_button.Click += new System.EventHandler(this.PT100_20_2_setpoint_button_Click);
+            // 
+            // V4_20_0_setpoint_textBox
+            // 
+            this.V4_20_0_setpoint_textBox.Location = new System.Drawing.Point(635, 73);
+            this.V4_20_0_setpoint_textBox.Name = "V4_20_0_setpoint_textBox";
+            this.V4_20_0_setpoint_textBox.Size = new System.Drawing.Size(100, 23);
+            this.V4_20_0_setpoint_textBox.TabIndex = 122;
+            this.V4_20_0_setpoint_textBox.Enter += new System.EventHandler(this.V4_20_0_setpoint_textBox_Enter);
+            this.V4_20_0_setpoint_textBox.Leave += new System.EventHandler(this.V4_20_0_setpoint_textBox_Leave);
+            // 
+            // V4_20_1_setpoint_textBox
+            // 
+            this.V4_20_1_setpoint_textBox.Location = new System.Drawing.Point(836, 72);
+            this.V4_20_1_setpoint_textBox.Name = "V4_20_1_setpoint_textBox";
+            this.V4_20_1_setpoint_textBox.Size = new System.Drawing.Size(100, 23);
+            this.V4_20_1_setpoint_textBox.TabIndex = 123;
+            this.V4_20_1_setpoint_textBox.Enter += new System.EventHandler(this.V4_20_1_setpoint_textBox_Enter);
+            this.V4_20_1_setpoint_textBox.Leave += new System.EventHandler(this.V4_20_1_setpoint_textBox_Leave);
+            // 
+            // V4_20_0_setpoint_button
+            // 
+            this.V4_20_0_setpoint_button.Location = new System.Drawing.Point(735, 73);
+            this.V4_20_0_setpoint_button.Name = "V4_20_0_setpoint_button";
+            this.V4_20_0_setpoint_button.Size = new System.Drawing.Size(51, 23);
+            this.V4_20_0_setpoint_button.TabIndex = 124;
+            this.V4_20_0_setpoint_button.Text = "задать";
+            this.V4_20_0_setpoint_button.UseVisualStyleBackColor = true;
+            this.V4_20_0_setpoint_button.Click += new System.EventHandler(this.V4_20_0_setpoint_button_Click);
+            // 
+            // V4_20_1_setpoint_button
+            // 
+            this.V4_20_1_setpoint_button.Location = new System.Drawing.Point(936, 72);
+            this.V4_20_1_setpoint_button.Name = "V4_20_1_setpoint_button";
+            this.V4_20_1_setpoint_button.Size = new System.Drawing.Size(51, 23);
+            this.V4_20_1_setpoint_button.TabIndex = 125;
+            this.V4_20_1_setpoint_button.Text = "задать";
+            this.V4_20_1_setpoint_button.UseVisualStyleBackColor = true;
+            this.V4_20_1_setpoint_button.Click += new System.EventHandler(this.V4_20_1_setpoint_button_Click);
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(69, 54);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(52, 15);
+            this.label44.TabIndex = 126;
+            this.label44.Text = "PT100_0 ";
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(260, 54);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(49, 15);
+            this.label45.TabIndex = 127;
+            this.label45.Text = "PT100_1";
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(474, 54);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(49, 15);
+            this.label46.TabIndex = 128;
+            this.label46.Text = "PT100_2";
+            // 
+            // ff
+            // 
+            this.ff.AutoSize = true;
+            this.ff.Location = new System.Drawing.Point(667, 54);
+            this.ff.Name = "ff";
+            this.ff.Size = new System.Drawing.Size(48, 15);
+            this.ff.TabIndex = 129;
+            this.ff.Text = "V4_20_0";
+            // 
+            // fffff
+            // 
+            this.fffff.AutoSize = true;
+            this.fffff.Location = new System.Drawing.Point(871, 54);
+            this.fffff.Name = "fffff";
+            this.fffff.Size = new System.Drawing.Size(48, 15);
+            this.fffff.TabIndex = 130;
+            this.fffff.Text = "V4_20_1";
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(65, 173);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(52, 15);
+            this.label49.TabIndex = 133;
+            this.label49.Text = "PT100_0 ";
+            // 
+            // PT100_20_0_warn_setpoint_button
+            // 
+            this.PT100_20_0_warn_setpoint_button.Location = new System.Drawing.Point(127, 191);
+            this.PT100_20_0_warn_setpoint_button.Name = "PT100_20_0_warn_setpoint_button";
+            this.PT100_20_0_warn_setpoint_button.Size = new System.Drawing.Size(51, 23);
+            this.PT100_20_0_warn_setpoint_button.TabIndex = 132;
+            this.PT100_20_0_warn_setpoint_button.Text = "задать";
+            this.PT100_20_0_warn_setpoint_button.UseVisualStyleBackColor = true;
+            this.PT100_20_0_warn_setpoint_button.Click += new System.EventHandler(this.PT100_20_0_warn_setpoint_button_Click);
+            // 
+            // PT100_20_0_warn_setpoint_textBox
+            // 
+            this.PT100_20_0_warn_setpoint_textBox.Location = new System.Drawing.Point(27, 191);
+            this.PT100_20_0_warn_setpoint_textBox.Name = "PT100_20_0_warn_setpoint_textBox";
+            this.PT100_20_0_warn_setpoint_textBox.Size = new System.Drawing.Size(100, 23);
+            this.PT100_20_0_warn_setpoint_textBox.TabIndex = 131;
+            this.PT100_20_0_warn_setpoint_textBox.Enter += new System.EventHandler(this.PT100_20_0_warn_setpoint_textBox_Enter);
+            this.PT100_20_0_warn_setpoint_textBox.Leave += new System.EventHandler(this.PT100_20_0_warn_setpoint_textBox_Leave);
+            // 
+            // tgfr
+            // 
+            this.tgfr.AutoSize = true;
+            this.tgfr.Location = new System.Drawing.Point(256, 169);
+            this.tgfr.Name = "tgfr";
+            this.tgfr.Size = new System.Drawing.Size(49, 15);
+            this.tgfr.TabIndex = 136;
+            this.tgfr.Text = "PT100_1";
+            // 
+            // PT100_20_1_warn_setpoint_button
+            // 
+            this.PT100_20_1_warn_setpoint_button.Location = new System.Drawing.Point(318, 187);
+            this.PT100_20_1_warn_setpoint_button.Name = "PT100_20_1_warn_setpoint_button";
+            this.PT100_20_1_warn_setpoint_button.Size = new System.Drawing.Size(51, 23);
+            this.PT100_20_1_warn_setpoint_button.TabIndex = 135;
+            this.PT100_20_1_warn_setpoint_button.Text = "задать";
+            this.PT100_20_1_warn_setpoint_button.UseVisualStyleBackColor = true;
+            this.PT100_20_1_warn_setpoint_button.Click += new System.EventHandler(this.PT100_20_1_warn_setpoint_button_Click);
+            // 
+            // PT100_20_1_warn_setpoint_textBox
+            // 
+            this.PT100_20_1_warn_setpoint_textBox.Location = new System.Drawing.Point(218, 187);
+            this.PT100_20_1_warn_setpoint_textBox.Name = "PT100_20_1_warn_setpoint_textBox";
+            this.PT100_20_1_warn_setpoint_textBox.Size = new System.Drawing.Size(100, 23);
+            this.PT100_20_1_warn_setpoint_textBox.TabIndex = 134;
+            this.PT100_20_1_warn_setpoint_textBox.Enter += new System.EventHandler(this.PT100_20_1_warn_setpoint_textBox_Enter);
+            this.PT100_20_1_warn_setpoint_textBox.Leave += new System.EventHandler(this.PT100_20_1_warn_setpoint_textBox_Leave);
+            // 
+            // ads
+            // 
+            this.ads.AutoSize = true;
+            this.ads.Location = new System.Drawing.Point(468, 169);
+            this.ads.Name = "ads";
+            this.ads.Size = new System.Drawing.Size(49, 15);
+            this.ads.TabIndex = 139;
+            this.ads.Text = "PT100_2";
+            // 
+            // PT100_20_2_warn_setpoint_button
+            // 
+            this.PT100_20_2_warn_setpoint_button.Location = new System.Drawing.Point(530, 187);
+            this.PT100_20_2_warn_setpoint_button.Name = "PT100_20_2_warn_setpoint_button";
+            this.PT100_20_2_warn_setpoint_button.Size = new System.Drawing.Size(51, 23);
+            this.PT100_20_2_warn_setpoint_button.TabIndex = 138;
+            this.PT100_20_2_warn_setpoint_button.Text = "задать";
+            this.PT100_20_2_warn_setpoint_button.UseVisualStyleBackColor = true;
+            this.PT100_20_2_warn_setpoint_button.Click += new System.EventHandler(this.PT100_20_2_warn_setpoint_button_Click);
+            // 
+            // PT100_20_2_warn_setpoint_textBox
+            // 
+            this.PT100_20_2_warn_setpoint_textBox.Location = new System.Drawing.Point(430, 187);
+            this.PT100_20_2_warn_setpoint_textBox.Name = "PT100_20_2_warn_setpoint_textBox";
+            this.PT100_20_2_warn_setpoint_textBox.Size = new System.Drawing.Size(100, 23);
+            this.PT100_20_2_warn_setpoint_textBox.TabIndex = 137;
+            this.PT100_20_2_warn_setpoint_textBox.Enter += new System.EventHandler(this.PT100_20_2_warn_setpoint_textBox_Enter);
+            this.PT100_20_2_warn_setpoint_textBox.Leave += new System.EventHandler(this.PT100_20_2_warn_setpoint_textBox_Leave);
+            // 
+            // werfcd
+            // 
+            this.werfcd.AutoSize = true;
+            this.werfcd.Location = new System.Drawing.Point(669, 168);
+            this.werfcd.Name = "werfcd";
+            this.werfcd.Size = new System.Drawing.Size(48, 15);
+            this.werfcd.TabIndex = 142;
+            this.werfcd.Text = "V4_20_0";
+            // 
+            // V4_20_0_warn_setpoint_button
+            // 
+            this.V4_20_0_warn_setpoint_button.Location = new System.Drawing.Point(731, 186);
+            this.V4_20_0_warn_setpoint_button.Name = "V4_20_0_warn_setpoint_button";
+            this.V4_20_0_warn_setpoint_button.Size = new System.Drawing.Size(51, 23);
+            this.V4_20_0_warn_setpoint_button.TabIndex = 141;
+            this.V4_20_0_warn_setpoint_button.Text = "задать";
+            this.V4_20_0_warn_setpoint_button.UseVisualStyleBackColor = true;
+            this.V4_20_0_warn_setpoint_button.Click += new System.EventHandler(this.V4_20_0_warn_setpoint_button_Click);
+            // 
+            // V4_20_0_warn_setpoint_textBox
+            // 
+            this.V4_20_0_warn_setpoint_textBox.Location = new System.Drawing.Point(631, 186);
+            this.V4_20_0_warn_setpoint_textBox.Name = "V4_20_0_warn_setpoint_textBox";
+            this.V4_20_0_warn_setpoint_textBox.Size = new System.Drawing.Size(100, 23);
+            this.V4_20_0_warn_setpoint_textBox.TabIndex = 140;
+            this.V4_20_0_warn_setpoint_textBox.Enter += new System.EventHandler(this.V4_20_0_warn_setpoint_textBox_Enter);
+            this.V4_20_0_warn_setpoint_textBox.Leave += new System.EventHandler(this.V4_20_0_warn_setpoint_textBox_Leave);
+            // 
+            // dfs
+            // 
+            this.dfs.AutoSize = true;
+            this.dfs.Location = new System.Drawing.Point(870, 168);
+            this.dfs.Name = "dfs";
+            this.dfs.Size = new System.Drawing.Size(48, 15);
+            this.dfs.TabIndex = 145;
+            this.dfs.Text = "V4_20_1";
+            // 
+            // V4_20_1_warn_setpoint_button
+            // 
+            this.V4_20_1_warn_setpoint_button.Location = new System.Drawing.Point(932, 186);
+            this.V4_20_1_warn_setpoint_button.Name = "V4_20_1_warn_setpoint_button";
+            this.V4_20_1_warn_setpoint_button.Size = new System.Drawing.Size(51, 23);
+            this.V4_20_1_warn_setpoint_button.TabIndex = 144;
+            this.V4_20_1_warn_setpoint_button.Text = "задать";
+            this.V4_20_1_warn_setpoint_button.UseVisualStyleBackColor = true;
+            this.V4_20_1_warn_setpoint_button.Click += new System.EventHandler(this.V4_20_1_warn_setpoint_button_Click);
+            // 
+            // V4_20_1_warn_setpoint_textBox
+            // 
+            this.V4_20_1_warn_setpoint_textBox.Location = new System.Drawing.Point(832, 186);
+            this.V4_20_1_warn_setpoint_textBox.Name = "V4_20_1_warn_setpoint_textBox";
+            this.V4_20_1_warn_setpoint_textBox.Size = new System.Drawing.Size(100, 23);
+            this.V4_20_1_warn_setpoint_textBox.TabIndex = 143;
+            this.V4_20_1_warn_setpoint_textBox.Enter += new System.EventHandler(this.V4_20_1_warn_setpoint_textBox_Enter);
+            this.V4_20_1_warn_setpoint_textBox.Leave += new System.EventHandler(this.V4_20_1_warn_setpoint_textBox_Leave);
+            // 
+            // sadas
+            // 
+            this.sadas.AutoSize = true;
+            this.sadas.Location = new System.Drawing.Point(669, 231);
+            this.sadas.Name = "sadas";
+            this.sadas.Size = new System.Drawing.Size(66, 15);
+            this.sadas.TabIndex = 148;
+            this.sadas.Text = "asymmetry";
+            // 
+            // as_warn_setpoint_button
+            // 
+            this.as_warn_setpoint_button.Location = new System.Drawing.Point(731, 249);
+            this.as_warn_setpoint_button.Name = "as_warn_setpoint_button";
+            this.as_warn_setpoint_button.Size = new System.Drawing.Size(51, 23);
+            this.as_warn_setpoint_button.TabIndex = 147;
+            this.as_warn_setpoint_button.Text = "задать";
+            this.as_warn_setpoint_button.UseVisualStyleBackColor = true;
+            this.as_warn_setpoint_button.Click += new System.EventHandler(this.as_warn_setpoint_button_Click);
+            // 
+            // asymmetry_warn_setpoint_textBox
+            // 
+            this.asymmetry_warn_setpoint_textBox.Location = new System.Drawing.Point(631, 249);
+            this.asymmetry_warn_setpoint_textBox.Name = "asymmetry_warn_setpoint_textBox";
+            this.asymmetry_warn_setpoint_textBox.Size = new System.Drawing.Size(100, 23);
+            this.asymmetry_warn_setpoint_textBox.TabIndex = 146;
+            this.asymmetry_warn_setpoint_textBox.Enter += new System.EventHandler(this.asymmetry_warn_setpoint_textBox_Enter);
+            this.asymmetry_warn_setpoint_textBox.Leave += new System.EventHandler(this.asymmetry_warn_setpoint_textBox_Leave);
+            // 
+            // w_c_warn_setpssddsdsdoint_textBox
+            // 
+            this.w_c_warn_setpssddsdsdoint_textBox.AutoSize = true;
+            this.w_c_warn_setpssddsdsdoint_textBox.Location = new System.Drawing.Point(832, 229);
+            this.w_c_warn_setpssddsdsdoint_textBox.Name = "w_c_warn_setpssddsdsdoint_textBox";
+            this.w_c_warn_setpssddsdsdoint_textBox.Size = new System.Drawing.Size(104, 15);
+            this.w_c_warn_setpssddsdsdoint_textBox.TabIndex = 151;
+            this.w_c_warn_setpssddsdsdoint_textBox.Text = "wrong connection";
+            // 
+            // w_c_warn_setpoint_button
+            // 
+            this.w_c_warn_setpoint_button.Location = new System.Drawing.Point(932, 249);
+            this.w_c_warn_setpoint_button.Name = "w_c_warn_setpoint_button";
+            this.w_c_warn_setpoint_button.Size = new System.Drawing.Size(51, 23);
+            this.w_c_warn_setpoint_button.TabIndex = 150;
+            this.w_c_warn_setpoint_button.Text = "задать";
+            this.w_c_warn_setpoint_button.UseVisualStyleBackColor = true;
+            this.w_c_warn_setpoint_button.Click += new System.EventHandler(this.w_c_warn_setpoint_button_Click);
+            // 
+            // w_c_warn_setpoint_textBox
+            // 
+            this.w_c_warn_setpoint_textBox.Location = new System.Drawing.Point(832, 249);
+            this.w_c_warn_setpoint_textBox.Name = "w_c_warn_setpoint_textBox";
+            this.w_c_warn_setpoint_textBox.Size = new System.Drawing.Size(100, 23);
+            this.w_c_warn_setpoint_textBox.TabIndex = 149;
+            this.w_c_warn_setpoint_textBox.Enter += new System.EventHandler(this.w_c_warn_setpoint_textBox_Enter);
+            this.w_c_warn_setpoint_textBox.Leave += new System.EventHandler(this.w_c_warn_setpoint_textBox_Leave);
+            // 
+            // WARNINGS
+            // 
+            this.WARNINGS.AutoSize = true;
+            this.WARNINGS.Location = new System.Drawing.Point(536, 141);
+            this.WARNINGS.Name = "WARNINGS";
+            this.WARNINGS.Size = new System.Drawing.Size(68, 15);
+            this.WARNINGS.TabIndex = 152;
+            this.WARNINGS.Text = "WARNINGS";
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(530, 22);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(82, 15);
+            this.label47.TabIndex = 153;
+            this.label47.Text = "PROTECTIONS";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -836,6 +1404,60 @@
             this.BackgroundImage = global::Transforms.Properties.Resources.сук;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1454, 690);
+            this.Controls.Add(this.label47);
+            this.Controls.Add(this.WARNINGS);
+            this.Controls.Add(this.w_c_warn_setpssddsdsdoint_textBox);
+            this.Controls.Add(this.w_c_warn_setpoint_button);
+            this.Controls.Add(this.w_c_warn_setpoint_textBox);
+            this.Controls.Add(this.sadas);
+            this.Controls.Add(this.as_warn_setpoint_button);
+            this.Controls.Add(this.asymmetry_warn_setpoint_textBox);
+            this.Controls.Add(this.dfs);
+            this.Controls.Add(this.V4_20_1_warn_setpoint_button);
+            this.Controls.Add(this.V4_20_1_warn_setpoint_textBox);
+            this.Controls.Add(this.werfcd);
+            this.Controls.Add(this.V4_20_0_warn_setpoint_button);
+            this.Controls.Add(this.V4_20_0_warn_setpoint_textBox);
+            this.Controls.Add(this.ads);
+            this.Controls.Add(this.PT100_20_2_warn_setpoint_button);
+            this.Controls.Add(this.PT100_20_2_warn_setpoint_textBox);
+            this.Controls.Add(this.tgfr);
+            this.Controls.Add(this.PT100_20_1_warn_setpoint_button);
+            this.Controls.Add(this.PT100_20_1_warn_setpoint_textBox);
+            this.Controls.Add(this.label49);
+            this.Controls.Add(this.PT100_20_0_warn_setpoint_button);
+            this.Controls.Add(this.PT100_20_0_warn_setpoint_textBox);
+            this.Controls.Add(this.fffff);
+            this.Controls.Add(this.ff);
+            this.Controls.Add(this.label46);
+            this.Controls.Add(this.label45);
+            this.Controls.Add(this.label44);
+            this.Controls.Add(this.V4_20_1_setpoint_button);
+            this.Controls.Add(this.V4_20_0_setpoint_button);
+            this.Controls.Add(this.V4_20_1_setpoint_textBox);
+            this.Controls.Add(this.V4_20_0_setpoint_textBox);
+            this.Controls.Add(this.PT100_20_2_setpoint_button);
+            this.Controls.Add(this.PT100_20_2_setpoint_textBox);
+            this.Controls.Add(this.PT100_20_1_setpoint_button);
+            this.Controls.Add(this.PT100_20_1_setpoint_textBox);
+            this.Controls.Add(this.PT100_20_0_setpoint_button);
+            this.Controls.Add(this.PT100_20_0_setpoint_textBox);
+            this.Controls.Add(this.wrong_con_warn_enable_checkBox);
+            this.Controls.Add(this.asymmetry_warn_enable_checkBox);
+            this.Controls.Add(this.V4_20_1_warn_enable_checkBox);
+            this.Controls.Add(this.V4_20_0_warn_enable_checkBox);
+            this.Controls.Add(this.PT_100_2_warn_enable_checkBox);
+            this.Controls.Add(this.PT_100_1_warn_enable_checkBox);
+            this.Controls.Add(this.PT_100_0_warn_enable_checkBox);
+            this.Controls.Add(this.V4_20_1_prot_enable_checkBox);
+            this.Controls.Add(this.V4_20_0_prot_enable_checkBox);
+            this.Controls.Add(this.PT_100_2_prot_enable_checkBox);
+            this.Controls.Add(this.PT_100_1_prot_enable_checkBox);
+            this.Controls.Add(this.PT_100_0_prot_enable_checkBox);
+            this.Controls.Add(this.warnings_listBox);
+            this.Controls.Add(this.locks_listBox);
+            this.Controls.Add(this.label43);
+            this.Controls.Add(this.label42);
             this.Controls.Add(this.label30);
             this.Controls.Add(this.label31);
             this.Controls.Add(this.label32);
@@ -1021,5 +1643,59 @@
         private TextBox GMD_2_textBox;
         private TextBox GMD_0_textBox;
         private Label label40;
+        private Label label42;
+        private Label label43;
+        private ListBox locks_listBox;
+        private ListBox warnings_listBox;
+        private CheckBox PT_100_0_prot_enable_checkBox;
+        private CheckBox PT_100_1_prot_enable_checkBox;
+        private CheckBox PT_100_2_prot_enable_checkBox;
+        private CheckBox V4_20_0_prot_enable_checkBox;
+        private CheckBox V4_20_1_prot_enable_checkBox;
+        private CheckBox PT_100_0_warn_enable_checkBox;
+        private CheckBox PT_100_1_warn_enable_checkBox;
+        private CheckBox PT_100_2_warn_enable_checkBox;
+        private CheckBox V4_20_0_warn_enable_checkBox;
+        private CheckBox V4_20_1_warn_enable_checkBox;
+        private CheckBox asymmetry_warn_enable_checkBox;
+        private CheckBox wrong_con_warn_enable_checkBox;
+        private TextBox PT100_20_0_setpoint_textBox;
+        private Button PT100_20_0_setpoint_button;
+        private TextBox PT100_20_1_setpoint_textBox;
+        private Button PT100_20_1_setpoint_button;
+        private TextBox PT100_20_2_setpoint_textBox;
+        private Button PT100_20_2_setpoint_button;
+        private TextBox V4_20_0_setpoint_textBox;
+        private TextBox V4_20_1_setpoint_textBox;
+        private Button V4_20_0_setpoint_button;
+        private Button V4_20_1_setpoint_button;
+        private Label label44;
+        private Label label45;
+        private Label label46;
+        private Label ff;
+        private Label fffff;
+        private Label label49;
+        private Button PT100_20_0_warn_setpoint_button;
+        private TextBox PT100_20_0_warn_setpoint_textBox;
+        private Label tgfr;
+        private Button PT100_20_1_warn_setpoint_button;
+        private TextBox PT100_20_1_warn_setpoint_textBox;
+        private Label ads;
+        private Button PT100_20_2_warn_setpoint_button;
+        private TextBox PT100_20_2_warn_setpoint_textBox;
+        private Label werfcd;
+        private Button V4_20_0_warn_setpoint_button;
+        private TextBox V4_20_0_warn_setpoint_textBox;
+        private Label dfs;
+        private Button V4_20_1_warn_setpoint_button;
+        private TextBox V4_20_1_warn_setpoint_textBox;
+        private Label sadas;
+        private Button as_warn_setpoint_button;
+        private TextBox asymmetry_warn_setpoint_textBox;
+        private Label w_c_warn_setpssddsdsdoint_textBox;
+        private Button w_c_warn_setpoint_button;
+        private TextBox w_c_warn_setpoint_textBox;
+        private Label WARNINGS;
+        private Label label47;
     }
 }

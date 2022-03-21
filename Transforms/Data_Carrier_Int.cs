@@ -115,6 +115,9 @@
         _PT100_0,
         _PT100_1,
         _PT100_2,
+        _FLASH_RATIOS_SHIFT_PT1,
+        _FLASH_RATIOS_SHIFT_PT2,
+        _FLASH_RATIOS_SHIFT_PT3,
     }
 
     public enum Reseiver
