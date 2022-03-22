@@ -680,6 +680,7 @@
 
         private const All_Params _19_param = All_Params._WARN_V4_20_ERROR_0;
         private const All_Params _20_param = All_Params._WARN_V4_20_ERROR_1;
+        private const All_Params state_param = All_Params.state;
         private Data_Carrier_Base field_1 = new Data_Carrier_Bool();
         private Data_Carrier_Base field_2 = new Data_Carrier_Bool();
         private Data_Carrier_Base field_3 = new Data_Carrier_Bool();
@@ -699,6 +700,7 @@
         private Data_Carrier_Base field_18 = new Data_Carrier_Bool();
         private Data_Carrier_Base field_19 = new Data_Carrier_Bool();
         private Data_Carrier_Base field_20 = new Data_Carrier_Bool();
+        private Data_Carrier_Base field_state = new Data_Carrier_State();
         public Command_Handler_60(List<Data_Carrier_Base> fields) : base(fields)
         {
             foreach (var d in fields)
@@ -741,6 +743,8 @@
                     field_19 = d;
                 if (d.param == _20_param)
                     field_20 = d;
+                if (d.param == state_param)
+                    field_state = d;
             }
         }
 
@@ -751,19 +755,29 @@
             switch (packet.frame)
             {
                 case 0:
-                    ((Data_Carrier_Bool)field_1).value = (data[0] >> 3) % 2 == 1;
-                    ((Data_Carrier_Bool)field_2).value = (data[0] >> 4) % 2 == 1;
-                    ((Data_Carrier_Bool)field_3).value = (data[0] >> 5) % 2 == 1;
-                    ((Data_Carrier_Bool)field_4).value = (data[0] >> 6) % 2 == 1;
-                    ((Data_Carrier_Bool)field_5).value = (data[0] >> 7) % 2 == 1;
-                    ((Data_Carrier_Bool)field_6).value = (data[1] >> 0) % 2 == 1;
-                    ((Data_Carrier_Bool)field_7).value = (data[1] >> 1) % 2 == 1;
-                    ((Data_Carrier_Bool)field_8).value = (data[1] >> 2) % 2 == 1;
-                    ((Data_Carrier_Bool)field_16).value = (data[1] >> 3) % 2 == 1;
-                    ((Data_Carrier_Bool)field_17).value = (data[1] >> 4) % 2 == 1;
-                    ((Data_Carrier_Bool)field_18).value = (data[1] >> 5) % 2 == 1;
-                    ((Data_Carrier_Bool)field_19).value = (data[1] >> 6) % 2 == 1;
-                    ((Data_Carrier_Bool)field_20).value = (data[1] >> 7) % 2 == 1;
+                    try
+                    {
+                        ((Data_Carrier_State)field_state).state = (State)(data[0]);
+                    }
+                    catch (Exception e)
+                    {
+                        throw new Exception("Недопустимый параметр команды на прием");
+
+                    }
+                    ((Data_Carrier_Bool)field_1).value = (data[1] >> 3) % 2 == 1;
+                    ((Data_Carrier_Bool)field_2).value = (data[1] >> 4) % 2 == 1;
+                    ((Data_Carrier_Bool)field_3).value = (data[1] >> 5) % 2 == 1;
+                  
+                    ((Data_Carrier_Bool)field_4).value = (data[1] >> 6) % 2 == 1;
+                    ((Data_Carrier_Bool)field_5).value = (data[1] >> 7) % 2 == 1;
+                    ((Data_Carrier_Bool)field_6).value = (data[2] >> 0) % 2 == 1;
+                    ((Data_Carrier_Bool)field_7).value = (data[2] >> 1) % 2 == 1;
+                    ((Data_Carrier_Bool)field_8).value = (data[2] >> 2) % 2 == 1;
+                    ((Data_Carrier_Bool)field_16).value = (data[2] >> 3) % 2 == 1;
+                    ((Data_Carrier_Bool)field_17).value = (data[2] >> 4) % 2 == 1;
+                    ((Data_Carrier_Bool)field_18).value = (data[2] >> 5) % 2 == 1;
+                    ((Data_Carrier_Bool)field_19).value = (data[2] >> 6) % 2 == 1;
+                    ((Data_Carrier_Bool)field_20).value = (data[2] >> 7) % 2 == 1;
                     ((Data_Carrier_Int)field_9).value = data[4] + data[5] * 256;
                     ((Data_Carrier_Int)field_10).value = data[6] + data[7] * 256;
 
@@ -777,7 +791,7 @@
                     ((Data_Carrier_Int)field_14).value = data[6] + data[7] * 256;
                     break;
             }
-            return new List<Data_Carrier_Base> { field_1, field_2, field_3, field_4, field_5, field_6, field_7, field_8, field_9, field_10, field_11, field_12, field_13, field_14, field_16, field_17, field_18, field_19, field_20 };
+            return new List<Data_Carrier_Base> { field_1, field_2, field_3, field_4, field_5, field_6, field_7, field_8, field_9, field_10, field_11, field_12, field_13, field_14, field_16, field_17, field_18, field_19, field_20, field_state };
         }
 
         public override Packet Handle_Outgoing_Command(List<Data_Carrier_Base>? list)

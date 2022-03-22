@@ -15,7 +15,7 @@
         private AutoResetEvent Ev = new AutoResetEvent(false);
         public int id;
         public List<Data_Carrier_Base> fields = new List<Data_Carrier_Base>() {
-              new Data_Carrier_Bool {param = All_Params. state, value = false},
+              new Data_Carrier_State {param = All_Params. state, state = State._DEVICE_INIT},
                new Data_Carrier_Int{param = All_Params.time_logic, value = 0},
             new Data_Carrier_Int_List {param = All_Params.sCurrentAnalogData_avg_adc_value, values = new List<int>{ 0,0,0,0,0,0,0,0} },
              new Data_Carrier_Int {param = All_Params._FLASH_ID_VERSIYA_H, value = 0},
@@ -156,10 +156,10 @@
             //packet.len = (packet.data == null ? (byte)0 : (byte)(packet.data.Length));
             //packet.to = (byte)id;
             //_mediator.Notify(this, Reseiver.connection, packet);
-            Packet packet1 = commands.First(c => c.id == 58).Handle_Outgoing_Command(null);
-            packet1.len = (packet1.data == null ? (byte)0 : (byte)(packet1.data.Length));
-            packet1.to = (byte)id;
-            _mediator.Notify(this, Reseiver.connection, packet1);
+            //Packet packet1 = commands.First(c => c.id == 58).Handle_Outgoing_Command(null);
+            //packet1.len = (packet1.data == null ? (byte)0 : (byte)(packet1.data.Length));
+            //packet1.to = (byte)id;
+            //_mediator.Notify(this, Reseiver.connection, packet1);
             Packet packet2 = commands.First(c => c.id == 60).Handle_Outgoing_Command(null);
             packet2.len = (packet2.data == null ? (byte)0 : (byte)(packet2.data.Length));
             packet2.to = (byte)id;
@@ -225,14 +225,10 @@
                         List<Data_Carrier_Base> datas = new List<Data_Carrier_Base>();
                         Packet packet = ((Packet)packet_s[i]);
 
-
-                        if(packet.frame == 0 &&  packet.cmd==60 && (packet.data[1] >> 2) % 2 == 1)
+                       if(packet.cmd == 60)
                         { }
 
-
-                        if (packet.frame == 0 && packet.cmd == 60 && (packet.data[1] >> 2) % 2 == 0)
-                        { }
-
+                      
 
                         if (packet.cmd != 203 && packet.cmd != 0)
                         {
@@ -261,7 +257,7 @@
         internal void Send_Data_to_Connection(List<Data_Carrier_Base> d)
         {
             Packet packet = commands.First(c => c.id == ((Data_Carrier_Int)d.Find(f => f.param == All_Params.command)).value).Handle_Outgoing_Command(d);
-            packet.len = (byte)packet.data.Length;
+            packet.len = packet.data == null?(byte)0:(byte)packet.data.Length;
             packet.to = (byte)id;
 
             _mediator.Notify(this, Reseiver.connection, packet);

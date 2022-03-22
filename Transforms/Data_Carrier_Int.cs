@@ -18,6 +18,18 @@
     {
         public bool value;  
     }
+    public class Data_Carrier_State : Data_Carrier_Base
+    {
+       public State state;  
+    }
+    public  enum State: byte
+    {
+        _DEVICE_INIT = 0,
+        _DEVICE_OFF = 1,
+        _DEVICE_ON = 2,
+        _DEVICE_FAULT = 3,
+
+    }
 
     public enum All_Params
     {
@@ -118,6 +130,8 @@
         _FLASH_RATIOS_SHIFT_PT1,
         _FLASH_RATIOS_SHIFT_PT2,
         _FLASH_RATIOS_SHIFT_PT3,
+       
+
     }
 
     public enum Reseiver

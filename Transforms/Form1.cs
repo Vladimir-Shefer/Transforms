@@ -80,6 +80,8 @@ namespace Transforms
                 textBox.Text = Convert.ToString(((Data_Carrier_Int)data).value);
            else if (data.GetType() == typeof(Data_Carrier_Bool))
                 textBox.Text = (((Data_Carrier_Bool)data).value?"true":"false");
+            else if (data.GetType() == typeof(Data_Carrier_State))
+                textBox.Text = (((Data_Carrier_State)data).state.ToString());
             else return false;
             return true;
         }
@@ -266,7 +268,12 @@ namespace Transforms
 
                         Write_data_to_textBox(data, GMD_8_textBox);
                     }
-                    else if (data.param == All_Params._FLASH_CURRENT_MUL)
+                        else if (data.param == All_Params.state)
+                        {
+
+                            Write_data_to_textBox(data, state_textBox);
+                        }
+                        else if (data.param == All_Params._FLASH_CURRENT_MUL)
                     {
 
                         Write_data_to_textBox(data, I_MUL);
@@ -331,8 +338,45 @@ namespace Transforms
                         {
 
                             if (!PT100_20_2_w_setpoint_enter) Write_data_to_textBox(data, PT100_20_2_warn_setpoint_textBox);
+
+                            
                         }
-                    //////////////////////////////
+                        else if (data.param == All_Params._FLASH_PROT_V4_20_0_SETPOINT)
+                        {
+
+                            if (!V4_20_0_setpoint_enter) Write_data_to_textBox(data, V4_20_0_setpoint_textBox);
+                        }
+                        else if (data.param == All_Params._FLASH_PROT_V4_20_1_SETPOINT)
+                        {
+
+                            if (!V4_20_1_setpoint_enter) Write_data_to_textBox(data, V4_20_1_setpoint_textBox);
+                        }
+                        else if (data.param == All_Params._FLASH_WARN_V4_20_0_SETPOINT)
+                        {
+
+                            if (!V4_20_0_w_setpoint_enter) Write_data_to_textBox(data, V4_20_0_warn_setpoint_textBox);
+                        }
+                        else if (data.param == All_Params._FLASH_WARN_V4_20_1_SETPOINT)
+                        {
+
+                            if (!V4_20_1_w_setpoint_enter) Write_data_to_textBox(data, V4_20_1_warn_setpoint_textBox);
+                        }
+                        else if (data.param == All_Params._FLASH_ASSYMETRY_SETPOINT)
+                        {
+
+                            if (!as_setpoint_enter) Write_data_to_textBox(data, asymmetry_warn_setpoint_textBox);
+                        }
+                        else if (data.param == All_Params._FLASH_WRONG_CON_MAX_CURRENT)
+                        {
+
+                            if (!w_setpoint_enter) Write_data_to_textBox(data, w_c_warn_setpoint_textBox);
+                        }
+                        else if (data.param == All_Params._FLASH_WRONG_CON_SW_CURRENT)
+                        {
+
+                            if (!w_setpoint_enter_sw) Write_data_to_textBox(data, sw_warn_setpoint_textBox);
+                        }
+                        //////////////////////////////
 
                         else if (data.param == All_Params._LOCK_PT100_0)
                     {
@@ -632,6 +676,7 @@ namespace Transforms
         bool V4_20_1_w_setpoint_enter = false;
         bool as_setpoint_enter = false;
         bool w_setpoint_enter = false;
+        bool w_setpoint_enter_sw = false;
         private void PT_100_0_enable_checkBox_CheckedChanged(object sender, EventArgs e)
         {
           
@@ -870,9 +915,9 @@ namespace Transforms
         {
             try
             {
-                _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Int { param = All_Params._FLASH_ASSYMETRY_SETPOINT, value = Convert.ToInt16(assymetry_textBox.Text) }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
-               
-                assymetry_textBox.Text = "";
+                _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Int { param = All_Params._FLASH_ASSYMETRY_SETPOINT, value = Convert.ToInt16(asymmetry_warn_setpoint_textBox.Text) }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+
+                asymmetry_warn_setpoint_textBox.Text = "";
 
                 as_warn_setpoint_button.Visible = false;
                 as_setpoint_enter = false;
@@ -897,76 +942,79 @@ namespace Transforms
 
         private void PT100_20_1_setpoint_textBox_Enter(object sender, EventArgs e)
         {
-          
+            PT100_20_1_setpoint_enter = true;
             PT100_20_1_setpoint_button.Visible = true;
         }
 
         private void PT100_20_2_setpoint_textBox_Enter(object sender, EventArgs e)
         {
-           
 
-            PT100_20_1_setpoint_button.Visible = true;
+            PT100_20_2_setpoint_enter = true;
+            PT100_20_2_setpoint_button.Visible = true;
         }
 
         private void V4_20_0_setpoint_textBox_Enter(object sender, EventArgs e)
         {
-            
 
+            V4_20_0_setpoint_enter = true;
             V4_20_0_setpoint_button.Visible = true;
         }
 
         private void V4_20_1_setpoint_textBox_Enter(object sender, EventArgs e)
         {
+            V4_20_1_setpoint_enter = true;
 
-          
             V4_20_1_setpoint_button.Visible = true;
         }
 
         private void PT100_20_0_warn_setpoint_textBox_Enter(object sender, EventArgs e)
         {
-           
 
+            PT100_20_0_w_setpoint_enter = true;
             PT100_20_0_warn_setpoint_button.Visible = true;
         }
 
         private void PT100_20_1_warn_setpoint_textBox_Enter(object sender, EventArgs e)
         {
-           
 
+
+            PT100_20_1_w_setpoint_enter = true;
             PT100_20_1_warn_setpoint_button.Visible = true;
         }
 
         private void PT100_20_2_warn_setpoint_textBox_Enter(object sender, EventArgs e)
         {
-          
 
+
+            PT100_20_2_w_setpoint_enter = true;
             PT100_20_2_warn_setpoint_button.Visible = true;
         }
 
         private void V4_20_0_warn_setpoint_textBox_Enter(object sender, EventArgs e)
         {
-            
 
+
+            V4_20_0_w_setpoint_enter = true;
             V4_20_0_warn_setpoint_button.Visible = true;
         }
 
         private void V4_20_1_warn_setpoint_textBox_Enter(object sender, EventArgs e)
         {
-
+            V4_20_1_w_setpoint_enter = true;
             V4_20_1_warn_setpoint_button.Visible = true;
         }
 
         private void asymmetry_warn_setpoint_textBox_Enter(object sender, EventArgs e)
         {
-           
 
+            as_setpoint_enter = true;
             as_warn_setpoint_button.Visible = true;
         }
 
         private void w_c_warn_setpoint_textBox_Enter(object sender, EventArgs e)
         {
-            
 
+            w_setpoint_enter = true;
             w_c_warn_setpoint_button.Visible = true;
         }
 
@@ -1107,6 +1155,54 @@ namespace Transforms
         private void PT100_20_0_setpoint_textBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void on_button_Click(object sender, EventArgs e)
+        {
+            _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_State { param = All_Params.state, state = State._DEVICE_ON }, new Data_Carrier_Int { param = All_Params.command, value = 51 } });
+        }
+
+        private void off_button_Click(object sender, EventArgs e)
+        {
+            _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_State { param = All_Params.state, state = State._DEVICE_OFF }, new Data_Carrier_Int { param = All_Params.command, value = 50 } });
+        }
+
+        private void checkBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            try
+            {
+                _ui.Pass_Data_to_Model_from_Interface(new List<Data_Carrier_Base> { new Data_Carrier_Int { param = All_Params._FLASH_WRONG_CON_SW_CURRENT, value = Convert.ToInt16(sw_warn_setpoint_textBox.Text) }, new Data_Carrier_Int { param = All_Params.command, value = 103 } });
+
+                sw_warn_setpoint_textBox.Text = "";
+
+                w_c_warn_sw_setpoint_button.Visible = false;
+                w_setpoint_enter_sw = false;
+            }
+            catch { }
+        }
+
+        private void sw_warn_setpoint_textBox_Enter(object sender, EventArgs e)
+        {
+
+            w_setpoint_enter_sw = true;
+            w_c_warn_sw_setpoint_button.Visible = true;
+        }
+
+        private void sw_warn_setpoint_textBox_Leave(object sender, EventArgs e)
+        {
+            if (!w_c_warn_sw_setpoint_button.Focused)
+            {
+
+                sw_warn_setpoint_textBox.Text = "";
+
+                w_c_warn_sw_setpoint_button.Visible = false;
+                w_setpoint_enter_sw = false;
+            }
         }
 
 
